@@ -1,0 +1,76 @@
+// autho
+.author {
+    height: 70px;
+    margin: 35px 0 14px;
+    background-color: var(--whiteF5F);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.desc {
+    font-size: 14px;
+    color: #272560;
+    font-weight: 400;
+    text-align: center;
+}
+.name {
+    font-weight: 600;
+}
+// Product type
+@import '~bootstrap/scss/bootstrap';
+.wrapper {
+    margin-bottom: 30px;
+}
+.background {
+    padding: 0 18px;
+    margin-bottom: 20px;
+    height: 350px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: url('../../../assets/images/laptoptype.png') center / cover no-repeat;
+    background-size: 110%;
+    transition: background-size 0.2s linear;
+    -moz-transition: background-size 0.2s linear;
+    -o-transition: background-size 0.2s linear;
+    -ms-transition: background-size 0.2s linear;
+
+    &:hover {
+        background-size: 150%;
+    }
+    @include media-breakpoint-down(sm) {
+        height: 82px;
+    }
+}
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--whiteFFF);
+
+    @include media-breakpoint-down(sm) {
+        font-size: 18px;
+    }
+}
+.link {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15px;
+    position: absolute;
+    bottom: 32px;
+    color: #fff;
+    text-decoration: underline;
+    opacity: 0.8;
+
+    &:hover {
+        color: unset;
+        opacity: 0.6;
+    }
+    @include media-breakpoint-down(sm) {
+        bottom: 15px;
+    }
+}

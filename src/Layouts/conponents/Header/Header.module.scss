@@ -1,0 +1,77 @@
+@import '~bootstrap/scss/bootstrap';
+.background {
+    background-color: var(--black);
+}
+.logo {
+    width: 22px;
+    display: none;
+
+    @include media-breakpoint-down(lg) {
+        display: block;
+    }
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--whiteFFF);
+    font-weight: 600;
+    height: 44px;
+    @include media-breakpoint-down(xl) {
+        font-size: 12px;
+    }
+}
+.day,
+.time {
+    display: inline-block;
+}
+
+.day {
+    color: var(--gray8C8);
+    margin-right: 8px;
+}
+
+.center {
+    display: flex;
+}
+.address {
+    color: var(--gray8C8);
+    margin-right: 8px;
+    @include media-breakpoint-down(lg) {
+        display: none;
+    }
+}
+.contact {
+    display: inline-block;
+    color: var(--whiteFFF);
+    text-decoration: underline;
+    &:hover {
+        color: var(--whiteFFF);
+        opacity: 0.6;
+    }
+}
+
+.right {
+    @include media-breakpoint-down(lg) {
+        display: none;
+    }
+}
+
+.phone {
+    margin-right: 16px;
+
+    @include media-breakpoint-down(md) {
+        margin-right: 6px;
+    }
+}
+
+.icon {
+    font-size: 25px;
+    & + .icon {
+        margin-left: 8px;
+    }
+
+    @include media-breakpoint-down(md) {
+        font-size: 20px;
+    }
+}

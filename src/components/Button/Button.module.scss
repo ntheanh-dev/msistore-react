@@ -1,0 +1,85 @@
+@import '~bootstrap/scss/bootstrap';
+.wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    @include media-breakpoint-down(xl) {
+        font-size: 1.2rem;
+    }
+    font-family: var(--font-family);
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 8px 15px;
+    // min-width: 100px;
+    cursor: pointer;
+    background-color: unset;
+    border: 2px solid transparent;
+    user-select: none;
+
+    + .wrapper {
+        margin-left: 16px;
+    }
+    &.disable {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 8px;
+}
+.icon {
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+}
+// Button type
+// .rounded {
+//     border-radius: 999px;
+//     border-color: rgba(22, 24, 35, 0.12);
+//     box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+
+//     &:hover {
+//         border-color: rgba(22, 24, 35, 0.032);
+//         background-color: rgba(22, 24, 35, 0.03);
+//     }
+// }
+
+.primary {
+    background-color: var(--blue015);
+    color: var(--whiteFFF);
+    border-color: transparent;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.outline {
+    color: var(--blue015);
+    border-color: currentColor;
+
+    &:hover {
+        border-color: currentColor;
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+.text {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Button size
+.small {
+    min-width: 88px;
+    padding: 4px 6px;
+}
+
+.large {
+    min-width: 140px;
+    padding: 14px 16px;
+}

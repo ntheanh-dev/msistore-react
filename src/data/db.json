@@ -1,0 +1,38 @@
+{
+    "laptops": [
+        {
+            "title": "GS66 Stealth",
+            "price": "$2.149",
+            "images": [
+                "/asset/images/laptops/lap1-1.png",
+                "/asset/images/laptops/lap1-2.png",
+                "/asset/images/laptops/lap1-3.png",
+                "/asset/images/laptops/lap1-4.png"
+            ],
+            "id": 1,
+            "categorySlug": "laptop-gaming",
+            "ram": [8, 16],
+            "ssd": [256, 512],
+            "review": 4,
+            "condition": "in stock",
+            "desc": "Trở thành tay chơi cự phách nơi đô thị với chiếc GS66 Stealth sử dụng thiết kế Core Black siêu gọn gàng và mỏng nhẹ. Trang bị vi xử lí Intel® Core™ i7 thế hệ 11 và card đồ họa NVIDIA® GeForce RTX™ 30 series, chiếc GS66 Stealth cực kì cơ động và gọn nhẹ, đồng thời sở hữu viên pin 99.9WHr dung lượng lớn nhất hiện nay cùng Wi-Fi 6E mới nhất. Ngày làm hết sức, đêm chơi hết mình, xứng danh vị vua của nơi thành thị sầm uất - GS66 Stealth."
+        },
+        {
+            "title": "Titan GT77",
+            "price": "$3.049",
+            "images": [
+                "/asset/images/laptops/lap2-1.png",
+                "/asset/images/laptops/lap2-2.png",
+                "/asset/images/laptops/lap2-3.png",
+                "/asset/images/laptops/lap2-4.png"
+            ],
+            "id": 2,
+            "categorySlug": "laptop-gaming",
+            "ram": [8, 16],
+            "ssd": [256, 512],
+            "review": 3,
+            "condition": "check availability",
+            "desc": "Kết hợp trải nghiệm cao cấp, công nghệ đột phá và hiệu năng đỉnh cao, chiếc Titan GT77 chính là sản phẩm đỉnh cao của làng game. Với linh kiện mạnh mẽ nhất, tối đa tới vi xử lí Intel® Core™ i9-12900HX thế hệ 12 mới nhất và card đồ họa NVIDIA® GeForce RTX™ 30 Series, cùng với dải đèn Mystic Light đầy thẩm mỹ, Titan GT77 mang lại sức mạnh cùng thiết kế hàng đầu hiện nay. Chiếc Titan GT77 nay đã tái sinh."
+        }
+    ]
+}

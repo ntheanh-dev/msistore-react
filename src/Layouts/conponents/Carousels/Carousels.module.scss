@@ -1,0 +1,19 @@
+.head {
+    margin: 37px 0 14px;
+    display: flex;
+    justify-content: space-between;
+}
+.left {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 33px;
+    color: var(--black);
+}
+.right {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15px;
+    text-align: right;
+    color: var(--black);
+    text-decoration: underline;
+}
