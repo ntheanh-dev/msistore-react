@@ -11,7 +11,7 @@
 
     --blue015: #0156ff;
     --blue01A: #01a4ff;
-    --blue3F5F: #f5f9ff;
+    --blueF5F: #f5f9ff;
 
     --grayACA: #acacac;
     --gray8C8: #8c8c8c;
@@ -60,7 +60,11 @@ html *::-webkit-scrollbar-track {
     border-radius: 0;
     background-color: rgba(0, 0, 0, 0);
 }
-
+ol,
+ul {
+    list-style: none;
+    padding: 0;
+}
 button,
 input,
 [tabindex] {

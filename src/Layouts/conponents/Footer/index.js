@@ -1,5 +1,13 @@
+import Features from "./Features";
+import FooterInfors from "./Footer";
+import { Container } from "react-bootstrap";
 function Footer() {
-    return (<h2>Footer</h2>);
+    return (
+        <Container fluid>
+            <Features />
+            <FooterInfors />
+        </Container>
+    );
 }
 
 export default Footer;
