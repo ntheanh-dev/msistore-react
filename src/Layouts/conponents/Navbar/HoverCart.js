@@ -4,9 +4,9 @@ import classNames from "classnames/bind";
 import { Link } from 'react-router-dom';
 import { memo } from 'react'
 
-import ItemInCartHover from '../../../components/ItemInCartHover';
-import Button from '../../../components/Button';
-import img from '../../../assets/images/laptops/lap2-1.png'
+import ItemInCartHover from '~/components/ItemInCartHover';
+import Button from '~/components/Button';
+import img from '~/assets/images/laptops/lap2-1.png'
 
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
@@ -52,7 +52,7 @@ function Hovercart(prop) {
                     </div>
                 )}
             >
-                <Link to="/signing" className={cx('iconCart')}>
+                <Link to="/" className={cx('iconCart')}>
                     <BsFillCartFill />
                 </Link>
             </Tippy>

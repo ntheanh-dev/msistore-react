@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import Carousel from "./Carousel";
 import style from './Carousels.module.scss'
-import slide from '../../../assets/images/slide1.png'
+import slide from '~/assets/images/slide1.png'
 
 const cx = classNames.bind(style)
 

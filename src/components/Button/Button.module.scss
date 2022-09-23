@@ -17,8 +17,10 @@
     border: 2px solid transparent;
     user-select: none;
 
-    + .wrapper {
-        margin-left: 16px;
+    @include media-breakpoint-down(lg) {
+        + .wrapper {
+            margin-top: 16px;
+        }
     }
     &.disable {
         pointer-events: none;
@@ -63,7 +65,27 @@
 
     &:hover {
         border-color: currentColor;
-        background-color: rgba(254, 44, 85, 0.06);
+        opacity: 0.6;
+    }
+}
+
+.black {
+    color: var(--whiteFFF);
+    background-color: var(--black);
+
+    &:hover {
+        border-color: currentColor;
+        opacity: 0.6;
+    }
+}
+
+.outlineGray {
+    border-color: currentColor;
+    color: #666666;
+
+    &:hover {
+        border-color: currentColor;
+        opacity: 0.6;
     }
 }
 

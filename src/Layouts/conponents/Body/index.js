@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import InforAuthor from "./inforAuthor";
 import ProductsType from "./ProductsType";
 import Brands from "./Brands";
-import img from '../../../assets/images/laptoptype.png'
+import img from '~/assets/images/laptoptype.png'
 function Body() {
     return (
         <Container>

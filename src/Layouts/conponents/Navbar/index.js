@@ -10,8 +10,8 @@ import { useState, useCallback } from 'react';
 
 
 import OverLay from './OverLay';
-import Button from '../../../components/Button';
-import logo from '../../../assets/images/logo.png'
+import Button from '~/components/Button';
+import logo from '~/assets/images/logo.png'
 import style from './Navbar.module.scss'
 import Hovercart from './HoverCart';
 const cx = classNames.bind(style)
@@ -119,7 +119,7 @@ function Navbar() {
                                     {/* your cart */}
                                     <Hovercart total={2} />
 
-                                    <Link to="/signing" className={cx('icon')}>
+                                    <Link to="/register" className={cx('icon')}>
                                         <MdAccountCircle />
                                     </Link>
                                 </Fragment>

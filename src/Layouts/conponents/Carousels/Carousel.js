@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 
-import Product from "../../../components/Product";
-import img from '../../../assets/images/laptops/lap1-1.png'
+import Product from "~/components/Product";
+import img from '~/assets/images/laptops/lap1-1.png'
 
 const Carousel = () => {
     var settings = {

@@ -1,12 +1,12 @@
 import classNames from "classnames/bind";
 
 import style from "./Body.module.scss";
-import msi from '../../../assets/images/brands/msi.png';
-import adata from '../../../assets/images/brands/adata.png';
-import gigabyte from '../../../assets/images/brands/gigabyte.png';
-import hp from '../../../assets/images/brands/hp.png';
-import razez from '../../../assets/images/brands/razez.png';
-import roccat from '../../../assets/images/brands/roccat.png';
+import msi from '~/assets/images/brands/msi.png';
+import adata from '~/assets/images/brands/adata.png';
+import gigabyte from '~/assets/images/brands/gigabyte.png';
+import hp from '~/assets/images/brands/hp.png';
+import razez from '~/assets/images/brands/razez.png';
+import roccat from '~/assets/images/brands/roccat.png';
 
 const cx = classNames.bind(style)
 function Brands() {

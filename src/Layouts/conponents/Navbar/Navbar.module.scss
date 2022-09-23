@@ -1,6 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 .background {
+    border: 1px solid #ccc;
+
     @include media-breakpoint-down(lg) {
+        border: unset;
         background-color: var(--blue015);
     }
 }

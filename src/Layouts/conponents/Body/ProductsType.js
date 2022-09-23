@@ -2,13 +2,14 @@ import classNames from "classnames/bind";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import Product from "../../../components/Product"
-// import img from '../../../assets/images/laptops/lap1-1.png'
-import img from '../../../assets/images/laptops/lap2-1.png'
+import Product from "~/components/Product"
+import img from '~/assets/images/laptops/lap2-1.png'
 import style from "./Body.module.scss";
 
 const cx = classNames.bind(style)
 function ProductsType() {
+
+
     return (
         <div className={cx('wrapper')}>
             <Row>

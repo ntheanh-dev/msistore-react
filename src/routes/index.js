@@ -1,13 +1,15 @@
 import Home from '../pages/Home';
 import Cart from "../pages/Cart";
 import Fillter from "../pages/Fillter";
-import Footer from "../pages/Footer";
+import Register from '~/pages/SignIng/Register';
+import Login from '~/pages/SignIng/Login'
 
 const publicRoutes = [
     { path: '/', component: Home },
-    { path: '/cart', component: Cart },
+    { path: '/yourcart', component: Cart },
     { path: '/fillter', component: Fillter },
-    { path: '/footer', component: Footer },
+    { path: '/login', component: Login },
+    { path: '/register', component: Register },
 ]
 
 const priveRoutes = [

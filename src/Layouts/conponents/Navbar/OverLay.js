@@ -2,8 +2,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
 
-import Button from '../../../components/Button';
-import logo from '../../../assets/images/logo.png'
+import Button from '~/components/Button';
+import logo from '~/assets/images/logo.png'
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 

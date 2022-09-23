@@ -5,9 +5,8 @@ import { memo } from "react";
 
 import style from './Footer.module.scss';
 const cx = classNames.bind(style)
-function FooterItem({ ele, isShow }) {
+function FooterItem({ ele }) {
 
-    if (!isShow) return
     return (
         ele.map((item, index) => (
             <li key={index}>
@@ -21,7 +20,6 @@ function FooterItem({ ele, isShow }) {
 
 FooterItem.propTypes = {
     ele: PropTypes.array.isRequired,
-    isShow: PropTypes.bool.isRequired
 }
 
 export default memo(FooterItem);

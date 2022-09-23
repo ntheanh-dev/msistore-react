@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
 
-import logo from '../../../assets/images/logo-2.png'
+import logo from '~/assets/images/logo-2.png'
 import style from './Header.module.scss'
 const cx = classNames.bind(style)
 function Header() {

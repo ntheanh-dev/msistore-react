@@ -33,7 +33,8 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    background: url('../../../assets/images/laptoptype.png') center / cover no-repeat;
+    background: center / cover no-repeat;
+    background-image: url('../../../assets/images/laptoptype.png');
     background-size: 110%;
     transition: background-size 0.2s linear;
     -moz-transition: background-size 0.2s linear;

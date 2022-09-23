@@ -1,0 +1,64 @@
+@import '~bootstrap/scss/bootstrap';
+.heading {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0px;
+    color: var(--black);
+    margin: 13px 0;
+}
+.head {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+}
+.box {
+    padding: 37px 57px 40px;
+    margin-bottom: 58px;
+    background-color: var(--whiteF5F);
+}
+.head {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: left;
+    color: var(--black);
+}
+.desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+    text-align: left;
+    color: var(--black);
+}
+.input {
+    height: 50px;
+    width: 100%;
+    padding: 0 17px;
+    border: 1px solid var(--gray8C8);
+    color: var(--gray8C8);
+    font-size: 14px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+.left-foot {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #0156ff;
+    display: inline;
+    margin-left: 23px;
+    margin-bottom: 0;
+}
+.desc-list {
+    padding-left: 16px;
+    list-style: unset;
+    margin-bottom: 30px;
+
+    & > li {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 20px;
+        color: var(--black);
+    }
+}
