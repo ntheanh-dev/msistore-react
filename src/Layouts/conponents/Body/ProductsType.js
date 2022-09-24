@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Product from "~/components/Product"
 import img from '~/assets/images/laptops/lap2-1.png'
@@ -25,6 +26,7 @@ function ProductsType() {
                     <Row className=" d-flex flex-nowrap overflow-hidden" >
                         <Col lg={3} md={6} sm={6} >
                             <Product
+                                primary
                                 name={"This is name product"}
                                 img={img}
                                 oldPrice={500}
@@ -35,6 +37,7 @@ function ProductsType() {
                         </Col>
                         <Col lg={3} md={6} sm={6} >
                             <Product
+                                primary
                                 name={"This is name product"}
                                 img={img}
                                 oldPrice={500}
@@ -45,6 +48,7 @@ function ProductsType() {
                         </Col>
                         <Col lg={3} md={6} sm={6} >
                             <Product
+                                primary
                                 name={"This is name product"}
                                 img={img}
                                 oldPrice={500}
@@ -55,6 +59,7 @@ function ProductsType() {
                         </Col>
                         <Col lg={3} md={6} sm={6} >
                             <Product
+                                primary
                                 name={"This is name product"}
                                 img={img}
                                 oldPrice={500}

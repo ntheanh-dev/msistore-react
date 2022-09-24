@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
-import { IoMdArrowDropright } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import { Fragment } from "react";
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,7 @@ function Pageing({ pages }) {
             {
                 pages.map((ele, ind) => (
                     <Fragment key={ind}>
-                        <IoMdArrowDropright className={cx('icon')} />
+                        <IoIosArrowForward className={cx('icon')} />
                         <Link to={`/${ele}`} className={cx('link')} >{ele}</Link>
                     </Fragment>
                 ))

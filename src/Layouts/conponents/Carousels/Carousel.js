@@ -36,6 +36,7 @@ const Carousel = () => {
     return (
         <Slider {...settings}>
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -44,6 +45,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -52,6 +54,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -60,6 +63,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -68,6 +72,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -76,6 +81,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}
@@ -84,6 +90,7 @@ const Carousel = () => {
                 condition={"check for availble"}
             />
             <Product
+                primary
                 name={"This is name product"}
                 img={img}
                 oldPrice={500}

@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import Pageing from "~/components/Pageing";
 import img from "~/assets/images/laptops/lap1-1.png"
-import ProductInCart from "./ProductInCart";
+import Product from "~/components/Product";
 import Button from "~/components/Button";
 import style from './YourCart.module.scss';
 const cx = classNames.bind(style)
@@ -50,7 +50,15 @@ function YourCart() {
                             </Row>
                         </div>
                     }
-                    <ProductInCart
+                    <Product
+                        isInCart
+                        img={img}
+                        name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
+                        price={4349}
+                        quanti={3}
+                    />
+                    <Product
+                        isInCart
                         img={img}
                         name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
                         price={4349}

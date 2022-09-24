@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { Link } from 'react-router-dom';
 import { memo } from 'react'
 
-import ItemInCartHover from '~/components/ItemInCartHover';
+import Product from '~/components/Product';
 import Button from '~/components/Button';
 import img from '~/assets/images/laptops/lap2-1.png'
 
@@ -27,22 +27,26 @@ function Hovercart(prop) {
                         <p className={cx('total')}>{prop.title} item in cart</p>
                         <Button to={"/yourcart"} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
-                            <ItemInCartHover
+                            <Product
+                                isHorver
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
                                 quanti={3}
                             />
-                            <ItemInCartHover
+                            <Product
+                                isHorver
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
                                 quanti={3}
                             />
-                            <ItemInCartHover
+                            <Product
+                                isHorver
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
                                 quanti={3}
                             />
-                            <ItemInCartHover
+                            <Product
+                                isHorver
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
                                 quanti={3}
