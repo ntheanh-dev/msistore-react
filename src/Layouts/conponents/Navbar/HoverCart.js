@@ -56,7 +56,7 @@ function Hovercart(prop) {
                     </div>
                 )}
             >
-                <Link to="/" className={cx('iconCart')}>
+                <Link to="/yourcart" className={cx('iconCart')}>
                     <BsFillCartFill />
                 </Link>
             </Tippy>

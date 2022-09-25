@@ -18,7 +18,7 @@ const Carousels = () => {
         autoplaySpeed: 2000,
     };
     return (
-        <Container>
+        <Container className={cx('wrapper')}>
             <Slider {...settings}>
                 <div>
                     <img src={slide} alt="slide" />

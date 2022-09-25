@@ -8,8 +8,7 @@ import classNames from "classnames/bind";
 import { Fragment } from "react"
 import { useState, useCallback } from 'react';
 
-
-import OverLay from './OverLay';
+import Nav from '~/components/Nav'
 import Button from '~/components/Button';
 import logo from '~/assets/images/logo.png'
 import style from './Navbar.module.scss'
@@ -59,14 +58,6 @@ function Navbar() {
         setToogleSearch({ input: true, icon: false, navLinks: false });
     }
 
-    const handleShowBar = () => {
-        setBars(true)
-    }
-
-    const handleHidenBar = useCallback(() => {
-        setBars(false)
-    }, [])
-
     const currentUse = false;
 
     return (
@@ -78,9 +69,9 @@ function Navbar() {
                         <img src={logo} alt="logo" />
                     </Link>
 
-                    {!bars && <FaBars className={cx('bars')} onClick={handleShowBar} />}
+                    {!bars && <FaBars className={cx('bars')} onClick={() => setBars(true)} />}
 
-                    {bars && <OverLay MAIN_NAV={MAIN_NAV} handle={handleHidenBar} />}
+                    {bars && <Nav isFillter handle={() => setBars(false)} />}
 
                     {toogleSearch.navLinks && (
                         <div className={cx('navLinks')}>
@@ -91,7 +82,7 @@ function Navbar() {
                                     </div>
                                 ))
                             }
-                            <Button primary to="/ourdeals" >Our Deals</Button>
+                            <Button primary>Our Deals</Button>
                         </div>
                     )}
 

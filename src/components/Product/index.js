@@ -1,17 +1,16 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill } from "react-icons/bs";
+import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill, BsFillBarChartFill } from "react-icons/bs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { memo } from "react";
 import { TiDeleteOutline, TiPencil } from "react-icons/ti";
+import { HiOutlineHeart } from "react-icons/hi";
+import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
-import { Fragment } from "react";
 
-import Button from "../Button";
-import Pageing from "../Pageing";
 import style from './Product.module.scss'
+import Button from "../Button";
 const cx = classNames.bind(style)
 
 function Product({
@@ -26,10 +25,10 @@ function Product({
 
     primary,
     isHorver,
-    isDetail,
     isInCart
 
 }) {
+    // isPrimary
     const stars = [];
     for (let i = 0; i < 5; i++) {
         if (i < review) {
@@ -42,6 +41,7 @@ function Product({
     // Item in cart
     const total = price * quanti
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
+
 
     return (
         <Link to="/product">
@@ -80,6 +80,13 @@ function Product({
                         <div className={cx("old")}>${oldPrice}</div>
                         <div className={cx("new")}>${newPrice}</div>
                     </div>
+                    <div className={cx('layout-hover')}>
+                        <div className={cx('actions')}>
+                            <HiOutlineHeart className={cx('icon-isHover')} />
+                            <BsFillBarChartFill className={cx('icon-isHover')} />
+                        </div>
+                        <Button primary>Add to cart</Button>
+                    </div>
                 </div>)
             }
 
@@ -96,6 +103,7 @@ function Product({
                     </div>
                 </Link>)
             }
+
             {isInCart &&
                 (<Row className={cx('wrapper-isInCart')}>
                     <Col md={2} className={cx('img-isInCart')}>
@@ -132,31 +140,6 @@ function Product({
                 </Row>)
             }
 
-            {isDetail &&
-                (<Fragment>
-                    <Pageing pages={['Laptops']} />
-                    <div className={cx('head-isDetail')}>
-                        <div className={cx('category')}>
-                            <Link className={cx('linkActive')}>About Product</Link>
-                            <Link>Details</Link>
-                        </div>
-                        <div className={cx('control-isDetail')}>
-                            <div className={cx('price-isDetail')}>
-                                <p>On Sale from</p>
-                                <span>${total}</span>
-                            </div>
-                            <div className={cx('quanti-Detail')}>
-                                <span className={cx('number-isDetail')}>{quanti}</span>
-                                <div className={cx('wrap-icon')}>
-                                    <IoIosArrowUp />
-                                    <IoIosArrowDown />
-                                </div>
-                            </div>
-                            <Button primary >Add to Cart</Button>
-                        </div>
-                    </div>
-                </Fragment>)
-            }
         </Link>
     );
 }

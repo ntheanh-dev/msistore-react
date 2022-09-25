@@ -2,6 +2,53 @@
 .product {
     position: relative;
     padding-bottom: 20px;
+
+    position: relative;
+
+    &:hover .layout-hover {
+        display: flex;
+    }
+}
+.layout-hover {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    & > div {
+        animation: fadeInIcons 0.3s linear;
+        align-items: flex-end;
+    }
+
+    & > button {
+        animation: fadeInBtn 0.3s linear;
+        padding: 2px 0;
+    }
+}
+@keyframes fadeInBtn {
+    from {
+        opacity: 0;
+        transform: translateY(70%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(100);
+    }
+}
+@keyframes fadeInIcons {
+    from {
+        opacity: 0;
+        transform: translateX(20%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 .stock-icon {
     font-size: 10px;
@@ -29,6 +76,7 @@
     height: 150px;
     margin: 0 auto;
 }
+
 .reviews {
     margin: 10px 0 7px;
     display: flex;
@@ -256,90 +304,4 @@
             font-size: 30px;
         }
     }
-}
-// Product isDetail
-.head-isDetail {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 85px;
-
-    @include media-breakpoint-down(md) {
-        flex-direction: column;
-        align-items: unset;
-    }
-}
-.category {
-    & > a {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 21px;
-        color: #666666;
-
-        & + a {
-            margin-left: 18px;
-        }
-    }
-}
-.linkActive {
-    color: var(--black) !important;
-    position: relative;
-
-    &::after {
-        position: absolute;
-        display: block;
-        content: '';
-        height: 2px;
-        bottom: -5px;
-        width: 100%;
-        background-color: var(--blue015);
-    }
-}
-.control-isDetail {
-    display: flex;
-}
-.price-isDetail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @include media-breakpoint-down(lg) {
-        flex-direction: column;
-    }
-    @include media-breakpoint-down(md) {
-        flex-direction: row;
-    }
-
-    & > p {
-        margin: 0;
-        margin-right: 8px;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 18px;
-    }
-
-    & > span {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 21px;
-    }
-}
-
-.quanti-Detail {
-    width: 70px;
-    height: 50px;
-    margin: 0 20px;
-
-    padding: 2px;
-    background: #ebebeb;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-around;
-}
-
-.number-isDetail {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 29px;
-    padding: 9px 0 9px 0px;
 }
