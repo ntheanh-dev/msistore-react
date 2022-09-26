@@ -5,8 +5,17 @@ import Pageing from "~/components/Pageing";
 
 import Button from "~/components/Button";
 import style from './Register.module.scss'
+import { useState, useRef } from "react";
 const cx = classNames.bind(style)
 function Register() {
+
+    const [name, setName] = useState('')
+    const [gmail, setGmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const nameRef = useRef()
+    const gmailRef = useRef()
+    const passwordRef = useRef()
     return (
         <Container>
             <Pageing pages={["Register"]} />
@@ -17,13 +26,37 @@ function Register() {
                     <p className={cx("desc")}>If you have an account, sign in with your email address.</p>
                     <form>
                         <label for="name">Name</label> <br />
-                        <input className={cx('input')} type="text" placeholder="Your name" id="name" />
+                        <input
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                            ref={nameRef}
+                            className={cx('input')}
+                            type="text"
+                            placeholder="Your Name"
+                            id="name"
+                        />
 
                         <label for="email">Email</label> <br />
-                        <input className={cx('input')} type="text" placeholder="Your Email" id="email" />
+                        <input
+                            value={gmail}
+                            onChange={e => setGmail(e.target.value)}
+                            ref={gmailRef}
+                            className={cx('input')}
+                            type="gmail"
+                            placeholder="Your Email"
+                            id="email"
+                        />
 
                         <br /> <label for="password">Password</label> <br />
-                        <input className={cx('input')} type="text" placeholder="Your Email" id="password" />
+                        <input
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            ref={passwordRef}
+                            className={cx('input')}
+                            type="password"
+                            placeholder="Password"
+                            id="password"
+                        />
                     </form>
                     <div>
                         <Button primary>Create</Button>

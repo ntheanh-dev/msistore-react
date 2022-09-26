@@ -7,63 +7,45 @@ import { AiOutlineMail } from "react-icons/ai";
 import { BsFillBarChartFill } from "react-icons/bs";
 import { memo, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
+import { Fragment } from "react";
 
 import slide from '~/assets/images/detail-slide.png'
-import img1 from '~/assets/images/laptops/lap1-1.png'
-import img2 from '~/assets/images/laptops/lap1-2.png'
-import img3 from '~/assets/images/laptops/lap1-3.png'
 import Button from "../Button";
 import Pageing from "../Pageing";
 import style from './ProductDetail.module.scss'
 const cx = classNames.bind(style)
 
 function ProductDetail({
-    name,
-    price,
-    quanti,
-
+    data
 }) {
-    const infos = [
-        "Intel Core i7-10700F",
-        "Intel H410",
-        "WHITE",
-        "NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6",
-        "SO-DIMM 16GB (16GB x 1) DDR4 2666MHz",
-        "2 total slots (64GB Max)",
-        "512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM",
-        "Gaming Keyboard GK30 + Gaming Mouse GM11",
-        "3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)",
-        "Intel WGI219Vethernet (10/100/1000M)",
-        "AX200 (WIFI 6)+BT5.1",
-        "PSU 330W",
-        "Fan Cooler"
-    ]
-
     // Item in cart
-    const [qty, setQty] = useState(quanti)
-    const handleReduce = () => {
-        qty > 0 && setQty(qty - 1)
+    const [qty, setQty] = useState(1)
+    const handleUpdateQty = (type) => {
+        if (type === 'plus') {
+            setQty(qty + 1)
+        } else {
+            setQty(qty === 1 ? 1 : qty - 1)
+        }
     }
-    const total = price * qty
-    // isDetail
+    const total = data.newPrice * qty;
     const [detail, setDetail] = useState(false)
 
-    const [img, setImg] = useState(img1)
+    const [img, setImg] = useState(data.images[0]);
 
     return (
-        <Link>
+        <Fragment>
             <Container>
                 <Pageing pages={['Laptops']} />
                 <div className={cx('head')}>
                     <div className={cx('category')}>
                         <Link
-                            className={detail ? '' : cx('linkActive')}
+                            className={detail ? ' ' : cx('linkActive')}
                             onClick={() => setDetail(false)}
                         >
                             About Product
                         </Link>
                         <Link
-                            className={detail ? cx('linkActive') : ''}
+                            className={detail ? cx('linkActive') : ' '}
                             onClick={() => setDetail(true)}
                         >
                             Details
@@ -77,8 +59,8 @@ function ProductDetail({
                         <div className={cx('quanti')}>
                             <span className={cx('number')}>{qty}</span>
                             <div className={cx('wrap-icon')}>
-                                <IoIosArrowUp onClick={() => setQty(qty + 1)} />
-                                <IoIosArrowDown onClick={handleReduce} />
+                                <IoIosArrowUp onClick={() => handleUpdateQty('plus')} />
+                                <IoIosArrowDown onClick={() => handleUpdateQty('minus')} />
                             </div>
                         </div>
                         <Button primary to={"/yourcart"} >Add to Cart</Button>
@@ -89,24 +71,20 @@ function ProductDetail({
                 <Container>
                     <Row className={cx('sm-flex-reserve')}>
                         <Col sm={12} md={6} className={cx('left')}>
-                            <h1 className={cx('name')}>MSI MPG Trident 3</h1>
+                            <h1 className={cx('name')}>{data.name}</h1>
                             <p className={cx('title')}>Be the first to review this product</p>
-                            {
-                                detail ?
-                                    (<ul className={cx('core-list')}>
-                                        {infos.map((info, index) => (
-                                            <li>{info}</li>
-                                        ))}
-                                    </ul>)
-                                    :
-                                    <div className={cx('desc')}>
-                                        MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop
-                                    </div>
+                            {detail ? (
+                                <ul className={cx('core-list')}>
+                                    {data.detail.map((info, index) => (
+                                        <li key={index}>{info}</li>
+                                    ))}
+                                </ul>) :
+                                <div className={cx('desc')}>{data.title}</div>
                             }
                             <div className={cx('types')}>
-                                <div className={(img === img1) && cx('type-active')} onClick={() => setImg(img1)}></div>
-                                <div className={(img === img2) && cx('type-active')} onClick={() => setImg(img2)}></div>
-                                <div className={(img === img3) && cx('type-active')} onClick={() => setImg(img3)}></div>
+                                <div className={(img === data.images[0]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[0]))}></div>
+                                <div className={(img === data.images[1]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[1]))}></div>
+                                <div className={(img === data.images[2]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[2]))}></div>
                             </div>
                             <div className={cx('quote')}>
                                 Have a Question
@@ -123,9 +101,9 @@ function ProductDetail({
                                 </div>
                             </div>
                             <div className={cx('change-img')}>
-                                <div className={img === img1 && cx('change-img-active')} onClick={() => setImg(img1)}></div>
-                                <div className={img === img2 && cx('change-img-active')} onClick={() => setImg(img2)}></div>
-                                <div className={img === img3 && cx('change-img-active')} onClick={() => setImg(img3)}></div>
+                                <div className={(img === data.images[0]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[0]))}></div>
+                                <div className={(img === data.images[1]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[1]))}></div>
+                                <div className={(img === data.images[2]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[2]))}></div>
                             </div>
                         </Col>
                     </Row>
@@ -154,9 +132,11 @@ function ProductDetail({
                     </Row>
                 </Container>
             </div>
-        </Link>
+        </Fragment>
     );
 }
-
+ProductDetail.propTypes = {
+    data: PropTypes.object.isRequired
+}
 
 export default memo(ProductDetail);

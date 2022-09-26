@@ -1,1 +1,1 @@
-GET http://localhost:3000/api/laptops
+GET http://localhost:3000/api/data/2

@@ -6,7 +6,7 @@ import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
 import { Fragment } from "react"
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import Nav from '~/components/Nav'
 import Button from '~/components/Button';

@@ -1,16 +1,28 @@
 import ProductDetail from "~/components/ProductDetail";
 
-import img from "~/assets/images/laptops/lap1-1.png"
+import { useEffect, useState } from "react";
+
 function ProductView() {
+
+    const [data, setData] = useState('')
+
+    useEffect(() => {
+        const fetAPI = async () => {
+            const responceJSON = await fetch('http://localhost:3000/api/data/2')
+            const responce = await responceJSON.json()
+            setData(responce)
+        }
+
+        fetAPI()
+    }, [])
     return (
-        <ProductDetail
-            isDetail
-            name={"MSI MPG Trident 3"}
-            desc={'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop'}
-            img={img}
-            price={500}
-            quanti={1}
-        />
+        <div>
+            {data && (
+                <ProductDetail
+                    data={data}
+                />
+            )}
+        </div>
     );
 }
 

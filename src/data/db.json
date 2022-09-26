@@ -1,16 +1,60 @@
 {
-    "laptops": [
+    "data": [
         {
-            "title": "GS66 Stealth",
-            "price": "$2.149",
-            "images": "http://localhost/assets/images/laptops/lap1-1.png",
             "id": 1,
+            "name": "GS66 Stealth",
+            "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
+            "images": ["images/laptops/lap1-1.png", "images/laptops/lap1-2.png", "images/laptops/lap1-3.png"],
             "categorySlug": "laptop-gaming",
-            "ram": [8, 16],
-            "ssd": [256, 512],
+            "detail": [
+                "Windows 10 Home",
+                "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
+                "Intel® Core™ i7-11800H",
+                "2TB NVMe PCIe Gen4x4 SSD",
+                "Killer 2.5Gb LAN",
+                "Killer Wi-Fi 6E AX1675",
+                "Bluetooth v5.2",
+                "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
+            ],
+            "oldPrice": 750,
+            "newPrice": 689,
             "review": 4,
-            "condition": "in stock",
-            "desc": "Trở thành tay chơi cự phách nơi đô thị với chiếc GS66 Stealth sử dụng thiết kế Core Black siêu gọn gàng và mỏng nhẹ. Trang bị vi xử lí Intel® Core™ i7 thế hệ 11 và card đồ họa NVIDIA® GeForce RTX™ 30 series, chiếc GS66 Stealth cực kì cơ động và gọn nhẹ, đồng thời sở hữu viên pin 99.9WHr dung lượng lớn nhất hiện nay cùng Wi-Fi 6E mới nhất. Ngày làm hết sức, đêm chơi hết mình, xứng danh vị vua của nơi thành thị sầm uất - GS66 Stealth."
+            "condition": "in stock"
+        },
+        {
+            "id": 2,
+            "name": "GS66 Stealth",
+            "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
+            "images": ["images/laptops/lap2-1.png", "images/laptops/lap2-2.png", "images/laptops/lap2-3.png"],
+            "categorySlug": "laptop-gaming",
+            "detail": [
+                "Windows 10 Home",
+                "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
+                "Intel® Core™ i7-11800H",
+                "2TB NVMe PCIe Gen4x4 SSD",
+                "Killer 2.5Gb LAN",
+                "Killer Wi-Fi 6E AX1675",
+                "Bluetooth v5.2",
+                "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
+            ],
+            "oldPrice": 750,
+            "newPrice": 689,
+            "review": 4,
+            "condition": "in stock"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "name": "The Anh",
+            "gmail": "theanhmgt@gmail.com",
+            "password": "12345",
+            "products": [
+                {
+                    "idItem": 2,
+                    "quanti": 3
+                }
+            ]
         }
     ]
 }
