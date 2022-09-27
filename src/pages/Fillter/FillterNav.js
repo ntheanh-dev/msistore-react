@@ -1,12 +1,14 @@
 import classNames from "classnames/bind";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { Fragment } from "react";
 
+import img from '~/assets/images/chair.png'
 import Button from "~/components/Button";
 import style from "./Fillter.module.scss"
 const cx = classNames.bind(style)
 function FillterNav({ setValueOptions }) {
+
 
     const [toogleList, setToogleList] = useState({
         category: false,
@@ -131,6 +133,14 @@ function FillterNav({ setValueOptions }) {
             </div>
             <div className={cx('background')} >
                 <h1>Compare Products</h1>
+                <p>You have no items to compare</p>
+            </div>
+            <div className={cx('background')} >
+                <h1>My Wish List</h1>
+                <p>You have no items in your wish list</p>
+            </div>
+            <div className={cx('img')}>
+                <img src={img} alt="alt" />
             </div>
         </Fragment>
     );
