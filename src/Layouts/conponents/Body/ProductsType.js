@@ -4,70 +4,46 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Product from "~/components/Product"
-import img from '~/assets/images/laptops/lap2-1.png'
 import style from "./Body.module.scss";
 
 const cx = classNames.bind(style)
-function ProductsType() {
+function ProductsType({ name, category, img }) {
 
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        const fetAPI = async () => {
+            const responceJSON = await fetch(`http://localhost:3000/api/data?categorySlug=${category}&_page=1&_limit=4`)
+            const responce = await responceJSON.json()
+            console.log(responce)
+            setData(responce)
+        }
+        fetAPI()
+    }, [])
 
     return (
         <div className={cx('wrapper')}>
             <Row>
                 <Col lg={2} md={3} sm={12} >
-                    <div className={cx('background')} >
+                    <div className={cx('background')} style={{ backgroundImage: `url(${img})` }} >
                         <div className={cx('title')}>
-                            <p>Cumstop builds</p>
+                            <p>{name}</p>
                         </div>
                         <Link to={"/products"} className={cx('link')} >See all prodcuts</Link>
                     </div>
                 </Col>
                 <Col lg={10} md={9} sm={12} >
                     <Row className=" d-flex flex-nowrap overflow-hidden" >
-                        <Col lg={3} md={6} sm={6} >
-                            <Product
-                                primary
-                                name={"This is name product"}
-                                img={img}
-                                oldPrice={500}
-                                newPrice={499}
-                                review={3}
-                                condition={"in stock"}
-                            />
-                        </Col>
-                        <Col lg={3} md={6} sm={6} >
-                            <Product
-                                primary
-                                name={"This is name product"}
-                                img={img}
-                                oldPrice={500}
-                                newPrice={499}
-                                review={3}
-                                condition={"in stock"}
-                            />
-                        </Col>
-                        <Col lg={3} md={6} sm={6} >
-                            <Product
-                                primary
-                                name={"This is name product"}
-                                img={img}
-                                oldPrice={500}
-                                newPrice={499}
-                                review={3}
-                                condition={"in stock"}
-                            />
-                        </Col>
-                        <Col lg={3} md={6} sm={6} >
-                            <Product
-                                primary
-                                name={"This is name product"}
-                                img={img}
-                                oldPrice={500}
-                                newPrice={499}
-                                review={3}
-                                condition={"in stock"}
-                            />
-                        </Col>
+                        {data && (
+                            data.map((ele, index) => (
+                                <Col lg={3} md={6} sm={6} key={index} >
+                                    <Product
+                                        primary
+                                        data={ele}
+                                    />
+                                </Col>
+                            ))
+                        )}
                     </Row>
                 </Col>
             </Row>

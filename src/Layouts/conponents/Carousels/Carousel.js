@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 
 import Product from "~/components/Product";
-import img from '~/assets/images/laptops/lap1-1.png'
-
 const Carousel = () => {
+
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        const fetAPI = async () => {
+            const responceJSON = await fetch('http://localhost:3000/api/data')
+            const responce = await responceJSON.json()
+            setData(responce)
+        }
+
+        fetAPI()
+    }, [])
+
     var settings = {
-        infinite: false,
+        infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
@@ -34,71 +45,19 @@ const Carousel = () => {
         ]
     };
     return (
-        <Slider {...settings}>
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-            <Product
-                primary
-                name={"This is name product"}
-                img={img}
-                oldPrice={500}
-                newPrice={499}
-                review={3}
-                condition={"check for availble"}
-            />
-        </Slider>
+        <div>
+            {data && (
+                <Slider {...settings}>
+                    {data.map((ele, index) => (
+                        <Product
+                            key={index}
+                            primary
+                            data={ele}
+                        />
+                    ))}
+                </Slider>
+            )}
+        </div>
     );
 }
 

@@ -1,0 +1,129 @@
+@import '~bootstrap/scss/bootstrap';
+.back {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > button {
+        background-color: transparent;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        color: var(--black);
+        text-align: center;
+    }
+}
+.sort-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin-top: 14px;
+    & > span {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 27px;
+        color: var(--gray8C8);
+        height: fit-content;
+    }
+}
+.showOnMobile {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    margin-right: 20px;
+    & > p {
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 27px;
+        color: var(--gray8C8);
+    }
+}
+.sort-control {
+    display: flex;
+    align-items: center;
+}
+.control {
+    height: 50px;
+    border: 2px solid #ccc;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 22px 0 12px;
+    & > label {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 27px;
+        color: var(--gray8C8);
+    }
+
+    & > select {
+        border: unset;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 27px;
+        color: var(--black);
+    }
+}
+.icon {
+    color: var(--gray8C8);
+    font-size: 32px;
+    margin-left: 20px;
+}
+
+// body
+.background {
+    background-color: var(--whiteF5F);
+    padding: 20px 16px;
+
+    & > h1 {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        color: var(--black);
+        margin-bottom: 10px;
+    }
+
+    & > h2 {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        text-align: left;
+        color: var(--black);
+    }
+
+    & > option {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 27px;
+        color: var(--black);
+        font-family: var(--font-family);
+    }
+}
+.heading {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    & > h2,
+    svg {
+        user-select: none;
+        cursor: pointer;
+    }
+}
+.colors {
+    display: flex;
+
+    & > input {
+        height: 25px;
+        width: 25px;
+        margin-right: 8px;
+        border: 2px solid var(--whiteFFF);
+        outline: 1px solid var(--gray8C8);
+    }
+}

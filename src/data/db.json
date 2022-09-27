@@ -1,60 +1,296 @@
 {
-    "data": [
+  "data": [
+    {
+      "id": 1,
+      "name": "GS66 Stealth",
+      "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
+      "images": [
+        "images/laptops/lap1-1.png",
+        "images/laptops/lap1-2.png",
+        "images/laptops/lap1-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Windows 10 Home",
+        "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
+        "Intel® Core™ i7-11800H",
+        "2TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
+      ],
+      "oldPrice": 750,
+      "newPrice": 689,
+      "review": 5,
+      "condition": "in stock"
+    },
+    {
+      "id": 2,
+      "name": "GS66 Stealth",
+      "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
+      "images": [
+        "images/laptops/lap2-1.png",
+        "images/laptops/lap2-2.png",
+        "images/laptops/lap2-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Windows 10 Home",
+        "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
+        "Intel® Core™ i7-11800H",
+        "2TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
+      ],
+      "oldPrice": 600,
+      "newPrice": 499,
+      "review": 4,
+      "condition": "in stock"
+    },
+    {
+      "id": 3,
+      "name": "Raider GE66 12UGS",
+      "title": "Raider GE66 12UGS (405VN)15.6 QHD (2560x1440), 240Hz, IPS-Level, 100% DCI-P3(Typical) ",
+      "images": [
+        "images/laptops/lap3-1.png",
+        "images/laptops/lap3-2.png",
+        "images/laptops/lap3-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Intel® Core™ i9 12900HK",
+        "Windows 11 Home",
+        "15.6 QHD (2560x1440), 240Hz, IPS-Level, 100% DCI-P3(Typical)",
+        "Intel® Core™ i9 12900HK",
+        "2TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 1100,
+      "newPrice": 999,
+      "review": 5,
+      "condition": "cheack availability "
+    },
+    {
+      "id": 4,
+      "name": "Stealth 15M A11UEK",
+      "title": "Stealth 15M A11UEK - 232VN NVIDIA® GeForce RTX™ 3060 Laptop 6GB GDDR6 Xung Boost tối đa 1357MHz, công suất tiêu thụ tối đa 65W với Dynamic Boost.",
+      "images": [
+        "images/laptops/lap4-1.png",
+        "images/laptops/lap4-2.png",
+        "images/laptops/lap4-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Intel® Core™ i7-11375H",
+        "Windows 11 Home",
+        "15.6  FHD (1920x1080), 144Hz, IPS-level",
+        "512GB NVMe PCIe Gen3x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 700,
+      "newPrice": 598,
+      "review": 3,
+      "condition": "in stock"
+    },
+    {
+      "id": 5,
+      "name": "Crosshair 15 B12UEZ",
+      "title": "Crosshair 15 B12UEZ (460VN) NVIDIA® GeForce RTX™ 3060 Laptop 6GB GDDR6 Xung boost tối đa 1752MHz, công suất tiêu thụ tối đa 140W với Dynamic Boost.",
+      "images": [
+        "images/laptops/lap5-1.png",
+        "images/laptops/lap5-2.png",
+        "images/laptops/lap5-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Intel® Core™ i7 12700H",
+        "Windows 11 Home",
+        "15.6 QHD (2560x1440), 165Hz, IPS-Level, 100% DCI-P3(Typical)",
+        "1TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 700,
+      "newPrice": 598,
+      "review": 3,
+      "condition": "in stock"
+    },
+    {
+      "id": 6,
+      "name": "Raider GE76 12UHS",
+      "title": "Raider GE76 12UHS (480VN) NVIDIA® GeForce RTX™ 3080 Ti Laptop 16GB GDDR6 Xung boost tối đa 1640MHz, công suất tiêu thụ tối đa 175W với Dynamic Boost. Tổng công suất CPU-GPU 220W với công nghệ MSI OverBoost.",
+      "images": [
+        "images/laptops/lap6-1.png",
+        "images/laptops/lap6-2.png",
+        "images/laptops/lap6-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Intel® Core™ i9 12900HK",
+        "Windows 11 Home",
+        "17.3 UHD (3840x2160), 120Hz, IPS-level, 100% AdobeRGB",
+        "2TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 1200,
+      "newPrice": 1199,
+      "review": 5,
+      "condition": "in stock"
+    },
+    {
+      "id": 7,
+      "name": "GP76 Leopard 11UG",
+      "title": "GP76 Leopard 11UG - 280VN NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 Xung boost tối đa 1720MHz, công suất tiêu thụ tối đa 140W với Dynamic Boost.",
+      "images": [
+        "images/laptops/lap7-1.png",
+        "images/laptops/lap7-2.png",
+        "images/laptops/lap7-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "Intel® Core™ i7-11800H",
+        "Windows 11 Home",
+        "17.3  FHD (1920x1080), 240Hz, xấp xỉ 100%sRGB",
+        "1TB NVMe PCIe Gen4x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 800,
+      "newPrice": 776,
+      "review": 5,
+      "condition": "cheack availability"
+    },
+    {
+      "id": 8,
+      "name": "Delta 15 A5EFK ",
+      "title": "Delta 15 A5EFK (071VN) - 280VN NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 Xung boost tối đa 1720MHz, công suất tiêu thụ tối đa 140W với Dynamic Boost.",
+      "images": [
+        "images/laptops/lap8-1.png",
+        "images/laptops/lap8-2.png",
+        "images/laptops/lap8-3.png"
+      ],
+      "categorySlug": "laptop-gaming",
+      "detail": [
+        "AMD Ryzen™ 7 5800H",
+        "Windows 11 Home",
+        "15.6 FHD (1920x1080), 240Hz, IPS-level, xấp xỉ 100% sRGB",
+        "512GB NVMe PCIe Gen3x4 SSD",
+        "Killer 2.5Gb LAN",
+        "Killer Wi-Fi 6E AX1675",
+        "Bluetooth v5.2",
+        "1x Mic-in/Headphone-out Combo Jack"
+      ],
+      "oldPrice": 600,
+      "newPrice": 399,
+      "review": 4,
+      "condition": "in stock"
+    },
+    {
+      "id": 9,
+      "name": "MAG Codex 5 12th",
+      "title": "MAG Codex 5 12th Intel Wireless 6E AX 210 Intel AC 3168",
+      "images": [
+        "images/laptops/pc9-1.png",
+        "images/laptops/pc9-2.png",
+        "images/laptops/pc9-3.png"
+      ],
+      "categorySlug": "pc-gaming",
+      "detail": [
+        "1x HDMI™ port, support 4K@60Hz as specified in HDMI™ 2.1",
+        "1x VGA port (D sub)",
+        "1x Display port, support 4K@60Hz as specified in DP 1.4",
+        "4x USB 2.0 Type A / 1x PS/2 combo port",
+        "2x USB 3.2 Gen 1 Type A",
+        "1x RJ45 (1G LAN)",
+        "3x Audio jacks"
+      ],
+      "oldPrice": 999,
+      "newPrice": 898,
+      "review": 5,
+      "condition": "in stock"
+    },
+    {
+      "id": 10,
+      "name": "MAG Infinite S3 12th",
+      "title": "MAG Infinite S3 12th MAG Infinite S3 12TC-251MYS HDMIx1, Display Portx3, GeForce RTX 3060 VENTUS 2X 12G, 12G",
+      "images": [
+        "images/laptops/pc10-1.png",
+        "images/laptops/pc10-2.png",
+        "images/laptops/pc10-3.png"
+      ],
+      "categorySlug": "pc-gaming",
+      "detail": [
+        "1x HDMI™ port, support 4K@60Hz as specified in HDMI™ 2.1",
+        "1x VGA port (D sub)",
+        "1x Display port, support 4K@60Hz as specified in DP 1.4",
+        "4x USB 2.0 Type A / 1x PS/2 combo port",
+        "2x USB 3.2 Gen 1 Type A",
+        "1x RJ45 (1G LAN)",
+        "3x Audio jacks"
+      ],
+      "oldPrice": 799,
+      "newPrice": 750,
+      "review": 5,
+      "condition": "in stock"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "The Anh",
+      "gmail": "theanhmgt@gmail.com",
+      "password": "12345",
+      "products": [
         {
-            "id": 1,
-            "name": "GS66 Stealth",
-            "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
-            "images": ["images/laptops/lap1-1.png", "images/laptops/lap1-2.png", "images/laptops/lap1-3.png"],
-            "categorySlug": "laptop-gaming",
-            "detail": [
-                "Windows 10 Home",
-                "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
-                "Intel® Core™ i7-11800H",
-                "2TB NVMe PCIe Gen4x4 SSD",
-                "Killer 2.5Gb LAN",
-                "Killer Wi-Fi 6E AX1675",
-                "Bluetooth v5.2",
-                "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
-            ],
-            "oldPrice": 750,
-            "newPrice": 689,
-            "review": 4,
-            "condition": "in stock"
-        },
-        {
-            "id": 2,
-            "name": "GS66 Stealth",
-            "title": "GS66 Stealth 11UG - 210VN 15.6 FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB NVIDIA® GeForce RTX™ 3070 Laptop 8GB GDDR6 boost tối đa 1410MHz,",
-            "images": ["images/laptops/lap2-1.png", "images/laptops/lap2-2.png", "images/laptops/lap2-3.png"],
-            "categorySlug": "laptop-gaming",
-            "detail": [
-                "Windows 10 Home",
-                "15.6'FHD (1920x1080), 300Hz, xấp xỉ 100%sRGB",
-                "Intel® Core™ i7-11800H",
-                "2TB NVMe PCIe Gen4x4 SSD",
-                "Killer 2.5Gb LAN",
-                "Killer Wi-Fi 6E AX1675",
-                "Bluetooth v5.2",
-                "1x (8K @ 60Hz / 4K @ 120Hz) HDMI"
-            ],
-            "oldPrice": 750,
-            "newPrice": 689,
-            "review": 4,
-            "condition": "in stock"
+          "idItem": 2,
+          "quanti": 3
         }
-    ],
-    "users": [
+      ]
+    },
+    {
+      "username": "Huu Nghia",
+      "gmail": "HuuNghiat@gmail.com",
+      "password": "12345",
+      "products": [
         {
-            "id": 1,
-            "name": "The Anh",
-            "gmail": "theanhmgt@gmail.com",
-            "password": "12345",
-            "products": [
-                {
-                    "idItem": 2,
-                    "quanti": 3
-                }
-            ]
+          "idItem": 2,
+          "quanti": 3
         }
-    ]
+      ],
+      "createdAt": 1664269203692,
+      "id": 2
+    },
+    {
+      "username": "huy8989",
+      "email": "huy89@gmail.com",
+      "password": "Theanhmgt66@",
+      "products": [],
+      "createdAt": 1664269408138,
+      "id": 3
+    },
+    {
+      "username": "theanh28",
+      "email": "2151013002anh@ou.edu.vn",
+      "password": "Theanhmgt66@",
+      "products": [],
+      "createdAt": 1664269833905,
+      "id": 4
+    }
+  ]
 }

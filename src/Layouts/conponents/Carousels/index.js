@@ -30,7 +30,6 @@ const Carousels = () => {
                     <img src={slide} alt="slide" />
                 </div>
             </Slider>
-
             <div className={cx('head')}>
                 <div className={cx('left')}>New Products</div>
                 <Link className={cx('right')} to="/products">See all products</Link>

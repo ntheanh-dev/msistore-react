@@ -16,6 +16,10 @@
     padding: 37px 57px 40px;
     margin-bottom: 58px;
     background-color: var(--whiteF5F);
+
+    & button {
+        margin-top: 20px;
+    }
 }
 .head {
     font-size: 18px;
@@ -39,7 +43,20 @@
     color: var(--gray8C8);
     font-size: 14px;
     border-radius: 6px;
-    margin-bottom: 20px;
+
+    & + span {
+        color: red;
+        font-size: 12px;
+        padding: 3px;
+        display: none;
+    }
+
+    &:invalid[focused='true'] {
+        border-color: red;
+    }
+    &:invalid[focused='true'] ~ span {
+        display: block;
+    }
 }
 .left-foot {
     font-size: 14px;

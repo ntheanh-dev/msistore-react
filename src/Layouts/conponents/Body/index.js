@@ -3,12 +3,14 @@ import { Container } from "react-bootstrap";
 import InforAuthor from "./inforAuthor";
 import ProductsType from "./ProductsType";
 import Brands from "./Brands";
-import img from '~/assets/images/laptoptype.png'
+import lap from '~/assets/images/laptoptype.png'
+import des from '~/assets/images/destoptype.png'
 function Body() {
     return (
         <Container>
             <InforAuthor />
-            <ProductsType name={'Cumstom builds'} img={img} />
+            <ProductsType name={'MSI Laptops'} img={lap} category={'laptop-gaming'} />
+            <ProductsType name={'Desktops'} img={des} category={'pc-gaming'} />
             <Brands />
         </Container>
     );

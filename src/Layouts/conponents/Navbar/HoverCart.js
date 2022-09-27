@@ -27,7 +27,7 @@ function Hovercart(prop) {
                         <p className={cx('total')}>{prop.title} item in cart</p>
                         <Button to={"/yourcart"} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
-                            <Product
+                            {/* <Product
                                 isHorver
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
@@ -50,7 +50,11 @@ function Hovercart(prop) {
                                 name={"EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On"}
                                 img={img}
                                 quanti={3}
-                            />
+                            /> */}
+                            {/* If nothing */}
+                            <div className={cx('no-item')}>
+                                <span>Notthing</span>
+                            </div>
                         </div>
                         <Button primary >Go to Checkout</Button>
                     </div>

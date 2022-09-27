@@ -14,14 +14,7 @@ import Button from "../Button";
 const cx = classNames.bind(style)
 
 function Product({
-    name,
-    img,
-    oldPrice,
-    newPrice,
-    price,
-    review,
-    condition,
-    quanti,
+    data,
 
     primary,
     isHorver,
@@ -31,7 +24,7 @@ function Product({
     // isPrimary
     const stars = [];
     for (let i = 0; i < 5; i++) {
-        if (i < review) {
+        if (i < data.review) {
             stars.push('star-color')
         } else {
             stars.push('star-no-color')
@@ -39,7 +32,7 @@ function Product({
     }
 
     // Item in cart
-    const total = price * quanti
+    const total = data.newPrice * 1
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
 
@@ -48,18 +41,18 @@ function Product({
             {primary &&
                 (<div className={cx("product")}>
                     {
-                        condition.includes("in stock")
+                        data.condition.includes("in stock")
                             ? <div>
                                 <BsFillCheckCircleFill className={cx('stock-icon')} />
-                                <div className={cx('tilte')}>{condition}</div>
+                                <div className={cx('tilte')}>{data.condition}</div>
                             </div>
                             : <div>
                                 <BsFillTelephoneXFill className={cx('phone-icon')} />
-                                <div className={cx('tilte')}>{condition}</div>
+                                <div className={cx('tilte')}>{data.condition}</div>
                             </div>
                     }
                     <div className={cx("img")}>
-                        <img src={img} alt="" />
+                        <img src={data.images[0]} alt="" />
                     </div>
                     <div className={cx("reviews")}>
                         <div className={cx("stars")}>
@@ -70,15 +63,15 @@ function Product({
                             }
                         </div>
                         <div className={cx("review-quanti")}>
-                            Reviews ({review})
+                            Reviews ({data.review})
                         </div>
                     </div>
                     <div className={cx("name")}>
-                        {name}
+                        {data.title}data.
                     </div>
                     <div className={cx("prices")}>
-                        <div className={cx("old")}>${oldPrice}</div>
-                        <div className={cx("new")}>${newPrice}</div>
+                        <div className={cx("old")}>${data.oldPrice}</div>
+                        <div className={cx("new")}>${data.newPrice}</div>
                     </div>
                     <div className={cx('layout-hover')}>
                         <div className={cx('actions')}>
@@ -92,11 +85,11 @@ function Product({
 
             {isHorver &&
                 (<Link className={cx('wrapper-isHover')}>
-                    <div className={cx('quanti-isHover')}>{quanti}<span>x</span></div>
+                    <div className={cx('quanti-isHover')}>{1}<span>x</span></div>
                     <div className={cx('img-isHover')}>
-                        <img src={img} alt="img" />
+                        <img src={data.images[0]} alt="img" />
                     </div>
-                    <div className={cx('name-isHover')}>{name}</div>
+                    <div className={cx('name-isHover')}>{data.title}</div>
                     <div className={cx('actions')}>
                         <TiDeleteOutline className={cx('icon-isHover')} />
                         <TiPencil className={cx('icon-isHover')} />
@@ -107,20 +100,20 @@ function Product({
             {isInCart &&
                 (<Row className={cx('wrapper-isInCart')}>
                     <Col md={2} className={cx('img-isInCart')}>
-                        <img src={img} alt="alt" />
+                        <img src={data.images[0]} alt="alt" />
                     </Col>
 
                     <Col md={4} className={cx('name-isInCart')}>
-                        <span>{name}</span>
+                        <span>{data.title}</span>
                     </Col>
 
                     <Col md={2} className={cx('price-isInCart')}>
                         {isMobile && <div className={cx('priceInMobile')}>Price</div>}
-                        ${price}
+                        ${data.newPrice}
                     </Col>
 
                     <Col md={1} className={cx('quanti-isInCart')}>
-                        <span className={cx('number')}>{quanti}</span>
+                        <span className={cx('number')}>{1}</span>
                         <div className={cx('wrap-icon')}>
                             <IoIosArrowUp />
                             <IoIosArrowDown />
@@ -139,18 +132,15 @@ function Product({
 
                 </Row>)
             }
-
         </Link>
     );
 }
 
 Product.propTypes = {
-    name: PropTypes.string.isRequired,
-    img: PropTypes.node.isRequired,
-    oldPrice: PropTypes.number,
-    newPrice: PropTypes.number,
-    review: PropTypes.number,
-    condition: PropTypes.string
+    data: PropTypes.object.isRequired,
+    primary: PropTypes.bool,
+    isHorver: PropTypes.bool,
+    isInCart: PropTypes.bool
 }
 
 export default memo(Product);

@@ -12,6 +12,7 @@ function YourCart() {
 
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
+
     const checkoutItems = [
         {
             title: "Subtotal",
