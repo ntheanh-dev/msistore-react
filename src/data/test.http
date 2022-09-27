@@ -1,1 +1,31 @@
-GET http://localhost:3000/api/data/2
+
+# @name getoneuser
+GET http://localhost:3000/api/users
+###
+
+
+
+
+
+# @name getAllProDuctByID
+
+GET http://localhost:3000/api/data?id=3&id=4&id=8
+
+###
+
+# @name PUTUSER
+
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Huu Nghia",
+    "gmail": "HuuNghiat@gmail.com",
+    "password": "12345",
+    "products": [
+        {
+        "idItem": 2,
+        "quanti": 3
+        }
+    ]
+}
