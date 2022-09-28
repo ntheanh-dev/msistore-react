@@ -26,7 +26,7 @@ function Fillter() {
 
     useEffect(() => {
         const fetAPI = async () => {
-            const responceJSON = await fetch(`http://localhost:3000/api/data?_page=1&_limit=10`)
+            const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data?_page=1&_limit=10`)
             const responce = await responceJSON.json()
             console.log(responceJSON)
             setData(responce)

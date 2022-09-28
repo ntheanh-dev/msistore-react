@@ -79,3 +79,28 @@
         color: var(--black);
     }
 }
+// avata
+.avata-heading {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: left;
+    color: var(--black);
+    margin: 8px 0;
+}
+.avatas {
+    display: flex;
+    justify-content: space-around;
+
+    & > div {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid var(--whiteFFF);
+    }
+}
+
+.avataActive {
+    outline: 2px solid var(--gray8C8);
+}

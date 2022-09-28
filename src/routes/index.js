@@ -3,7 +3,7 @@ import Cart from "../pages/Cart";
 import Fillter from "../pages/Fillter";
 import Register from '~/pages/SignIng/Register';
 import Login from '~/pages/SignIng/Login'
-import ProductView from '~/Layouts/conponents/ProductDetail';
+import ProductView from '~/Layouts/conponents/ProductView';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -11,7 +11,7 @@ const publicRoutes = [
     { path: '/fillter', component: Fillter },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/detail', component: ProductView },
+    { path: '/product/:productid', component: ProductView },
 ]
 
 const priveRoutes = [

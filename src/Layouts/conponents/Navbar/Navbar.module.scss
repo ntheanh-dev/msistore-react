@@ -141,6 +141,7 @@
 }
 .icon {
     font-size: 22px;
+    margin: 0 20px;
 }
 
 .iconCart {
@@ -189,4 +190,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.avata {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #fff;
 }

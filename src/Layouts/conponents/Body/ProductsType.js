@@ -13,9 +13,8 @@ function ProductsType({ name, category, img }) {
 
     useEffect(() => {
         const fetAPI = async () => {
-            const responceJSON = await fetch(`http://localhost:3000/api/data?categorySlug=${category}&_page=1&_limit=4`)
+            const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data?categorySlug=${category}&_page=1&_limit=4`)
             const responce = await responceJSON.json()
-            console.log(responce)
             setData(responce)
         }
         fetAPI()

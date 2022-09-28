@@ -3,13 +3,17 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import Pageing from "~/components/Pageing";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
 
+import { UserContext } from "./UserContext";
 import FormInput from "./Input";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
 import { useState } from "react";
 const cx = classNames.bind(style)
 function Register() {
+
+    const { setUser } = useContext(UserContext)
 
     let navigate = useNavigate();
     const [values, setValues] = useState({
@@ -18,7 +22,7 @@ function Register() {
         password: '',
         confirmPassword: '',
     })
-
+    const [avata, setAvata] = useState('/images/avata1.jpg')
     const inputs = [
         {
             id: 1,
@@ -66,7 +70,7 @@ function Register() {
     }
 
     const getUserByGmail = async (gmail) => {
-        const responceJSON = await fetch(`http://localhost:3000/api/users?gmail=${gmail}`)
+        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?gmail=${gmail}`)
         const responce = await responceJSON.json();
 
         return responce
@@ -77,20 +81,22 @@ function Register() {
         const data = new FormData(e.target)
         const { confirmPassword, ...user } = Object.fromEntries(data.entries())
         user.products = []
+        user.avata = avata
         getUserByGmail(user.email).then(resp => {
             if (resp[0]) {
                 alert("Account already exists ");
             } else {
 
-                fetch('http://localhost:3000/api/users/', {
+                fetch('https://msi-data.herokuapp.com/api/users/', {
                     method: 'POST',
                     body: JSON.stringify(user),
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',
                     }
                 })
-
-                navigate('/login')
+                localStorage.setItem("userData", JSON.stringify(user))
+                setUser(user)
+                navigate('/')
             }
         })
     }
@@ -111,6 +117,27 @@ function Register() {
                                 onChange={onChange}
                             />
                         ))}
+                        <h3 className={cx("avata-heading")}>Avatas</h3>
+                        <div className={cx("avatas")}>
+                            <div
+                                className={cx(avata === '/images/avata1.jpg' ? 'avataActive' : ' ')}
+                                onClick={() => setAvata('/images/avata1.jpg')}
+                            >
+                                <img src={'/images/avata1.jpg'} alt="alt" />
+                            </div>
+                            <div
+                                className={cx(avata === '/images/avata2.jpg' ? 'avataActive' : ' ')}
+                                onClick={() => setAvata('/images/avata2.jpg')}
+                            >
+                                <img src={'/images/avata2.jpg'} alt="alt" />
+                            </div>
+                            <div
+                                className={cx(avata === '/images/avata3.jpg' ? 'avataActive' : ' ')}
+                                onClick={() => setAvata('/images/avata3.jpg')}
+                            >
+                                <img src={'/images/avata3.jpg'} alt="alt" />
+                            </div>
+                        </div>
                         <div>
                             <Button primary>Create</Button>
                             <Link to="/login" className={cx("left-foot")}>Already have an account?</Link>

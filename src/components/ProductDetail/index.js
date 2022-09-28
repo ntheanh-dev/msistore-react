@@ -9,15 +9,12 @@ import { memo, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { Fragment } from "react";
 
-import slide from '~/assets/images/detail-slide.png'
 import Button from "../Button";
 import Pageing from "../Pageing";
 import style from './ProductDetail.module.scss'
 const cx = classNames.bind(style)
 
-function ProductDetail({
-    data
-}) {
+function ProductDetail({ data }) {
     // Item in cart
     const [qty, setQty] = useState(1)
     const handleUpdateQty = (type) => {
@@ -30,6 +27,7 @@ function ProductDetail({
     const total = data.newPrice * qty;
     const [detail, setDetail] = useState(false)
 
+    console.log(data.images[0])
     const [img, setImg] = useState(data.images[0]);
 
     return (
@@ -93,7 +91,7 @@ function ProductDetail({
                         </Col>
                         <Col sm={12} md={6} className={cx('right')}>
                             <div className={cx('img')}>
-                                <img src={img} alt="alt" />
+                                <img src={`/${img}`} alt="alt" />
                                 <div className={cx("icons")}>
                                     <HiOutlineHeart className={cx('icon')} />
                                     <BsFillBarChartFill className={cx('icon')} />
@@ -104,29 +102,6 @@ function ProductDetail({
                                 <div className={(img === data.images[0]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[0]))}></div>
                                 <div className={(img === data.images[1]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[1]))}></div>
                                 <div className={(img === data.images[2]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[2]))}></div>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <div className={cx('slider')}>
-                <Container>
-                    <Row className={cx('slider-content')}>
-                        <Col sm={12} md={6}>
-                            <div className={cx('slider-desc')}>
-                                <div className={cx('slider-heading')}>
-                                    Outplay the Competittion
-                                </div>
-                                <div className={cx('slider-title')}>
-                                    Experience a 40% boost in computing from last generation. MSI Desktop equips the 10th Gen. Intel® Core™ i7 processor with the upmost computing power to bring you an unparalleled gaming experience.
-
-                                    *Performance compared to i7-9700. Specs varies by model.
-                                </div>
-                            </div>
-                        </Col>
-                        <Col sm={12} md={6}>
-                            <div className={cx('slider-img')}>
-                                <img src={slide} alt="alt" />
                             </div>
                         </Col>
                     </Row>

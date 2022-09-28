@@ -8,6 +8,7 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
+import { useNavigate } from "react-router-dom";
 
 import style from './Product.module.scss'
 import Button from "../Button";
@@ -21,6 +22,7 @@ function Product({
     isInCart
 
 }) {
+    const navigate = useNavigate()
     // isPrimary
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -35,9 +37,8 @@ function Product({
     const total = data.newPrice * 1
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
-
     return (
-        <Link to="/product">
+        <div onClick={() => navigate(`/product/${data.id}`)}>
             {primary &&
                 (<div className={cx("product")}>
                     {
@@ -132,7 +133,7 @@ function Product({
 
                 </Row>)
             }
-        </Link>
+        </div>
     );
 }
 

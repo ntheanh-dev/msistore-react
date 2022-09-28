@@ -1,13 +1,18 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
 
+import { UserContext } from "./UserContext";
 import FormInput from "./Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
-import { useState, useRef } from "react";
+import { useContext, useState } from "react";
 const cx = classNames.bind(style)
 function Login() {
+    let navigate = useNavigate()
+    const { user, setUser } = useContext(UserContext)
+
 
     const [values, setValues] = useState({
         username: '',
@@ -52,10 +57,28 @@ function Login() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const handleSumit = e => {
+    const fetAPI = async (email, password) => {
+        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?email=${email}&password=${password}`)
+
+        return responceJSON.json()
+    }
+
+    const handleSumit = (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
-        console.log(Object.fromEntries(data.entries()))
+        const { email, password } = Object.fromEntries(data.entries())
+        fetAPI(email, password).then(account => {
+            if (account[0]) {
+                setUser(account[0])
+                localStorage.setItem("userData", JSON.stringify(account[0]))
+                navigate('/')
+            } else {
+                alert('Khong tim thay tai khoan')
+            }
+
+        })
+        // get apit
+
     }
     return (
         <Container>

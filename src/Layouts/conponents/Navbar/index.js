@@ -6,8 +6,9 @@ import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
 import { Fragment } from "react"
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
+import { UserContext } from '~/pages/SignIng/UserContext';
 import Nav from '~/components/Nav'
 import Button from '~/components/Button';
 import logo from '~/assets/images/logo.png'
@@ -15,6 +16,9 @@ import style from './Navbar.module.scss'
 import Hovercart from './HoverCart';
 const cx = classNames.bind(style)
 function Navbar() {
+
+    const { user } = useContext(UserContext)
+
     const MAIN_NAV = [
         {
             display: "Laptops",
@@ -58,8 +62,6 @@ function Navbar() {
         setToogleSearch({ input: true, icon: false, navLinks: false });
     }
 
-    const currentUse = false;
-
     return (
         <div className={cx('background')}>
             <Container>
@@ -101,10 +103,15 @@ function Navbar() {
                         )}
 
                         {
-                            currentUse ? (
-                                <Link to="/yourcart" className={cx('icon')}>
-                                    <BsFillCartFill />
-                                </Link>
+                            user ? (
+                                <Fragment>
+                                    <Link to="/yourcart" className={cx('icon')}>
+                                        <BsFillCartFill />
+                                    </Link>
+                                    <Link to="/account">
+                                        <div className={cx('avata')}><img src={user.avata} alt='alt' /></div>
+                                    </Link>
+                                </Fragment>
                             ) : (
                                 <Fragment>
                                     {/* your cart */}
