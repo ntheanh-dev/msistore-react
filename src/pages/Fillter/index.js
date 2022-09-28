@@ -3,9 +3,10 @@ import Pageing from "~/components/Pageing";
 import classNames from "classnames/bind";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdSort } from 'react-icons/md';
 
+import Product from "~/components/Product";
 import FillterNav from "./FillterNav";
 import style from "./Fillter.module.scss"
 import SelectSort from "./SelectSort";
@@ -15,12 +16,23 @@ function Fillter() {
     const navigate = useNavigate();
     const [selected, setSelect] = useState('Position')
 
+    const [data, setData] = useState('')
+
     const [valueOptions, setValueOptions] = useState({
         category: '',
         price: '',
         color: '',
     })
 
+    useEffect(() => {
+        const fetAPI = async () => {
+            const responceJSON = await fetch(`http://localhost:3000/api/data?_page=1&_limit=10`)
+            const responce = await responceJSON.json()
+            console.log(responceJSON)
+            setData(responce)
+        }
+        fetAPI()
+    }, [])
 
     return (
         <Container>
@@ -33,7 +45,7 @@ function Fillter() {
                         </div>
                     </Col>
                 )}
-                <Col lg={10} md={8} sm={12}>
+                <Col lg={10} md={9} sm={12}>
                     <div className={cx('sort-head')}>
 
                         {!isMobile ? <span>Items 1-35 of 61</span> : <div className={cx('showOnMobile')}><p>Fillter</p></div>}
@@ -51,8 +63,16 @@ function Fillter() {
                         <FillterNav setValueOptions={setValueOptions} />
                     </Col>
                 )}
-                <Col lg={10} md={8} sm={12}>
-                    <h1>Products</h1>
+                <Col lg={10} md={9} sm={12}>
+                    <Row className=" d-flex flex-wrap" >
+                        {data && (
+                            data.map((ele) => (
+                                <Col key={ele.id} lg={2} md={4} sm={6}>
+                                    <Product primary data={ele} />
+                                </Col>
+                            ))
+                        )}
+                    </Row>
                 </Col>
             </Row>
         </Container>
