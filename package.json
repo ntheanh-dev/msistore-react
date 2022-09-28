@@ -12,13 +12,17 @@
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "@tippyjs/react": "^4.2.6",
+        "babel-plugin-module-resolver": "^4.1.0",
         "bootstrap": "^5.2.1",
         "classnames": "^2.3.2",
+        "customize-cra": "^1.0.0",
+        "json": "^11.0.0",
         "node": "^18.9.1",
         "normalize.css": "^8.0.1",
         "popper.js": "^1.16.1",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
+        "react-app-rewired": "^2.2.1",
         "react-bootstrap": "^2.5.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.4.0",
@@ -26,6 +30,8 @@
         "react-router-dom": "^6.4.0",
         "react-scripts": "5.0.1",
         "react-slick": "^0.29.0",
+        "sass": "^1.55.0",
+        "server": "^1.0.37",
         "slick-carousel": "^1.8.1",
         "web-vitals": "^2.1.4"
     },
@@ -53,12 +59,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "devDependencies": {
-        "babel-plugin-module-resolver": "^4.1.0",
-        "customize-cra": "^1.0.0",
-        "json-server": "^0.17.0",
-        "react-app-rewired": "^2.2.1",
-        "sass": "^1.54.9"
     }
 }
