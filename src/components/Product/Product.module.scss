@@ -80,7 +80,8 @@
 .reviews {
     margin: 10px 0 7px;
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     @include media-breakpoint-down(xl) {
         flex-direction: column;
@@ -91,11 +92,12 @@
     margin: 4px 10px 0;
 }
 .stars {
-    display: inline;
+    display: flex;
 }
 .icon {
     display: inline;
     font-size: 14px;
+    color: var(--grayC4C);
     & + .icon {
         margin-left: 10px;
     }

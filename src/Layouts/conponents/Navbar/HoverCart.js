@@ -6,13 +6,14 @@ import { memo } from 'react'
 
 import Product from '~/components/Product';
 import Button from '~/components/Button';
-import img from '~/assets/images/laptops/lap2-1.png'
 
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 function Hovercart(prop) {
 
     // Goi api your cart
+
+
 
     return (
         <div>

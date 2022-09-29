@@ -1,27 +1,28 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
-import { UserContext } from './pages/SignIng/UserContext';
+import { productsFetch } from './redux/productsSlice';
 import { publicRoutes } from './routes';
 import DefaultLayout from './Layouts/DefauLayout';
-import { useState } from 'react';
 function App() {
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("userData")) || null)
-  const providerValue = useMemo(() => ({ user, setUser }), [user, setUser])
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(productsFetch())
+  }, [])
 
   return (
     <Router>
       <div className="App">
-        <UserContext.Provider value={providerValue}>
-          <Routes>
-            {publicRoutes.map((route, index) => {
-              const Layout = DefaultLayout
-              const Page = route.component
-              return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
-            })}
-          </Routes>
-        </UserContext.Provider>
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Layout = DefaultLayout
+            const Page = route.component
+            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
+          })}
+        </Routes>
       </div>
     </Router>
   );

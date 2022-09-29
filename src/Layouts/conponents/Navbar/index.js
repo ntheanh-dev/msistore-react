@@ -5,20 +5,19 @@ import { MdAccountCircle } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
-import { Fragment } from "react"
-import { useState, useContext } from 'react';
+import { Fragment, useState } from "react"
+import { useSelector } from 'react-redux';
 
-import { UserContext } from '~/pages/SignIng/UserContext';
-import Nav from '~/components/Nav'
 import Button from '~/components/Button';
+import Nav from '~/components/Nav'
 import logo from '~/assets/images/logo.png'
-import style from './Navbar.module.scss'
 import Hovercart from './HoverCart';
+import style from './Navbar.module.scss'
+import Search from './Search';
 const cx = classNames.bind(style)
 function Navbar() {
 
-    const { user } = useContext(UserContext)
-
+    const user = useSelector(state => state.user.value)
     const MAIN_NAV = [
         {
             display: "Laptops",
@@ -73,7 +72,7 @@ function Navbar() {
 
                     {!bars && <FaBars className={cx('bars')} onClick={() => setBars(true)} />}
 
-                    {bars && <Nav isFillter handle={() => setBars(false)} />}
+                    {bars && <Nav handle={() => setBars(false)} />}
 
                     {toogleSearch.navLinks && (
                         <div className={cx('navLinks')}>
@@ -89,10 +88,7 @@ function Navbar() {
                     )}
 
                     <div className={cx('search', toogleSearch.input && 'activeF')}>
-                        <button className={cx('search-btn')}>
-                            <AiOutlineSearch className={cx('search-icon')} />
-                        </button>
-                        <input placeholder='Search here' />
+                        <Search />
                     </div>
 
                     <div className={cx('actions')}>
@@ -117,7 +113,7 @@ function Navbar() {
                                     {/* your cart */}
                                     <Hovercart total={2} />
 
-                                    <Link to="/register" className={cx('icon')}>
+                                    <Link to="/login" className={cx('icon')}>
                                         <MdAccountCircle />
                                     </Link>
                                 </Fragment>

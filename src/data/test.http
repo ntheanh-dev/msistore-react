@@ -1,6 +1,6 @@
 
 # @name getoneuser
-GET https://msi-data.herokuapp.com/api/users?email=huy89@gmail.com&password=Theanhmgt6
+GET https://msi-data.herokuapp.com/api/users
 ###
 
 

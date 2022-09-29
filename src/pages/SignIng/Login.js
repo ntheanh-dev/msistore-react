@@ -1,19 +1,21 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { UserContext } from "./UserContext";
+import { set } from "~/redux/shoppingCart";
+import { update } from "~/redux/userSlice";
 import FormInput from "./Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
-import { useContext, useState } from "react";
+import { useState } from "react";
 const cx = classNames.bind(style)
 function Login() {
+
+    const dispatch = useDispatch()
+
     let navigate = useNavigate()
-    const { user, setUser } = useContext(UserContext)
-
-
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -69,16 +71,14 @@ function Login() {
         const { email, password } = Object.fromEntries(data.entries())
         fetAPI(email, password).then(account => {
             if (account[0]) {
-                setUser(account[0])
                 localStorage.setItem("userData", JSON.stringify(account[0]))
+                dispatch(update(account[0]))
+                dispatch(set(account[0].cart))
                 navigate('/')
             } else {
                 alert('Khong tim thay tai khoan')
             }
-
         })
-        // get apit
-
     }
     return (
         <Container>

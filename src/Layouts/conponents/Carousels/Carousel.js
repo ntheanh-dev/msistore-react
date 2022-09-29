@@ -6,13 +6,13 @@ const Carousel = () => {
 
     const [data, setData] = useState(null)
 
+
     useEffect(() => {
         const fetAPI = async () => {
             const responceJSON = await fetch('https://msi-data.herokuapp.com/api/data')
             const responce = await responceJSON.json()
             setData(responce)
         }
-
         fetAPI()
     }, [])
 

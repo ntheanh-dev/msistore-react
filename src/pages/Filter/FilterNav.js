@@ -2,13 +2,42 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
+import { setFilters } from "~/redux/filterSlice";
 import img from '~/assets/images/chair.png'
 import Button from "~/components/Button";
-import style from "./Fillter.module.scss"
+import style from "./Filter.module.scss"
 const cx = classNames.bind(style)
-function FillterNav({ setValueOptions }) {
 
+function FilterNav({ setIsFlter }) {
+    const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
+
+    const dispatch = useDispatch()
+    const filter = useSelector(state => state.filter)
+
+    const handleSetFilter = () => {
+        setIsFlter(true);
+    }
+
+    const getQtyFilter = (filter) => {
+        return Object.keys(filter).reduce((prve, key) => {
+            if (filter[key] !== '') {
+                return prve + 1
+            }
+            return prve
+        }, 0)
+    }
+
+    const handleClearFilter = () => {
+        setIsFlter(false);
+        dispatch(setFilters({
+            category: '',
+            price: '',
+            color: '',
+        }))
+    }
 
     const [toogleList, setToogleList] = useState({
         category: false,
@@ -52,14 +81,54 @@ function FillterNav({ setValueOptions }) {
             title: '$400.00 - $500.00',
             value: 500,
             id: 7
+        },
+        {
+            title: '$500.00 - $600.00',
+            value: 600,
+            id: 8
+        },
+        {
+            title: '$600.00 - $700.00',
+            value: 700,
+            id: 9
+        },
+        {
+            title: '$700.00 - $800.00',
+            value: 800,
+            id: 10
+        },
+        {
+            title: '$800.00 - $900.00',
+            value: 900,
+            id: 11
+        },
+        {
+            title: '$900.00 - $1.000.00',
+            value: 1000,
+            id: 12
+        },
+        {
+            title: '$1.000.00 - $1.100.00',
+            value: 1100,
+            id: 13
+        },
+        {
+            title: '$1.100.00 - $1.200.00',
+            value: 1200,
+            id: 14
+        },
+        {
+            title: '$1.200.00 - $1.300.00',
+            value: 1300,
+            id: 15
         }
     ]
 
     return (
         <Fragment>
             <div className={cx('background')} >
-                <h1>Filter</h1>
-                <Button outline>Clear Filter</Button>
+                {!isMobile && <h1>Filter</h1>}
+                {!isMobile && <Button outline onClick={handleClearFilter}>Clear Filter</Button>}
 
                 <div
                     className={cx('heading')}
@@ -72,8 +141,8 @@ function FillterNav({ setValueOptions }) {
                     <option
                         key={ele.id}
                         value={ele.value}
-                        onClick={e => setValueOptions(prve => ({
-                            ...prve,
+                        onClick={e => dispatch(setFilters({
+                            ...filter,
                             category: e.target.value
                         }))}
                     >
@@ -93,8 +162,8 @@ function FillterNav({ setValueOptions }) {
                     <option
                         key={ele.id}
                         value={ele.value}
-                        onClick={e => setValueOptions(prve => ({
-                            ...prve,
+                        onClick={e => dispatch(setFilters({
+                            ...filter,
                             price: e.target.value
                         }))}
                     >
@@ -114,36 +183,41 @@ function FillterNav({ setValueOptions }) {
                         <input
                             type="color"
                             defaultValue='black'
-                            onClick={e => setValueOptions(prve => ({
-                                ...prve,
+                            onClick={e => dispatch(setFilters({
+                                ...filter,
                                 color: e.target.value
                             }))}
                         />
                         <input
                             type="color"
                             defaultValue="#ff0000"
-                            onClick={e => setValueOptions(prve => ({
-                                ...prve,
+                            onClick={e => dispatch(setFilters({
+                                ...filter,
                                 color: e.target.value
                             }))}
                         />
                     </div>
                 )}
-                <Button primary>Apply Fillters</Button>
+                {isMobile && <Button outline onClick={handleClearFilter}>Clear Filter</Button>}
+                <Button primary onClick={handleSetFilter} >Apply filters  ({getQtyFilter(filter)})</Button>
             </div>
-            <div className={cx('background')} >
-                <h1>Compare Products</h1>
-                <p>You have no items to compare</p>
-            </div>
-            <div className={cx('background')} >
-                <h1>My Wish List</h1>
-                <p>You have no items in your wish list</p>
-            </div>
-            <div className={cx('img')}>
-                <img src={img} alt="alt" />
-            </div>
+            {!isMobile && (
+                <Fragment>
+                    <div className={cx('background')} >
+                        <h1>Compare Products</h1>
+                        <p>You have no items to compare</p>
+                    </div>
+                    <div className={cx('background')} >
+                        <h1>My Wish List</h1>
+                        <p>You have no items in your wish list</p>
+                    </div>
+                    <div className={cx('img')}>
+                        <img src={img} alt="alt" />
+                    </div>
+                </Fragment>
+            )}
         </Fragment>
     );
 }
 
-export default FillterNav;
+export default FilterNav;

@@ -101,6 +101,7 @@
         border-color: var(--grayCCC);
     }
 }
+
 .search-btn {
     display: flex;
     align-items: center;
@@ -120,11 +121,10 @@
         background-color: var(--whiteFFF);
     }
     &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
+        opacity: 0.8;
         cursor: pointer;
     }
     &:active {
-        background-color: rgba(22, 24, 35, 0.06);
     }
 }
 

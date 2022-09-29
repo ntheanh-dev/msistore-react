@@ -1,12 +1,13 @@
 import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
+import { useSelector } from 'react-redux';
 
 import Pageing from "~/components/Pageing";
-import img from "~/assets/images/laptops/lap1-1.png"
 import Product from "~/components/Product";
 import Button from "~/components/Button";
 import style from './YourCart.module.scss';
+import { FaProductHunt } from "react-icons/fa";
 const cx = classNames.bind(style)
 function YourCart() {
 
@@ -51,7 +52,7 @@ function YourCart() {
                             </Row>
                         </div>
                     }
-                    <Product
+                    {/* <Product
                         isInCart
                         img={img}
                         name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
@@ -64,7 +65,7 @@ function YourCart() {
                         name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
                         price={4349}
                         quanti={3}
-                    />
+                    /> */}
                     <div className={cx('buttons')}>
                         <Button outlineGray>Continue Shopping</Button>
                         <Button black>Clear Shopping Cart</Button>

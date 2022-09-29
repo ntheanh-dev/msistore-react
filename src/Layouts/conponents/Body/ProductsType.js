@@ -9,6 +9,7 @@ import style from "./Body.module.scss";
 const cx = classNames.bind(style)
 function ProductsType({ name, category, img }) {
 
+
     const [data, setData] = useState(null)
 
     useEffect(() => {
@@ -28,7 +29,7 @@ function ProductsType({ name, category, img }) {
                         <div className={cx('title')}>
                             <p>{name}</p>
                         </div>
-                        <Link to={"/products"} className={cx('link')} >See all prodcuts</Link>
+                        <Link to={"/filter"} className={cx('link')} >See all prodcuts</Link>
                     </div>
                 </Col>
                 <Col lg={10} md={9} sm={12} >

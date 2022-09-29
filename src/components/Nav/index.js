@@ -8,7 +8,7 @@ import style from './Nav.module.scss'
 import { Fragment, useState } from "react";
 const cx = classNames.bind(style)
 
-function OverLay({ handle, isNav, isFillter }) {
+function OverLay({ handle }) {
 
     //isNav
     const MAIN_NAV = [
@@ -42,7 +42,7 @@ function OverLay({ handle, isNav, isFillter }) {
         }
     ]
 
-    //isFillter
+    //isfilter
     const [colorList, setColorList] = useState(false)
 
 
@@ -58,14 +58,10 @@ function OverLay({ handle, isNav, isFillter }) {
         <div className={cx('isNav')}>
             <Fragment>
                 <div className={cx('isNavTablet-head')}>
-                    {isNav &&
-                        <Link to="/">
-                            <img src={logo} alt="logo" />
-                        </Link>
-                    }
-                    {isFillter &&
-                        <h1 className={cx('heading')}>Fillter By</h1>
-                    }
+                    <Link to="/">
+                        <img src={logo} alt="logo" />
+                    </Link>
+                    <h1 className={cx('heading')}>filter By</h1>
 
                     <AiOutlineClose
                         className={cx('xmark-icon')}
@@ -73,23 +69,13 @@ function OverLay({ handle, isNav, isFillter }) {
                     />
                 </div>
                 <div className={cx('isNavTablet-body')}>
-                    {isNav &&
-                        (MAIN_NAV.map((item, index) => (
-                            <div key={index} className={cx('isLinksTab')}>
-                                <Link to={item.path}>{item.display}</Link>
-                            </div>
-                        )))
-                    }
-                    {isFillter && (
-                        <div className={cx('fillter-list')}>
-                            <div>Price</div>
-                            {colorList && (
-                                <ul></ul>
-                            )}
+                    {MAIN_NAV.map((item, index) => (
+                        <div key={index} className={cx('isLinksTab')}>
+                            <Link to={item.path}>{item.display}</Link>
                         </div>
-                    )}
-                    {isNav && <Button primary to="/ourdeals" >Our Deals</Button>}
-                    {isFillter && <Button primary to="/ourdeals" >Apply Fillter</Button>}
+                    ))}
+
+                    <Button primary to="/ourdeals" >Our Deals</Button>
                 </div>
             </Fragment>
         </div>

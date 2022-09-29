@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
 
-import style from "./Fillter.module.scss"
+import style from "./Filter.module.scss"
 const cx = classNames.bind(style)
 
 function SelectSort({ values, optionDetector, setSelect }) {

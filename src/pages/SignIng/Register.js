@@ -3,9 +3,10 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import Pageing from "~/components/Pageing";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 
-import { UserContext } from "./UserContext";
+import { set } from "~/redux/shoppingCart";
+import { update } from "~/redux/userSlice";
 import FormInput from "./Input";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
@@ -13,7 +14,7 @@ import { useState } from "react";
 const cx = classNames.bind(style)
 function Register() {
 
-    const { setUser } = useContext(UserContext)
+    const dispatch = useDispatch();
 
     let navigate = useNavigate();
     const [values, setValues] = useState({
@@ -80,8 +81,9 @@ function Register() {
         e.preventDefault()
         const data = new FormData(e.target)
         const { confirmPassword, ...user } = Object.fromEntries(data.entries())
-        user.products = []
+        user.cart = { items: [], totalPrice: 1890 }
         user.avata = avata
+        user.totalPrice = 0
         getUserByGmail(user.email).then(resp => {
             if (resp[0]) {
                 alert("Account already exists ");
@@ -95,7 +97,8 @@ function Register() {
                     }
                 })
                 localStorage.setItem("userData", JSON.stringify(user))
-                setUser(user)
+                dispatch(update(user))
+                dispatch(set(user.cart))
                 navigate('/')
             }
         })
