@@ -2,8 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const productsSlice = createSlice({
     name: 'products',
-    initialState: { items: [], status: null },
-    reducers: {},
+    initialState: {
+        items: [],
+        status: null
+    },
+    reducers: {
+    },
     extraReducers: (builder) => {
         builder
             .addCase(productsFetch.pending, (state, action) => {

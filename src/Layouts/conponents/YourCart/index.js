@@ -1,23 +1,36 @@
 import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
 
+import { clearCar, getTotal } from "~/redux/shoppingCart";
 import Pageing from "~/components/Pageing";
 import Product from "~/components/Product";
 import Button from "~/components/Button";
 import style from './YourCart.module.scss';
-import { FaProductHunt } from "react-icons/fa";
 const cx = classNames.bind(style)
 function YourCart() {
 
+    const dispath = useDispatch()
+    const cart = useSelector(state => state.cart)
+
+    useEffect(() => {
+        dispath(getTotal(null));
+    }, [cart])
+
+    const { cartTotalAmount } = useSelector(state => state.cart)
+
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
+    // const total = productInCart.reduce((acc, cur) => {
+    //     return acc + cur.quanti * cur.newPrice
+    // }, 0)
 
     const checkoutItems = [
         {
             title: "Subtotal",
-            ship: "$13,047.00" // API
+            ship: `$${cartTotalAmount}` // API
         },
         {
             title: "Shipping",
@@ -29,7 +42,7 @@ function YourCart() {
         },
         {
             title: "Order Total",
-            ship: "$13,068.00" // Api
+            ship: `$${cartTotalAmount + 21 + 1.91}` // Api
         }
     ]
 
@@ -52,23 +65,15 @@ function YourCart() {
                             </Row>
                         </div>
                     }
-                    {/* <Product
-                        isInCart
-                        img={img}
-                        name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
-                        price={4349}
-                        quanti={3}
-                    />
-                    <Product
-                        isInCart
-                        img={img}
-                        name={"MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty"}
-                        price={4349}
-                        quanti={3}
-                    /> */}
+                    {cart.cartItems.length === 0 && (
+                        <h1 className={cx('notthing')}>Notthing</h1>
+                    )}
+                    {cart.cartItems.map(product => (
+                        <Product isInCart key={product.id} data={product} />
+                    ))}
                     <div className={cx('buttons')}>
-                        <Button outlineGray>Continue Shopping</Button>
-                        <Button black>Clear Shopping Cart</Button>
+                        <Button to='/' outlineGray>Continue Shopping</Button>
+                        <Button onClick={() => dispath(clearCar(null))} black>Clear Shopping Cart</Button>
                         <Button black>Update Shopping Cart</Button>
                     </div>
                 </Col>

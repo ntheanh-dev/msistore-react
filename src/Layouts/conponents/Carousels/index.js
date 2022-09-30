@@ -15,7 +15,7 @@ const Carousels = () => {
         infinite: true,
         slidesToShow: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
     };
     return (
         <Container className={cx('wrapper')}>

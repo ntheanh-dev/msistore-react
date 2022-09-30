@@ -27,7 +27,6 @@ function ProductDetail({ data }) {
     const total = data.newPrice * qty;
     const [detail, setDetail] = useState(false)
 
-    console.log(data.images[0])
     const [img, setImg] = useState(data.images[0]);
 
     return (

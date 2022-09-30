@@ -9,7 +9,7 @@ GET https://msi-data.herokuapp.com/api/users
 
 # @name getAllProDuctByID
 
-GET https://msi-data.herokuapp.com/api/data?id=3&id=4&id=8
+GET https://msi-data.herokuapp.com/api/users?email=anh3@gmail.com&password=Theanh28@`
 
 ###
 
@@ -17,14 +17,12 @@ GET https://msi-data.herokuapp.com/api/data?id=3&id=4&id=8
 
 POST https://msi-data.herokuapp.com/api/users HTTP/1.1
 Content-Type: application/json
+
 {
-    "username": "Huu Nghia",
-    "gmail": "HuuNghiat@gmail.com",
-    "password": "12345",
+    "username": "amin",
+    "gmail": "anh@gmail.com",
+    "password": "Theanh28@",
     "products": [
-        {
-        "idItem": 2,
-        "quanti": 3
-        }
+        
     ]
 }

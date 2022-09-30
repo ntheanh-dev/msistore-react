@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import Pageing from "~/components/Pageing";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify"
 
-import { set } from "~/redux/shoppingCart";
-import { update } from "~/redux/userSlice";
+import { userByEmailFetch, userPost } from "~/redux/userSlice";
 import FormInput from "./Input";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
@@ -23,6 +24,7 @@ function Register() {
         password: '',
         confirmPassword: '',
     })
+
     const [avata, setAvata] = useState('/images/avata1.jpg')
     const inputs = [
         {
@@ -70,38 +72,74 @@ function Register() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const getUserByGmail = async (gmail) => {
-        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?gmail=${gmail}`)
-        const responce = await responceJSON.json();
+    // const getUserByGmail = async (gmail) => {
+    //     const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?gmail=${gmail}`)
+    //     const responce = await responceJSON.json();
 
-        return responce
-    }
+    //     return responce
+    // }
 
     const handleSumit = e => {
         e.preventDefault()
         const data = new FormData(e.target)
         const { confirmPassword, ...user } = Object.fromEntries(data.entries())
-        user.cart = { items: [], totalPrice: 1890 }
+        const initialCart = {
+            cartItems: [],
+            cartTotalAmount: 0,
+            cartTotalQuantity: 0,
+        }
+        user.cart = initialCart
         user.avata = avata
-        user.totalPrice = 0
-        getUserByGmail(user.email).then(resp => {
-            if (resp[0]) {
-                alert("Account already exists ");
-            } else {
 
-                fetch('https://msi-data.herokuapp.com/api/users/', {
-                    method: 'POST',
-                    body: JSON.stringify(user),
-                    headers: {
-                        'Content-type': 'application/json; charset=UTF-8',
-                    }
-                })
-                localStorage.setItem("userData", JSON.stringify(user))
-                dispatch(update(user))
-                dispatch(set(user.cart))
-                navigate('/')
-            }
-        })
+        dispatch(userByEmailFetch(user.email))
+            .then(unwrapResult)
+            .then(resp => {
+                // khong tim thay tai khoan
+                if (resp.length === 0) {
+                    dispatch(userPost(user))
+
+                    toast.success(`Register successful`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+
+                    navigate('/')
+
+                } else if (resp.length > 0) {
+                    toast.warn(`Account already exists`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            })
+
+        // getUserByGmail(user.email).then(resp => {
+        //     if (resp[0]) {
+        //         alert("Account already exists ");
+        //     } else {
+
+        //         fetch('https://msi-data.herokuapp.com/api/users/', {
+        //             method: 'POST',
+        //             body: JSON.stringify(user),
+        //             headers: {
+        //                 'Content-type': 'application/json; charset=UTF-8',
+        //             }
+        //         })
+        //         localStorage.setItem("userData", JSON.stringify(user))
+        //         dispatch(update(user))
+        //         navigate('/')
+        //     }
+        // })
     }
     return (
         <Container>

@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MdSort } from 'react-icons/md';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { productRemening } from "./ProductRemaning";
 import Product from "~/components/Product";
@@ -18,13 +18,11 @@ function Filter() {
 
     const navigate = useNavigate();
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
-    const products = useSelector(state => state.products)
+    const { items } = useSelector(state => state.products)
     const productAffter = useSelector(productRemening)
 
     const [showNavFillter, setShowNavFillter] = useState(!isMobile)
     const [isFilter, setIsFlter] = useState(false)
-
-    // console.log(productAffter)
 
     const [selected, setSelect] = useState('Position')
 
@@ -65,20 +63,19 @@ function Filter() {
                 )}
                 <Col lg={10} md={9} sm={12}>
                     <Row className=" d-flex flex-wrap" >
-                        {products.status === 'done' && (
-                            isFilter ?
-                                productAffter.map((ele) => (
-                                    <Col key={ele.id} lg={2} md={4} sm={6}>
-                                        <Product primary data={ele} />
-                                    </Col>
-                                ))
-                                :
-                                products.items.map((ele) => (
-                                    <Col key={ele.id} lg={2} md={4} sm={6}>
-                                        <Product primary data={ele} />
-                                    </Col>
-                                ))
-                        )}
+                        {isFilter ?
+                            productAffter.map((ele) => (
+                                <Col key={ele.id} lg={2} md={4} sm={6}>
+                                    <Product primary data={ele} />
+                                </Col>
+                            ))
+                            :
+                            items.map((ele) => (
+                                <Col key={ele.id} lg={2} md={4} sm={6}>
+                                    <Product primary data={ele} />
+                                </Col>
+                            ))
+                        }
                     </Row>
                 </Col>
             </Row>

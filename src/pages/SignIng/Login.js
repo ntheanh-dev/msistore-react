@@ -2,14 +2,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { toast } from "react-toastify"
+import { useState } from "react";
 
-import { set } from "~/redux/shoppingCart";
-import { update } from "~/redux/userSlice";
+import { userFetch } from "~/redux/userSlice";
 import FormInput from "./Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
-import { useState } from "react";
 const cx = classNames.bind(style)
 function Login() {
 
@@ -59,26 +60,44 @@ function Login() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const fetAPI = async (email, password) => {
-        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?email=${email}&password=${password}`)
-
-        return responceJSON.json()
-    }
-
     const handleSumit = (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
         const { email, password } = Object.fromEntries(data.entries())
-        fetAPI(email, password).then(account => {
-            if (account[0]) {
-                localStorage.setItem("userData", JSON.stringify(account[0]))
-                dispatch(update(account[0]))
-                dispatch(set(account[0].cart))
-                navigate('/')
-            } else {
-                alert('Khong tim thay tai khoan')
-            }
-        })
+
+
+        const userData = {
+            email: email,
+            password: password
+        }
+
+        dispatch(userFetch(userData))
+            .then(unwrapResult)
+            .then(resp => {
+                if (resp[0]) {
+                    toast.success(`Login successful`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    navigate('/')
+                } else {
+                    toast.warn(`Account not found`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            })
+
     }
     return (
         <Container>

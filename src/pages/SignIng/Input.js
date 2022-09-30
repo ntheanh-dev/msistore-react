@@ -12,7 +12,6 @@ function FormInput(props) {
         setFocused(true)
     };
 
-
     return (
         <div>
             <label>{label}</label><br />

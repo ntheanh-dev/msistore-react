@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { useSelector } from "react-redux";
 
 import Product from "~/components/Product";
 const Carousel = () => {
 
-    const [data, setData] = useState(null)
-
-
-    useEffect(() => {
-        const fetAPI = async () => {
-            const responceJSON = await fetch('https://msi-data.herokuapp.com/api/data')
-            const responce = await responceJSON.json()
-            setData(responce)
-        }
-        fetAPI()
-    }, [])
+    const { items } = useSelector(state => state.products)
 
     var settings = {
         infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 1000,
+        speed: 1500,
         autoplaySpeed: 2000,
         dots: true,
         cssEase: "linear",
@@ -46,9 +37,9 @@ const Carousel = () => {
     };
     return (
         <div>
-            {data && (
+            {
                 <Slider {...settings}>
-                    {data.map((ele, index) => (
+                    {items.map((ele, index) => (
                         <Product
                             key={index}
                             primary
@@ -56,7 +47,7 @@ const Carousel = () => {
                         />
                     ))}
                 </Slider>
-            )}
+            }
         </div>
     );
 }

@@ -13,20 +13,31 @@
     line-height: 22px;
     margin-bottom: 13px;
 }
-
+.notthing {
+    text-align: center;
+}
 .buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
+    margin-top: 25px;
     @include media-breakpoint-down(lg) {
         flex-direction: column;
+    }
+    @include media-breakpoint-up(md) {
+        margin-bottom: 65px;
     }
 }
 
 .right {
     padding: 30px;
     background-color: var(--blueF5F);
+    height: -webkit-fill-available;
+    margin-bottom: 65px;
+
+    @include media-breakpoint-down(md) {
+        margin-bottom: 30px;
+    }
 }
 .right-head {
     font-size: 24px;

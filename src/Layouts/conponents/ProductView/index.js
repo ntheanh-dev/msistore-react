@@ -1,31 +1,39 @@
 import ProductDetail from "~/components/ProductDetail";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { memo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
+import { useSelector, useDispatch } from "react-redux";
 
+import { setId } from "~/redux/filterSlice";
+import { ProductById } from "./ProductById";
 import style from './ProducView.module.scss'
 import slide from '~/assets/images/detail-slide.png'
 const cx = classNames.bind(style)
 function ProductView() {
 
+    const dispatch = useDispatch()
     const { productid } = useParams()
-    const [data, setData] = useState('')
 
-    useEffect(() => {
-        const fetAPI = async () => {
-            const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data/${productid}`)
-            const responce = await responceJSON.json()
-            setData(responce)
-        }
+    dispatch(setId(productid))
+    const product = useSelector(ProductById)
 
-        fetAPI()
-    }, [])
+    // const [data, setData] = useState('')
+
+    // useEffect(() => {
+    //     const fetAPI = async () => {
+    //         const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data/${productid}`)
+    //         const responce = await responceJSON.json()
+    //         setData(responce)
+    //     }
+
+    //     fetAPI()
+    // }, [])
     return (
         <div>
-            {data && (
+            {product[0] && (
                 <ProductDetail
-                    data={data}
+                    data={product[0]}
                 />
             )}
             <div className={cx('slider')}>
@@ -55,4 +63,4 @@ function ProductView() {
     );
 }
 
-export default ProductView;
+export default memo(ProductView);

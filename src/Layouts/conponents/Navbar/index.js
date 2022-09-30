@@ -1,6 +1,5 @@
 import Container from 'react-bootstrap/Container';
 import { AiOutlineSearch } from "react-icons/ai";
-import { BsFillCartFill } from "react-icons/bs";
 import { MdAccountCircle } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -13,7 +12,7 @@ import Nav from '~/components/Nav'
 import logo from '~/assets/images/logo.png'
 import Hovercart from './HoverCart';
 import style from './Navbar.module.scss'
-import Search from './Search';
+import Search from '~/components/Search';
 const cx = classNames.bind(style)
 function Navbar() {
 
@@ -102,16 +101,15 @@ function Navbar() {
                             user ? (
                                 <Fragment>
                                     <Link to="/yourcart" className={cx('icon')}>
-                                        <BsFillCartFill />
+                                        <Hovercart link={'/yourcart'} />
                                     </Link>
                                     <Link to="/account">
-                                        <div className={cx('avata')}><img src={user.avata} alt='alt' /></div>
+                                        <div className={cx('avata')}><img src={user && user.avata} alt='alt' /></div>
                                     </Link>
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    {/* your cart */}
-                                    <Hovercart total={2} />
+                                    <Hovercart link={'/login'} />
 
                                     <Link to="/login" className={cx('icon')}>
                                         <MdAccountCircle />

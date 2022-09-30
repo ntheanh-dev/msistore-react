@@ -245,7 +245,10 @@
         right: -50px;
     }
     @include media-breakpoint-down(md) {
-        left: -90px;
+        left: -80px;
+    }
+    @include media-breakpoint-down(sm) {
+        left: -50px;
     }
 }
 .icon {

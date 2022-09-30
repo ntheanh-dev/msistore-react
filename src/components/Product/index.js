@@ -9,9 +9,11 @@ import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import style from './Product.module.scss'
 import Button from "../Button";
+import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/shoppingCart";
 const cx = classNames.bind(style)
 
 function Product({
@@ -19,10 +21,24 @@ function Product({
 
     primary,
     isHorver,
-    isInCart
+    isInCart,
+    isSerachResult
 
 }) {
     const navigate = useNavigate()
+    const dispath = useDispatch()
+    const handleAddToCart = (data) => {
+        dispath(addToCart(data))
+    }
+    const handleRemove = (data) => {
+        dispath(removeCart(data))
+    }
+    const handleIncrease = (data) => {
+        dispath(increaseCart(data))
+    }
+    const handleDecrease = (data) => {
+        dispath(decreaseCart(data))
+    }
     // isPrimary
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -34,58 +50,59 @@ function Product({
     }
 
     // Item in cart
-    const total = data.newPrice * 1
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     return (
-        <div onClick={() => navigate(`/product/${data.id}`)}>
+        <div>
             {primary &&
                 (<div className={cx("product")}>
-                    {
-                        data.condition.includes("in stock")
-                            ? <div>
-                                <BsFillCheckCircleFill className={cx('stock-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
-                            </div>
-                            : <div>
-                                <BsFillTelephoneXFill className={cx('phone-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
-                            </div>
-                    }
-                    <div className={cx("img")}>
-                        <img src={data.images[0]} alt="" />
-                    </div>
-                    <div className={cx("reviews")}>
-                        <div className={cx("stars")}>
-                            {
-                                stars.map((star, index) => (
-                                    <BsFillStarFill key={index} className={cx(star, "icon")} />
-                                ))
-                            }
+                    <div onClick={() => navigate(`/product/${data.id}`)}>
+                        {
+                            data.condition.includes("in stock")
+                                ? <div>
+                                    <BsFillCheckCircleFill className={cx('stock-icon')} />
+                                    <div className={cx('tilte')}>{data.condition}</div>
+                                </div>
+                                : <div>
+                                    <BsFillTelephoneXFill className={cx('phone-icon')} />
+                                    <div className={cx('tilte')}>{data.condition}</div>
+                                </div>
+                        }
+                        <div className={cx("img")}>
+                            <img src={data.images[0]} alt="" />
                         </div>
-                        <div className={cx("review-quanti")}>
-                            Reviews ({data.review})
+                        <div className={cx("reviews")}>
+                            <div className={cx("stars")}>
+                                {
+                                    stars.map((star, index) => (
+                                        <BsFillStarFill key={index} className={cx(star, "icon")} />
+                                    ))
+                                }
+                            </div>
+                            <div className={cx("review-quanti")}>
+                                Reviews ({data.review})
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx("name")}>
-                        {data.title}data.
-                    </div>
-                    <div className={cx("prices")}>
-                        <div className={cx("old")}>${data.oldPrice}</div>
-                        <div className={cx("new")}>${data.newPrice}</div>
+                        <div className={cx("name")}>
+                            {data.title}
+                        </div>
+                        <div className={cx("prices")}>
+                            <div className={cx("old")}>${data.oldPrice}</div>
+                            <div className={cx("new")}>${data.newPrice}</div>
+                        </div>
                     </div>
                     <div className={cx('layout-hover')}>
                         <div className={cx('actions')}>
                             <HiOutlineHeart className={cx('icon-isHover')} />
                             <BsFillBarChartFill className={cx('icon-isHover')} />
                         </div>
-                        <Button primary>Add to cart</Button>
+                        <Button onClick={() => handleAddToCart(data)} primary>Add to cart</Button>
                     </div>
                 </div>)
             }
 
             {isHorver &&
-                (<Link className={cx('wrapper-isHover')}>
+                (<div className={cx('wrapper-isHover')}>
                     <div className={cx('quanti-isHover')}>{1}<span>x</span></div>
                     <div className={cx('img-isHover')}>
                         <img src={data.images[0]} alt="img" />
@@ -95,7 +112,7 @@ function Product({
                         <TiDeleteOutline className={cx('icon-isHover')} />
                         <TiPencil className={cx('icon-isHover')} />
                     </div>
-                </Link>)
+                </div>)
             }
 
             {isInCart &&
@@ -114,25 +131,72 @@ function Product({
                     </Col>
 
                     <Col md={1} className={cx('quanti-isInCart')}>
-                        <span className={cx('number')}>{1}</span>
+                        <span className={cx('number')}>{data.cartQuantity}</span>
                         <div className={cx('wrap-icon')}>
-                            <IoIosArrowUp />
-                            <IoIosArrowDown />
+                            <IoIosArrowUp onClick={() => handleIncrease(data)} />
+                            <IoIosArrowDown onClick={() => handleDecrease(data)} />
                         </div>
                     </Col>
 
                     <Col md={2} className={cx('total-isInCart')}>
                         {isMobile && <div className={cx('totalInMobile')}>Subtotal</div>}
-                        <div>${total}</div>
+                        <div>${data.newPrice * data.cartQuantity}</div>
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
-                        <TiDeleteOutline />
+                        <TiDeleteOutline onClick={() => handleRemove(data)} />
                         <TiPencil />
                     </Col>
 
                 </Row>)
             }
+            {isSerachResult && (
+                <div className={cx('wrapper-isSearch')}>
+                    <div className={cx('conditon')}>
+                        {data.condition.includes("in stock")
+                            ? <div>
+                                <BsFillCheckCircleFill className={cx('stock-icon')} />
+                                <div className={cx('tilte')}>{data.condition}</div>
+                            </div>
+                            : <div>
+                                <BsFillTelephoneXFill className={cx('phone-icon')} />
+                                <div className={cx('tilte')}>{data.condition}</div>
+                            </div>
+                        }
+                    </div>
+                    <div className={cx('content')}>
+                        <div className={cx('left-isSearch')}>
+                            <div className={cx('img-isSearch')} ><img src={`/${data.images[0]}`} alt="img" /></div>
+                            <div className={cx("reviews")}>
+                                <div className={cx("stars")}>
+                                    {
+                                        stars.map((star, index) => (
+                                            <BsFillStarFill key={index} className={cx(star, "icon")} />
+                                        ))
+                                    }
+                                </div>
+                                <div className={cx("review-quanti")}>
+                                    Reviews ({data.review})
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={cx('right-isSearch')}>
+                            <div className={cx("name-isSearch")}>
+                                {data.name}
+                            </div>
+                            <div className={cx("title-isSearch")}>
+                                {data.title}
+                            </div>
+                            <div className={cx("prices-isSearch")}>
+                                <div className={cx("old")}>${data.oldPrice}</div>
+                                <div className={cx("new")}>${data.newPrice}</div>
+                            </div>
+                            <Button outline>Add to cart</Button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

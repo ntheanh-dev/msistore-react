@@ -4,8 +4,6 @@ import style from "./Filter.module.scss"
 const cx = classNames.bind(style)
 
 function SelectSort({ values, optionDetector, setSelect }) {
-
-
     return (
         <div className={cx('control')}>
             <label htmlFor="sort">Sort By: </label>
