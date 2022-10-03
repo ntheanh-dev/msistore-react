@@ -65,6 +65,7 @@
     border-color: currentColor;
 
     &:hover {
+        color: var(--blue015);
         border-color: currentColor;
         opacity: 0.6;
     }

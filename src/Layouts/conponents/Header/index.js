@@ -24,7 +24,7 @@ function Header() {
                             </div>
                             <div className={cx('center')}>
                                 <span className={cx('address')}>Visit our showroom in 1234 Street Adress City Address, 1234</span>
-                                <Link to="/contact" className={cx('contact')}>Contact US</Link>
+                                <Link to="/comming" className={cx('contact')}>Contact US</Link>
                             </div>
                             <div className={cx('right')}>
                                 <a className={cx('phone')} href="tel:+00 151515">+00 151515</a>

@@ -75,7 +75,6 @@ function Register() {
     // const getUserByGmail = async (gmail) => {
     //     const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?gmail=${gmail}`)
     //     const responce = await responceJSON.json();
-
     //     return responce
     // }
 
@@ -97,18 +96,20 @@ function Register() {
                 // khong tim thay tai khoan
                 if (resp.length === 0) {
                     dispatch(userPost(user))
+                        .then(unwrapResult)
+                        .then(resp => {
+                            toast.success(`Register successful`, {
+                                position: "top-right",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
+                            navigate('/')
+                        })
 
-                    toast.success(`Register successful`, {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-
-                    navigate('/')
 
                 } else if (resp.length > 0) {
                     toast.warn(`Account already exists`, {

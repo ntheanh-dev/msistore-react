@@ -1,6 +1,6 @@
 import ProductDetail from "~/components/ProductDetail";
-import { useParams } from "react-router-dom";
-import { memo } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { memo, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +11,11 @@ import style from './ProducView.module.scss'
 import slide from '~/assets/images/detail-slide.png'
 const cx = classNames.bind(style)
 function ProductView() {
+
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const dispatch = useDispatch()
     const { productid } = useParams()

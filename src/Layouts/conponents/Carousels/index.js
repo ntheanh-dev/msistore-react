@@ -32,7 +32,7 @@ const Carousels = () => {
             </Slider>
             <div className={cx('head')}>
                 <div className={cx('left')}>New Products</div>
-                <Link className={cx('right')} to="/products">See all products</Link>
+                <Link className={cx('right')} to="/filter">See all products</Link>
             </div>
 
             <Carousel />

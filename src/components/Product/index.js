@@ -1,5 +1,4 @@
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill, BsFillBarChartFill } from "react-icons/bs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -9,11 +8,13 @@ import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify"
 
 import style from './Product.module.scss'
 import Button from "../Button";
-import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/shoppingCart";
+// import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/shoppingCart";
+import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/userSlice";
 const cx = classNames.bind(style)
 
 function Product({
@@ -25,10 +26,24 @@ function Product({
     isSerachResult
 
 }) {
+    const { id } = useSelector(state => state.user.value)
     const navigate = useNavigate()
     const dispath = useDispatch()
-    const handleAddToCart = (data) => {
-        dispath(addToCart(data))
+    const handleAddToCart = (data, e) => {
+        e.stopPropagation()
+        if (id) {
+            dispath(addToCart(data))
+        } else {
+            toast.warn(`Please login to add product`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        }
     }
     const handleRemove = (data) => {
         dispath(removeCart(data))
@@ -38,6 +53,9 @@ function Product({
     }
     const handleDecrease = (data) => {
         dispath(decreaseCart(data))
+    }
+    const handleClickItem = (id) => {
+        navigate(`/product/${id}`)
     }
     // isPrimary
     const stars = [];
@@ -55,8 +73,8 @@ function Product({
     return (
         <div>
             {primary &&
-                (<div className={cx("product")}>
-                    <div onClick={() => navigate(`/product/${data.id}`)}>
+                (<div className={cx("product")} onClick={() => handleClickItem(data.id)}>
+                    <div >
                         {
                             data.condition.includes("in stock")
                                 ? <div>
@@ -96,20 +114,19 @@ function Product({
                             <HiOutlineHeart className={cx('icon-isHover')} />
                             <BsFillBarChartFill className={cx('icon-isHover')} />
                         </div>
-                        <Button onClick={() => handleAddToCart(data)} primary>Add to cart</Button>
+                        <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
                     </div>
                 </div>)
             }
-
             {isHorver &&
                 (<div className={cx('wrapper-isHover')}>
-                    <div className={cx('quanti-isHover')}>{1}<span>x</span></div>
+                    <div className={cx('quanti-isHover')}>{data.cartQuantity}<span>x</span></div>
                     <div className={cx('img-isHover')}>
                         <img src={data.images[0]} alt="img" />
                     </div>
                     <div className={cx('name-isHover')}>{data.title}</div>
                     <div className={cx('actions')}>
-                        <TiDeleteOutline className={cx('icon-isHover')} />
+                        <TiDeleteOutline className={cx('icon-isHover')} onClick={() => handleRemove(data)} />
                         <TiPencil className={cx('icon-isHover')} />
                     </div>
                 </div>)
@@ -151,7 +168,7 @@ function Product({
                 </Row>)
             }
             {isSerachResult && (
-                <div className={cx('wrapper-isSearch')}>
+                <div className={cx('wrapper-isSearch')} onClick={() => handleClickItem(data.id)}>
                     <div className={cx('conditon')}>
                         {data.condition.includes("in stock")
                             ? <div>
@@ -192,7 +209,7 @@ function Product({
                                 <div className={cx("old")}>${data.oldPrice}</div>
                                 <div className={cx("new")}>${data.newPrice}</div>
                             </div>
-                            <Button outline>Add to cart</Button>
+                            <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
                         </div>
                     </div>
                 </div>

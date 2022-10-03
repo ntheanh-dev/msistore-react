@@ -21,7 +21,7 @@ function App() {
           {publicRoutes.map((route, index) => {
             const Layout = DefaultLayout
             const Page = route.component
-            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
+            return <Route key={index} path={route.path} element={route.isNotDefault ? <Page /> : <Layout><Page /></Layout>} />
           })}
         </Routes>
         <ToastContainer

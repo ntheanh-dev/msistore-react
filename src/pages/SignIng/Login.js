@@ -65,7 +65,6 @@ function Login() {
         const data = new FormData(e.target)
         const { email, password } = Object.fromEntries(data.entries())
 
-
         const userData = {
             email: email,
             password: password

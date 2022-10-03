@@ -9,7 +9,7 @@ GET https://msi-data.herokuapp.com/api/users
 
 # @name getAllProDuctByID
 
-GET https://msi-data.herokuapp.com/api/users?email=anh3@gmail.com&password=Theanh28@`
+GET https://msi-data.herokuapp.com/api/users?email=admin1@gmail.com
 
 ###
 

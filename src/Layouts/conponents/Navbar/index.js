@@ -1,6 +1,5 @@
 import Container from 'react-bootstrap/Container';
 import { AiOutlineSearch } from "react-icons/ai";
-import { MdAccountCircle } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
@@ -13,38 +12,40 @@ import logo from '~/assets/images/logo.png'
 import Hovercart from './HoverCart';
 import style from './Navbar.module.scss'
 import Search from '~/components/Search';
+import Account from './Account';
 const cx = classNames.bind(style)
 function Navbar() {
 
-    const user = useSelector(state => state.user.value)
+    const user = useSelector(state => state.user)
+
     const MAIN_NAV = [
         {
             display: "Laptops",
-            path: "/laptop"
+            path: "/filter"
         },
         {
             display: "Desktop PCs",
-            path: "/destop"
+            path: "/filter"
         },
         {
             display: "Netwoking Devices",
-            path: "/netwoking"
+            path: "/filter"
         },
         {
             display: "Printers & Scanners",
-            path: "/printers"
+            path: "/filter"
         },
         {
             display: "PC Parts",
-            path: "/pcparts"
+            path: "/filter"
         },
         {
             display: "All Other Products",
-            path: "/otherproducts"
+            path: "/filter"
         },
         {
             display: "Repairs",
-            path: "/repairs"
+            path: "/filter"
         }
     ]
 
@@ -96,24 +97,18 @@ function Navbar() {
                                 <AiOutlineSearch className={cx('icon')} />
                             </div>
                         )}
-
                         {
-                            user ? (
+                            user.value.id ? (
                                 <Fragment>
                                     <Link to="/yourcart" className={cx('icon')}>
                                         <Hovercart link={'/yourcart'} />
                                     </Link>
-                                    <Link to="/account">
-                                        <div className={cx('avata')}><img src={user && user.avata} alt='alt' /></div>
-                                    </Link>
+                                    <Account avataPath={user.value.avata} hasUser={true} />
                                 </Fragment>
                             ) : (
                                 <Fragment>
                                     <Hovercart link={'/login'} />
-
-                                    <Link to="/login" className={cx('icon')}>
-                                        <MdAccountCircle />
-                                    </Link>
+                                    <Account avataPath={user.value.avate} hasUser={false} />
                                 </Fragment>
                             )
                         }

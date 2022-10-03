@@ -1,6 +1,6 @@
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai"
 import classNames from "classnames/bind";
-import { Fragment, useState, useRef } from "react"
+import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -11,7 +11,7 @@ import style from './Search.module.scss'
 const cx = classNames.bind(style)
 function Search() {
     const [searchValue, setSearchValue] = useState('')
-    const [showResult, setShowResult] = useState(false)
+    // const [showResult, setShowResult] = useState(false)
 
     const inputRef = useRef()
     const dispatch = useDispatch()

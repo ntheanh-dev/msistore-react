@@ -2,9 +2,11 @@ import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from "react-toastify"
 import { useEffect } from "react";
 
-import { clearCar, getTotal } from "~/redux/shoppingCart";
+import { userPut } from "~/redux/userSlice";
+import { getTotal, clearCar } from '~/redux/userSlice';
 import Pageing from "~/components/Pageing";
 import Product from "~/components/Product";
 import Button from "~/components/Button";
@@ -13,15 +15,41 @@ const cx = classNames.bind(style)
 function YourCart() {
 
     const dispath = useDispatch()
-    const cart = useSelector(state => state.cart)
+    const cart = useSelector(state => state.user.value.cart)
+    const user = useSelector(state => state.user.value)
 
     useEffect(() => {
         dispath(getTotal(null));
     }, [cart])
 
-    const { cartTotalAmount } = useSelector(state => state.cart)
+    const { cartTotalAmount } = useSelector(state => state.user.value.cart)
 
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
+
+    const handleUpdate = () => {
+        if (user.id) {
+            dispath(userPut(user))
+            toast.success(`Updated your shopping cart`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            toast.warn(`You are not logged`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
 
     // const total = productInCart.reduce((acc, cur) => {
     //     return acc + cur.quanti * cur.newPrice
@@ -74,7 +102,7 @@ function YourCart() {
                     <div className={cx('buttons')}>
                         <Button to='/' outlineGray>Continue Shopping</Button>
                         <Button onClick={() => dispath(clearCar(null))} black>Clear Shopping Cart</Button>
-                        <Button black>Update Shopping Cart</Button>
+                        <Button onClick={() => handleUpdate()} black>Update Shopping Cart</Button>
                     </div>
                 </Col>
 

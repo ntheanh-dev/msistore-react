@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getTotal } from '~/redux/shoppingCart';
+import { getTotal } from '~/redux/userSlice';
 import Product from '~/components/Product';
 import Button from '~/components/Button';
 import style from './Navbar.module.scss'
@@ -13,14 +13,14 @@ const cx = classNames.bind(style)
 function Hovercart({ link }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-    const cart = useSelector(state => state.cart)
-    const user = useSelector(state => state.user.value)
+    const cart = useSelector(state => state.user.value.cart)
+    const { id } = useSelector(state => state.user.value)
 
     useEffect(() => {
         dispath(getTotal(null));
     }, [cart])
 
-    const { cartTotalQuantity } = useSelector(state => state.cart)
+    const { cartTotalQuantity } = useSelector(state => state.user.value.cart)
 
     return (
         <div>
@@ -33,20 +33,20 @@ function Hovercart({ link }) {
                     <div className={cx('yourcart')} tabIndex="-1" {...attrs}>
                         <h3 className={cx('heading')}>My cart</h3>
                         <p className={cx('total')}>{cartTotalQuantity} item in cart</p>
-                        <Button to={user && "/yourcart"} outline >View or Edit Your Cart</Button>
+                        <Button to={id ? "/yourcart" : '/'} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
-                            {(!user || cart.cartItems.length === 0) && (
+                            {(!id || cart.cartItems.length === 0) && (
                                 <div className={cx('no-item')}>
                                     <span>Notthing</span>
                                 </div>
                             )}
-                            {user && (
+                            {id && (
                                 cart.cartItems.map((product) => (
                                     <Product isHorver data={product} key={product.id} />
                                 ))
                             )}
                         </div>
-                        <Button primary to={user && "/yourcart"}  >Go to Checkout</Button>
+                        <Button primary to={id && "/yourcart"} >Go to Checkout</Button>
                     </div>
                 )}
             >

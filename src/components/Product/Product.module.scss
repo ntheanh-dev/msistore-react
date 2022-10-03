@@ -2,7 +2,7 @@
 .product {
     position: relative;
     padding-bottom: 20px;
-
+    cursor: pointer;
     position: relative;
 
     &:hover .layout-hover {
@@ -192,6 +192,10 @@
     color: var(--grayA1A);
     font-size: 28px;
     margin-bottom: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 //Product in cart
@@ -310,6 +314,7 @@
 // is searchResult
 
 .wrapper-isSearch {
+    cursor: pointer;
     padding: 0 15px;
 }
 .conditon {
