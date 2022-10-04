@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const initialUser = {
     value: JSON.parse(localStorage.getItem("userData")) || {
@@ -165,7 +166,11 @@ export const userSlice = createSlice({
             })
             .addCase(userFetch.fulfilled, (state, action) => {
                 state.status = 'done'
-                state.value = action.payload[0]
+                if (action.payload[0]) {
+                    state.value = action.payload[0]
+                    localStorage.setItem("userData", JSON.stringify(action.payload[0]))
+
+                }
             })
 
             .addCase(userPost.pending, (state, action) => {
@@ -191,7 +196,6 @@ export const userFetch = createAsyncThunk("user,userFetch",
         const { email, password } = userData
         const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?email=${email}&password=${password}`)
         const responce = await responceJSON.json()
-        localStorage.setItem("userData", JSON.stringify(responce[0]))
         return responce
     }
 )

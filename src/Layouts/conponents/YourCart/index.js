@@ -38,16 +38,6 @@ function YourCart() {
                 draggable: true,
                 progress: undefined,
             });
-        } else {
-            toast.warn(`You are not logged`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
         }
     }
 

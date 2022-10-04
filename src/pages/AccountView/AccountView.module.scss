@@ -3,8 +3,10 @@
     display: flex;
     flex-direction: column;
 
-    & > button {
-        padding: 0px 15px;
+    & button {
+        margin-top: 24px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 .img {
@@ -24,6 +26,17 @@
     padding-bottom: 16px;
     margin-bottom: 16px;
 }
+
+.input {
+    height: 50px;
+    width: 100%;
+    padding: 0 17px;
+    border: 1px solid var(--gray8C8);
+    font-size: 14px;
+    border-radius: 4px;
+    color: linear-gradient(0deg, rgba(58, 53, 65, 0.87), rgba(58, 53, 65, 0.87));
+}
+
 .detail {
     font-weight: 500;
     line-height: 22px;
@@ -37,8 +50,25 @@
     }
 
     & > input {
-        margin-left: 8px;
-        border: 1px solid var(--black);
-        color: linear-gradient(0deg, rgba(58, 53, 65, 0.87), rgba(58, 53, 65, 0.87));
+        padding-left: 8px;
     }
+}
+.avatas {
+    display: flex;
+    justify-content: space-around;
+
+    & > div {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid var(--whiteFFF);
+    }
+}
+.avataActive {
+    outline: 2px solid var(--gray8C8);
+}
+
+.right {
+    padding: 60px 20px;
 }

@@ -72,13 +72,7 @@ function Register() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    // const getUserByGmail = async (gmail) => {
-    //     const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?gmail=${gmail}`)
-    //     const responce = await responceJSON.json();
-    //     return responce
-    // }
-
-    const handleSumit = e => {
+    const handleSubmit = e => {
         e.preventDefault()
         const data = new FormData(e.target)
         const { confirmPassword, ...user } = Object.fromEntries(data.entries())
@@ -107,7 +101,7 @@ function Register() {
                                 draggable: true,
                                 progress: undefined,
                             });
-                            navigate('/')
+                            navigate('/login')
                         })
 
 
@@ -123,24 +117,6 @@ function Register() {
                     });
                 }
             })
-
-        // getUserByGmail(user.email).then(resp => {
-        //     if (resp[0]) {
-        //         alert("Account already exists ");
-        //     } else {
-
-        //         fetch('https://msi-data.herokuapp.com/api/users/', {
-        //             method: 'POST',
-        //             body: JSON.stringify(user),
-        //             headers: {
-        //                 'Content-type': 'application/json; charset=UTF-8',
-        //             }
-        //         })
-        //         localStorage.setItem("userData", JSON.stringify(user))
-        //         dispatch(update(user))
-        //         navigate('/')
-        //     }
-        // })
     }
     return (
         <Container>
@@ -150,7 +126,7 @@ function Register() {
                 <Col md={5} sm={12} className={cx("box")}>
                     <h1 className={cx("head")}>Registered Customers</h1>
                     <p className={cx("desc")}>If you have an account, sign in with your email address.</p>
-                    <form onSubmit={handleSumit}>
+                    <form onSubmit={handleSubmit}>
                         {inputs.map((input) => (
                             <FormInput
                                 key={input.id}

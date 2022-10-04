@@ -18,13 +18,18 @@ function Filter() {
 
     const navigate = useNavigate();
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
-    const { items } = useSelector(state => state.products)
-    const productAffter = useSelector(productRemening)
-
-    const [showNavFillter, setShowNavFillter] = useState(!isMobile)
     const [isFilter, setIsFlter] = useState(false)
-
     const [selected, setSelect] = useState('Position')
+    const [showNavFillter, setShowNavFillter] = useState(!isMobile)
+    const productAffter = useSelector(productRemening)
+    const { items } = useSelector(state => state.products)
+    const newItems = [...items]
+    if (selected === 'Prices') {
+        newItems.sort((a, b) => a.newPrice - b.newPrice)
+    } else if (selected === 'Position') {
+        newItems.sort((a, b) => a.id - b.id)
+
+    }
 
     return (
         <Container>
@@ -40,7 +45,7 @@ function Filter() {
                 <Col lg={10} md={9} sm={12}>
                     <div className={cx('sort-head')}>
 
-                        {!isMobile ? <span>Items 1-35 of 61</span> :
+                        {!isMobile ? <span>Items 1-{newItems.length} of {newItems.length}</span> :
                             <div
                                 className={cx('showOnMobile')}
                                 onClick={() => setShowNavFillter(!showNavFillter)}
@@ -70,7 +75,7 @@ function Filter() {
                                 </Col>
                             ))
                             :
-                            items.map((ele) => (
+                            newItems.map((ele) => (
                                 <Col key={ele.id} lg={2} md={4} sm={6}>
                                     <Product primary data={ele} />
                                 </Col>
