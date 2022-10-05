@@ -1,8 +1,7 @@
 import classNames from "classnames/bind";
 import { useState } from "react";
 
-
-import style from './Register.module.scss'
+import style from './Input.module.scss'
 const cx = classNames.bind(style)
 function FormInput(props) {
     const [focused, setFocused] = useState(false);
@@ -29,5 +28,4 @@ function FormInput(props) {
         </div>
     );
 }
-
-export default FormInput;
+export default FormInput    

@@ -7,6 +7,7 @@ import ProductView from '~/Layouts/conponents/ProductView';
 import NotFount from '~/pages/NotFound';
 import CommingSoon from '~/pages/CommingSoon';
 import AccountView from '~/pages/AccountView';
+import AdminView from '~/pages/AdminView';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -17,6 +18,7 @@ const publicRoutes = [
     { path: '/account', component: AccountView },
     { path: '/product/:productid', component: ProductView },
     { path: '/comming', component: CommingSoon },
+    { path: '/admin', component: AdminView },
     { path: '*', isNotDefault: true, component: NotFount },
 ]
 

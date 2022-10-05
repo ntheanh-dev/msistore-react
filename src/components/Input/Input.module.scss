@@ -1,0 +1,23 @@
+.input {
+    height: 50px;
+    width: 100%;
+    padding: 0 17px;
+    border: 1px solid var(--gray8C8);
+    color: var(--gray8C8);
+    font-size: 14px;
+    border-radius: 6px;
+
+    & + span {
+        color: red;
+        font-size: 12px;
+        padding: 3px;
+        display: none;
+    }
+
+    &:invalid[focused='true'] {
+        border-color: red;
+    }
+    &:invalid[focused='true'] ~ span {
+        display: block;
+    }
+}

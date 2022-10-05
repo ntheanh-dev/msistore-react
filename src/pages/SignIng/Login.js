@@ -1,21 +1,26 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 import { userFetch } from "~/redux/userSlice";
-import FormInput from "./Input";
+import FormInput from "~/components/Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
 const cx = classNames.bind(style)
 function Login() {
 
-    const dispatch = useDispatch()
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
+    const dispatch = useDispatch()
     let navigate = useNavigate()
     const [values, setValues] = useState({
         username: '',
@@ -37,21 +42,11 @@ function Login() {
         {
             id: 2,
             name: "password",
-            type: "text",
+            type: "password",
             placeholder: "Your password",
             lable: "Password",
             errormessage: "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character",
             pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-            required: true,
-        },
-        {
-            id: 3,
-            name: "confirmPassword",
-            type: "text",
-            placeholder: "Confirm password",
-            lable: "Confirm password",
-            errormessage: "Passwords don't match!",
-            pattern: values.password,
             required: true,
         }
     ]

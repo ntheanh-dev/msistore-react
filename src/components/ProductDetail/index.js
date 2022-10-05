@@ -5,18 +5,25 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { HiOutlineHeart } from "react-icons/hi";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillBarChartFill } from "react-icons/bs";
-import { memo, useState } from "react";
+import { memo, useState, Fragment } from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify"
 
+import { addToCart } from "~/redux/userSlice";
 import Button from "../Button";
 import Pageing from "../Pageing";
 import style from './ProductDetail.module.scss'
 const cx = classNames.bind(style)
 
 function ProductDetail({ data }) {
-    // Item in cart
+    const dispath = useDispatch()
+    const { id } = useSelector(state => state.user.value)
+
     const [qty, setQty] = useState(1)
+    const [detail, setDetail] = useState(false)
+    const [img, setImg] = useState(data.images[0]);
+    const total = data.newPrice * qty;
     const handleUpdateQty = (type) => {
         if (type === 'plus') {
             setQty(qty + 1)
@@ -24,10 +31,21 @@ function ProductDetail({ data }) {
             setQty(qty === 1 ? 1 : qty - 1)
         }
     }
-    const total = data.newPrice * qty;
-    const [detail, setDetail] = useState(false)
-
-    const [img, setImg] = useState(data.images[0]);
+    const handleAddItem = (data, e) => {
+        if (id) {
+            dispath(addToCart(data))
+        } else {
+            toast.warn(`Please login to add product`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        }
+    }
 
     return (
         <Fragment>
@@ -60,7 +78,7 @@ function ProductDetail({ data }) {
                                 <IoIosArrowDown onClick={() => handleUpdateQty('minus')} />
                             </div>
                         </div>
-                        <Button primary to={"/yourcart"} >Add to Cart</Button>
+                        <Button primary onClick={e => handleAddItem(data, e)} >Add to Cart</Button>
                     </div>
                 </div>
             </Container>

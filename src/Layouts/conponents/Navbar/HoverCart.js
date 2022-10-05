@@ -4,6 +4,8 @@ import classNames from "classnames/bind";
 import { useNavigate } from 'react-router-dom';
 import { memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import { AiOutlineInbox } from "react-icons/ai";
+import { useMediaQuery } from 'react-responsive';
 
 import { getTotal } from '~/redux/userSlice';
 import Product from '~/components/Product';
@@ -15,6 +17,7 @@ function Hovercart({ link }) {
     const dispath = useDispatch()
     const cart = useSelector(state => state.user.value.cart)
     const { id } = useSelector(state => state.user.value)
+    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     useEffect(() => {
         dispath(getTotal(null));
@@ -25,7 +28,7 @@ function Hovercart({ link }) {
     return (
         <div>
             <Tippy
-                // delay={[0, 200]}
+                disabled={isTabletOrMobile}
                 interactive
                 offset={[12, 8]}
                 placement='bottom-end'
@@ -36,8 +39,9 @@ function Hovercart({ link }) {
                         <Button to={id ? "/yourcart" : '/'} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
                             {(!id || cart.cartItems.length === 0) && (
-                                <div className={cx('no-item')}>
-                                    <span>Notthing</span>
+                                <div className={cx('nodata')}>
+                                    <AiOutlineInbox />
+                                    <h1>No data</h1>
                                 </div>
                             )}
                             {id && (

@@ -2,21 +2,26 @@ import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import Pageing from "~/components/Pageing";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
+import { useEffect } from "react";
 
 import { userByEmailFetch, userPost } from "~/redux/userSlice";
-import FormInput from "./Input";
+import FormInput from "~/components/Input";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
 import { useState } from "react";
 const cx = classNames.bind(style)
 function Register() {
 
-    const dispatch = useDispatch();
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
+    const dispatch = useDispatch();
     let navigate = useNavigate();
     const [values, setValues] = useState({
         username: '',

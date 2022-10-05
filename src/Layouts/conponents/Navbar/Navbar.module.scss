@@ -132,12 +132,23 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-.no-item {
-    width: 100%;
-    height: 200px;
+.nodata {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 36px 0;
+    color: var(--gray8C8);
+
+    & > svg {
+        font-size: 36px;
+    }
+
+    & > h1 {
+        color: var(--gray8C8);
+        font-weight: 500;
+        line-height: 22px;
+    }
 }
 // account
 .wrapper-account {
@@ -208,9 +219,9 @@
     transform: translateX(100%);
     background-color: var(--whiteFFF);
     border: 2px solid var(--black);
-    outline: 2px solid var(--whiteFFF);
-    width: 20px;
-    height: 20px;
+    // outline: 2px solid var(--whiteFFF);
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

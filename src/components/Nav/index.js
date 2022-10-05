@@ -61,7 +61,6 @@ function OverLay({ handle }) {
                     <Link to="/">
                         <img src={logo} alt="logo" />
                     </Link>
-                    <h1 className={cx('heading')}>filter By</h1>
 
                     <AiOutlineClose
                         className={cx('xmark-icon')}

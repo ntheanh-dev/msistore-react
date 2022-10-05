@@ -33,10 +33,10 @@ function ProductsType({ name, category, img }) {
                     </div>
                 </Col>
                 <Col lg={10} md={9} sm={12} >
-                    <Row className=" d-flex flex-nowrap overflow-hidden" >
+                    <Row>
                         {data && (
                             data.map((ele, index) => (
-                                <Col lg={3} md={6} sm={6} key={index} >
+                                <Col lg={3} sm={6} xs={6} key={index} >
                                     <Product
                                         primary
                                         data={ele}

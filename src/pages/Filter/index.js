@@ -2,8 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import Pageing from "~/components/Pageing";
 import classNames from "classnames/bind";
 import { useMediaQuery } from 'react-responsive'
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { MdSort } from 'react-icons/md';
 import { useSelector } from "react-redux";
 
@@ -15,6 +15,11 @@ import SelectSort from "./SelectSort";
 const cx = classNames.bind(style)
 
 function Filter() {
+
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const navigate = useNavigate();
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
@@ -70,13 +75,13 @@ function Filter() {
                     <Row className=" d-flex flex-wrap" >
                         {isFilter ?
                             productAffter.map((ele) => (
-                                <Col key={ele.id} lg={2} md={4} sm={6}>
+                                <Col key={ele.id} lg={2} md={4} xs={6}>
                                     <Product primary data={ele} />
                                 </Col>
                             ))
                             :
                             newItems.map((ele) => (
-                                <Col key={ele.id} lg={2} md={4} sm={6}>
+                                <Col key={ele.id} lg={2} md={4} xs={6}>
                                     <Product primary data={ele} />
                                 </Col>
                             ))

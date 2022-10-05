@@ -70,6 +70,10 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
+
+    @include media-breakpoint-down(xl) {
+        font-size: 12px;
+    }
 }
 .img {
     width: 150px;

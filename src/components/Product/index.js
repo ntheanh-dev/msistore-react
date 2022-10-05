@@ -4,7 +4,7 @@ import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill, BsFillBarC
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TiDeleteOutline, TiPencil } from "react-icons/ti";
 import { HiOutlineHeart } from "react-icons/hi";
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
@@ -71,20 +71,22 @@ function Product({
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     return (
-        <div>
+        <Fragment>
             {primary &&
                 (<div className={cx("product")} onClick={() => handleClickItem(data.id)}>
                     <div >
-                        {
-                            data.condition.includes("in stock")
-                                ? <div>
-                                    <BsFillCheckCircleFill className={cx('stock-icon')} />
-                                    <div className={cx('tilte')}>{data.condition}</div>
-                                </div>
-                                : <div>
-                                    <BsFillTelephoneXFill className={cx('phone-icon')} />
-                                    <div className={cx('tilte')}>{data.condition}</div>
-                                </div>
+                        {data.condition.includes("in stock") ? (
+                            <div>
+                                <BsFillCheckCircleFill className={cx('stock-icon')} />
+                                <div className={cx('tilte')}>{data.condition}</div>
+                            </div>
+
+                        ) : (
+                            <div>
+                                <BsFillTelephoneXFill className={cx('phone-icon')} />
+                                <div className={cx('tilte')}>{data.condition}</div>
+                            </div>
+                        )
                         }
                         <div className={cx("img")}>
                             <img src={data.images[0]} alt="" />
@@ -214,7 +216,7 @@ function Product({
                     </div>
                 </div>
             )}
-        </div>
+        </Fragment>
     );
 }
 

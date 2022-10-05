@@ -178,8 +178,8 @@ export const userSlice = createSlice({
             })
             .addCase(userPost.fulfilled, (state, action) => {
                 state.status = 'doneeeee'
-                state.value = action.payload
-                localStorage.setItem("userData", JSON.stringify(action.payload))
+                // state.value = action.payload
+                // localStorage.setItem("userData", JSON.stringify(action.payload))
             })
 
             .addCase(userPut.pending, (state, action) => {

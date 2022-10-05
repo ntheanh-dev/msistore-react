@@ -4,6 +4,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
+import { useMediaQuery } from "react-responsive";
 
 import { logout } from "~/redux/userSlice";
 import style from './Navbar.module.scss'
@@ -11,15 +12,11 @@ const cx = classNames.bind(style)
 function Account({ avataPath, hasUser }) {
 
     const { id } = useSelector(state => state.user.value)
-
     const navigate = useNavigate()
     const dispath = useDispatch()
+    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     const ACCOUNT = [
-        {
-            title: "My Account",
-            path: '/account'
-        },
         {
             title: "My wish list(0)",
             path: '/comming'
@@ -38,6 +35,12 @@ function Account({ avataPath, hasUser }) {
         },
     ]
 
+    if (id) {
+        ACCOUNT.unshift({
+            title: "My Account",
+            path: '/account'
+        })
+    }
     const handleLogOut = () => {
         dispath(logout(null))
     }
@@ -47,6 +50,7 @@ function Account({ avataPath, hasUser }) {
             <div>
                 <Tippy
                     // delay={[0, 200]}
+                    disabled={isTabletOrMobile}
                     interactive
                     offset={[12, 8]}
                     placement='bottom-end'

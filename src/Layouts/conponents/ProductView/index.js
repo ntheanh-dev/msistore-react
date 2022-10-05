@@ -23,17 +23,6 @@ function ProductView() {
     dispatch(setId(productid))
     const product = useSelector(ProductById)
 
-    // const [data, setData] = useState('')
-
-    // useEffect(() => {
-    //     const fetAPI = async () => {
-    //         const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data/${productid}`)
-    //         const responce = await responceJSON.json()
-    //         setData(responce)
-    //     }
-
-    //     fetAPI()
-    // }, [])
     return (
         <div>
             {product[0] && (
@@ -51,7 +40,6 @@ function ProductView() {
                                 </div>
                                 <div className={cx('slider-title')}>
                                     Experience a 40% boost in computing from last generation. MSI Desktop equips the 10th Gen. Intel® Core™ i7 processor with the upmost computing power to bring you an unparalleled gaming experience.
-
                                     *Performance compared to i7-9700. Specs varies by model.
                                 </div>
                             </div>

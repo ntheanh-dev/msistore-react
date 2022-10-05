@@ -1,18 +1,18 @@
 .left {
-    padding: 60px 20px;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
+    height: calc(100vh - 136px);
 
-    & button {
+    & form button {
         margin-top: 24px;
-        margin-left: auto;
-        margin-right: auto;
     }
 }
 .img {
     width: 120px;
     height: 120px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50%;
     border: 2px solid var(--black);
     overflow: hidden;
@@ -62,13 +62,17 @@
         height: 80px;
         border-radius: 50%;
         overflow: hidden;
-        border: 2px solid var(--whiteFFF);
     }
 }
 .avataActive {
-    outline: 2px solid var(--gray8C8);
+    border: 2px solid var(--gray8C8);
 }
+.btns {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
 
-.right {
-    padding: 60px 20px;
+    & > button {
+        margin-top: 0 !important;
+    }
 }

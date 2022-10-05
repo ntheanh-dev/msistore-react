@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { logout } from "~/redux/userSlice";
 import { userPut } from "~/redux/userSlice";
 import Button from "~/components/Button";
 import style from './AccountView.module.scss'
 const cx = classNames.bind(style)
 function AccountView() {
-
     const { value } = useSelector(state => state.user)
     const [avata, setAvata] = useState(value.avata)
     const [userName, setUserName] = useState(value.username)
@@ -24,13 +24,17 @@ function AccountView() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-
         const newUser = { ...value };
         newUser.username = userName
         newUser.password = password
         newUser.avata = avata
         dispatch(userPut(newUser))
         window.location.reload()
+    }
+
+    const handleLogOut = () => {
+        dispatch(logout(null))
+        navigate('/')
     }
 
     return (
@@ -86,7 +90,7 @@ function AccountView() {
                                 type="text"
                                 pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`}
                             />
-                            <Button outlineGray>Save</Button>
+                            <Button outline>Save</Button>
                         </form>
                     ) : (
                         <Fragment>
@@ -102,7 +106,12 @@ function AccountView() {
                         </Fragment>
                     )}
 
-                    {!edit && <Button outlineGray onClick={() => handleEdit()}>Edit</Button>}
+                    {!edit && (
+                        <div className={cx('btns')}>
+                            <Button outline onClick={() => handleEdit()}>Edit</Button>
+                            <Button outline onClick={() => handleLogOut()} >Logout</Button>
+                        </div>
+                    )}
                 </Col>
             </Row>
         </Container>
