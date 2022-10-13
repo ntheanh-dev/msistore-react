@@ -195,7 +195,10 @@
         margin-right: 20px;
         width: 31px;
         height: 31px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
         border-radius: 50%;
+        -khtml-border-radius: 50%;
     }
 
     & > div:first-child {

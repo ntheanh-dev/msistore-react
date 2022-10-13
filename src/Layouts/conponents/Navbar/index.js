@@ -101,14 +101,14 @@ function Navbar() {
                             user.value.id ? (
                                 <Fragment>
                                     <Link to="/yourcart" className={cx('icon')}>
-                                        <Hovercart link={'/yourcart'} />
+                                        <Hovercart />
                                     </Link>
-                                    <Account avataPath={user.value.avata} hasUser={true} />
+                                    <Account user={user} />
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    <Hovercart link={'/login'} />
-                                    <Account avataPath={user.value.avate} hasUser={false} />
+                                    <Hovercart />
+                                    <Account user={user} />
                                 </Fragment>
                             )
                         }

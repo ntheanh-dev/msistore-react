@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
-import { unwrapResult } from "@reduxjs/toolkit";
 
 const initialUser = {
     value: JSON.parse(localStorage.getItem("userData")) || {
@@ -19,7 +18,6 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.value = action.payload
-
         },
         addToCart: (state, action) => {
             const itemIndex = state.value.cart.cartItems.findIndex(
@@ -169,7 +167,6 @@ export const userSlice = createSlice({
                 if (action.payload[0]) {
                     state.value = action.payload[0]
                     localStorage.setItem("userData", JSON.stringify(action.payload[0]))
-
                 }
             })
 
@@ -229,5 +226,5 @@ export const userPut = createAsyncThunk("user,userPut",
     }
 )
 
-export const { addToCart, removeCart, increaseCart, decreaseCart, clearCar, getTotal, setCart, logout } = userSlice.actions
+export const { addToCart, removeCart, increaseCart, decreaseCart, clearCar, getTotal, setCart, logout, setUser } = userSlice.actions
 export default userSlice.reducer;

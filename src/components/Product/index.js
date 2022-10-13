@@ -13,7 +13,6 @@ import { toast } from "react-toastify"
 
 import style from './Product.module.scss'
 import Button from "../Button";
-// import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/shoppingCart";
 import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/userSlice";
 const cx = classNames.bind(style)
 
@@ -27,6 +26,7 @@ function Product({
 
 }) {
     const { id } = useSelector(state => state.user.value)
+
     const navigate = useNavigate()
     const dispath = useDispatch()
     const handleAddToCart = (data, e) => {

@@ -2,16 +2,15 @@ import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
 import { useMediaQuery } from "react-responsive";
 
 import { logout } from "~/redux/userSlice";
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
-function Account({ avataPath, hasUser }) {
+function Account({ user }) {
 
-    const { id } = useSelector(state => state.user.value)
     const navigate = useNavigate()
     const dispath = useDispatch()
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -30,12 +29,12 @@ function Account({ avataPath, hasUser }) {
             path: '/register'
         },
         {
-            title: id ? "Log out" : "Sign in",
-            path: id ? "/" : "/login"
+            title: user.value.id ? "Log out" : "Sign in",
+            path: user.value.id ? "/" : "/login"
         },
     ]
 
-    if (id) {
+    if (user.value.id) {
         ACCOUNT.unshift({
             title: "My Account",
             path: '/account'
@@ -69,9 +68,9 @@ function Account({ avataPath, hasUser }) {
                         </div>
                     )}
                 >
-                    {hasUser === true ? (
+                    {user.value.id ? (
                         <div className={cx('avata')} onClick={() => navigate('/account')} >
-                            <img src={avataPath} alt='alt' />
+                            <img src={user.value.avata} alt='alt' />
                         </div>
                     ) : (
                         <div onClick={() => navigate('/login')} className={cx('icon')}>

@@ -1,4 +1,5 @@
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai"
+import { BiSearchAlt } from "react-icons/bi"
 import classNames from "classnames/bind";
 import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +30,7 @@ function Search() {
     return (
         <div className={cx('search')}>
             <button className={cx('search-btn')}>
-                <AiOutlineSearch />
+                <BiSearchAlt />
             </button>
             <input
                 placeholder='Search here'

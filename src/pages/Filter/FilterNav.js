@@ -4,23 +4,27 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { Row, Col } from "react-bootstrap";
 
 import { setFilters } from "~/redux/filterSlice";
 import img from '~/assets/images/chair.png'
 import Button from "~/components/Button";
 import style from "./Filter.module.scss"
+import msi from '~/assets/images/brands/msi.png';
+import adata from '~/assets/images/brands/adata.png';
+import gigabyte from '~/assets/images/brands/gigabyte.png';
+import hp from '~/assets/images/brands/hp.png';
+import razez from '~/assets/images/brands/razez.png';
+import roccat from '~/assets/images/brands/roccat.png';
 const cx = classNames.bind(style)
 
 function FilterNav({ setIsFlter }) {
     const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
-
     const dispatch = useDispatch()
     const filter = useSelector(state => state.filter)
-
     const handleSetFilter = () => {
         setIsFlter(true);
     }
-
     const getQtyFilter = (filter) => {
         return Object.keys(filter).reduce((prve, key) => {
             if (filter[key] !== '') {
@@ -123,7 +127,32 @@ function FilterNav({ setIsFlter }) {
             id: 15
         }
     ]
-
+    const brands = [
+        {
+            name: msi,
+            href: "https://www.vn.msi.com",
+        },
+        {
+            name: roccat,
+            href: "https://ca.roccat.com/",
+        },
+        {
+            name: razez,
+            href: "https://www.razer.com/",
+        },
+        {
+            name: gigabyte,
+            href: "https://www.gigabyte.com/vn",
+        },
+        {
+            name: hp,
+            href: "https://www.hp.com/us-en/shop/cat/laptops",
+        },
+        {
+            name: adata,
+            href: "https://www.adata.com/vn/",
+        }
+    ]
     return (
         <Fragment>
             <div className={cx('background')} >
@@ -203,6 +232,15 @@ function FilterNav({ setIsFlter }) {
             </div>
             {!isMobile && (
                 <Fragment>
+                    <div className={cx('brands')}>
+                        <h1>Brands</h1>
+                        <Button outlineGray>All brands</Button>
+                    </div>
+                    <Row >
+                        {brands.map((brand, index) => (
+                            <Col md={6} key={index} className={cx('brand')} ><img src={brand.name} alt="alt" /></Col>
+                        ))}
+                    </Row>
                     <div className={cx('background')} >
                         <h1>Compare Products</h1>
                         <p>You have no items to compare</p>

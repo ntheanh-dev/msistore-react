@@ -27,9 +27,10 @@ function AccountView() {
         const newUser = { ...value };
         newUser.username = userName
         newUser.password = password
+        console.log(password)
         newUser.avata = avata
         dispatch(userPut(newUser))
-        window.location.reload()
+        setEdit(false)
     }
 
     const handleLogOut = () => {

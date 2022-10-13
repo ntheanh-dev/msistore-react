@@ -1,7 +1,11 @@
+.wrapper {
+    position: relative;
+}
 .input {
     height: 50px;
     width: 100%;
-    padding: 0 17px;
+    padding-left: 17px;
+    padding-right: 25px;
     border: 1px solid var(--gray8C8);
     color: var(--gray8C8);
     font-size: 14px;
@@ -19,5 +23,17 @@
     }
     &:invalid[focused='true'] ~ span {
         display: block;
+    }
+}
+.icons {
+    position: absolute;
+    font-size: 20px;
+    top: 50px;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    & > svg {
+        color: var(--gray8C8);
     }
 }

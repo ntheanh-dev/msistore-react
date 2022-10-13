@@ -92,7 +92,7 @@ function Register() {
         dispatch(userByEmailFetch(user.email))
             .then(unwrapResult)
             .then(resp => {
-                // khong tim thay tai khoan
+                // khong trung tai khoan
                 if (resp.length === 0) {
                     dispatch(userPost(user))
                         .then(unwrapResult)

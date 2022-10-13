@@ -246,7 +246,6 @@
     font-size: 16px;
     color: var(--black);
     font-weight: 600;
-
     @include media-breakpoint-down(md) {
         display: flex;
         justify-content: space-between;
@@ -291,7 +290,6 @@
 .total-isInCart {
     font-size: 16px;
     font-weight: 600;
-
     @include media-breakpoint-down(md) {
         display: flex;
         justify-content: space-between;
@@ -351,7 +349,6 @@
     line-height: 18px;
     margin-bottom: 20px;
     color: var(--black);
-    user-select: none;
 }
 
 .title-isSearch {
@@ -364,7 +361,6 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    user-select: none;
 }
 
 .prices-isSearch {

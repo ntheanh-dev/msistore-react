@@ -39,5 +39,6 @@
     }
     @include media-breakpoint-down(md) {
         align-items: flex-start;
+        height: 400px;
     }
 }

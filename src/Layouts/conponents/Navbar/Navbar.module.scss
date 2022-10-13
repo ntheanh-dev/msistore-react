@@ -50,9 +50,49 @@
     color: var(--black);
     font-weight: 600;
     margin: 0 12px;
+    position: relative;
     @include media-breakpoint-down(xl) {
         font-size: 12px;
         margin: 0 6px;
+    }
+    & > a::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 0%;
+        height: 3px;
+        border-top-right-radius: 1.5px;
+        border-bottom-right-radius: 1.5px;
+        background-color: transparent;
+        transition: all 0.2s linear;
+        opacity: 0;
+    }
+    & > a::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 50%;
+        top: 100%;
+        width: 0%;
+        height: 3px;
+        border-top-left-radius: 1.5px;
+        border-bottom-left-radius: 1.5px;
+        background-color: transparent;
+        transition: all 0.2s linear;
+        opacity: 0;
+    }
+
+    & > a:hover::after {
+        width: 50%;
+        background-color: var(--black);
+        opacity: 1;
+    }
+    & > a:hover::before {
+        width: 50%;
+        background-color: var(--black);
+        opacity: 1;
     }
 }
 .link:first-child {
@@ -79,7 +119,10 @@
     flex-shrink: 0;
 }
 .hideTablet {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
     @include media-breakpoint-down(lg) {
         display: none;
     }

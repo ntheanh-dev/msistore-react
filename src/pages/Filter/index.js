@@ -12,19 +12,20 @@ import Product from "~/components/Product";
 import FilterNav from "./FilterNav";
 import style from "./Filter.module.scss"
 import SelectSort from "./SelectSort";
+import Button from "~/components/Button";
 const cx = classNames.bind(style)
 
 function Filter() {
-
     const { pathname } = useLocation();
+    const navigate = useNavigate();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    const navigate = useNavigate();
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
     const [isFilter, setIsFlter] = useState(false)
     const [selected, setSelect] = useState('Position')
+    const [showDesc, setShowDesc] = useState(false)
     const [showNavFillter, setShowNavFillter] = useState(!isMobile)
     const productAffter = useSelector(productRemening)
     const { items } = useSelector(state => state.products)
@@ -33,7 +34,6 @@ function Filter() {
         newItems.sort((a, b) => a.newPrice - b.newPrice)
     } else if (selected === 'Position') {
         newItems.sort((a, b) => a.id - b.id)
-
     }
 
     return (
@@ -87,6 +87,23 @@ function Filter() {
                             ))
                         }
                     </Row>
+                    <div className={cx('description')} >
+                        <div className={cx('content', showDesc ? "show-desc" : "hiden-desc")}>
+                            <p>MSI has unveiled the Prestige Series line of business-class and gaming notebooks. Tuned for color accuracy, the Prestige Series also leverages True Color Technology, which allows users to adjust the display profile to best fit their computing needs.
+
+                                There are six different screen profiles, which are tuned for gaming, reducing eye fatigue, sRGB color accuracy, increasing clarity for words and lines, reducing harmful blue light, and optimizing contrast for watching movies.
+                                Given the various display profiles and discrete graphics chip, the Prestige Series notebooks can be used for various design work as well as for office tasks given that the screen can be adjusted for better clarity, color accuracy, or for eye strain reduction. Users working with video or 3D rendering will appreciate the "movie mode" for which contrast is increased.
+
+                                Home users or students can benefit from the "anti-blue" and the "office mode" options, both of which are designed to reduce eye strain. This is helpful when working on the computer for extended periods of time. Additionally, in their down time, students can also use the "gamer mode" to increase the screen brightness.
+                            </p>
+                        </div>
+                        <Button
+                            outlineGray
+                            onClick={() => setShowDesc(!showDesc)}
+                        >
+                            {showDesc ? "Hiden" : "More"}
+                        </Button>
+                    </div>
                 </Col>
             </Row>
         </Container>

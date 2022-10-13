@@ -3,7 +3,7 @@ import Cart from "../pages/Cart";
 import Filter from "../pages/Filter";
 import Register from '~/pages/SignIng/Register';
 import Login from '~/pages/SignIng/Login'
-import ProductView from '~/Layouts/conponents/ProductView';
+import ProductView from '~/pages/ProductView';
 import NotFount from '~/pages/NotFound';
 import CommingSoon from '~/pages/CommingSoon';
 import AccountView from '~/pages/AccountView';
