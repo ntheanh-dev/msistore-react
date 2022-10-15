@@ -38,9 +38,7 @@
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test",
-        "eject": "react-app-rewired eject",
-        "predeploy": "react-app-rewired build",
-        "deploy": "gh-pages -d build"
+        "eject": "react-app-rewired eject"
     },
     "eslintConfig": {
         "extends": [
@@ -59,8 +57,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "devDependencies": {
-        "gh-pages": "^4.0.0"
     }
 }

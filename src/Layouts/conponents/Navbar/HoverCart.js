@@ -23,6 +23,7 @@ function Hovercart() {
 
     useEffect(() => {
         dispath(getTotal(null));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
     const { cartTotalQuantity } = useSelector(state => state.user.value.cart)

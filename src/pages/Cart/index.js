@@ -23,6 +23,7 @@ function Cart() {
 
     useEffect(() => {
         dispath(getTotal(null));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
     const handleUpdate = () => {

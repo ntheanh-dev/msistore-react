@@ -1,11 +1,11 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
+import { Fragment } from "react";
 
 import Button from '~/components/Button';
 import logo from '~/assets/images/logo.png'
 import style from './Nav.module.scss'
-import { Fragment, useState } from "react";
 const cx = classNames.bind(style)
 
 function OverLay({ handle }) {
@@ -41,18 +41,6 @@ function OverLay({ handle }) {
             path: "/repairs"
         }
     ]
-
-    //isfilter
-    const [colorList, setColorList] = useState(false)
-
-
-    const render = (list) => {
-        (
-            list.map((ele, index) => (
-                <li key={index}>{ele}</li>
-            ))
-        )
-    }
 
     return (
         <div className={cx('isNav')}>
