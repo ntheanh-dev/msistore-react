@@ -1,4 +1,4 @@
-import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai"
+import { AiOutlineClose } from "react-icons/ai"
 import { BiSearchAlt } from "react-icons/bi"
 import classNames from "classnames/bind";
 import { useState, useRef } from "react"

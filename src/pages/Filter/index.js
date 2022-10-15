@@ -27,9 +27,12 @@ function Filter() {
     const [selected, setSelect] = useState('Position')
     const [showDesc, setShowDesc] = useState(false)
     const [showNavFillter, setShowNavFillter] = useState(!isMobile)
+
     const productAffter = useSelector(productRemening)
     const { items } = useSelector(state => state.products)
     const newItems = [...items]
+
+
     if (selected === 'Prices') {
         newItems.sort((a, b) => a.newPrice - b.newPrice)
     } else if (selected === 'Position') {

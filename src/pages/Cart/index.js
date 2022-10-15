@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AiOutlineInbox } from "react-icons/ai";
 
 import { userPut } from "~/redux/userSlice";
