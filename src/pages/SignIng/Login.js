@@ -6,7 +6,6 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
 import { useState, useEffect } from "react";
 
-
 import { userFetch } from "~/redux/userSlice";
 import FormInput from "~/components/Input";
 import Pageing from "~/components/Pageing";
@@ -45,8 +44,9 @@ function Login() {
             type: "password",
             placeholder: "Your password",
             lable: "Password",
-            errormessage: "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character",
-            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            errormessage: "Password should be 8-20 characters and include at least 1 number",
+            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true,
         }
     ]

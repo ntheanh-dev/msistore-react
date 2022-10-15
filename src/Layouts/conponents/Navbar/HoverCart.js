@@ -3,7 +3,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import classNames from "classnames/bind";
 import { useNavigate } from 'react-router-dom';
 import { memo, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AiOutlineInbox } from "react-icons/ai";
 import { useMediaQuery } from 'react-responsive';
 
@@ -12,21 +12,18 @@ import Product from '~/components/Product';
 import Button from '~/components/Button';
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
-function Hovercart() {
+function Hovercart({ user }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-
-    const cart = useSelector(state => state.user.value.cart)
-    const { id } = useSelector(state => state.user.value)
-
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+    const { id } = user.value
+    const { cartTotalQuantity, cartItems } = user.value.cart
 
     useEffect(() => {
         dispath(getTotal(null));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cart])
-
-    const { cartTotalQuantity } = useSelector(state => state.user.value.cart)
+    }, [cartItems])
 
     return (
         <div>
@@ -41,14 +38,14 @@ function Hovercart() {
                         <p className={cx('total')}>{cartTotalQuantity} item in cart</p>
                         <Button to={id ? "/yourcart" : '/login'} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
-                            {(!id || cart.cartItems.length === 0) && (
+                            {(!id || cartItems.length === 0) && (
                                 <div className={cx('nodata')}>
                                     <AiOutlineInbox />
                                     <h1>No data</h1>
                                 </div>
                             )}
                             {id && (
-                                cart.cartItems.map((product) => (
+                                cartItems.map((product) => (
                                     <Product isHorver data={product} key={product.id} />
                                 ))
                             )}

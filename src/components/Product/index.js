@@ -66,7 +66,6 @@ function Product({
             stars.push('star-no-color')
         }
     }
-
     // Item in cart
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 

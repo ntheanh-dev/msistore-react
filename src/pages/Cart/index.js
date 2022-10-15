@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { AiOutlineInbox } from "react-icons/ai";
 
 import { userPut } from "~/redux/userSlice";
-import { getTotal, clearCar } from '~/redux/userSlice';
+import { getTotal } from '~/redux/userSlice';
 import Pageing from "~/components/Pageing";
 import Product from "~/components/Product";
 import Button from "~/components/Button";
@@ -40,7 +40,22 @@ function Cart() {
     }
 
     const handleClear = () => {
-        dispath(clearCar(null))
+        const cart = {
+            cartItems: [],
+            cartTotalAmount: 0,
+            cartTotalQuantity: 0,
+        }
+        const newUser = { ...user, cart }
+        dispath(userPut(newUser))
+        toast.error(`Cleared shopping cart`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
     }
 
     const checkoutItems = [

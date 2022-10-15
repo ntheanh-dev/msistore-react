@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
-
 const initialUser = {
     value: JSON.parse(localStorage.getItem("userData")) || {
         cart: {
@@ -11,7 +10,6 @@ const initialUser = {
     },
     status: 'idle',
 }
-
 export const userSlice = createSlice({
     name: "user",
     initialState: initialUser,
@@ -113,18 +111,6 @@ export const userSlice = createSlice({
             }
             );
         },
-        clearCar: (state, action) => {
-            state.value.cart.cartItems = []
-            toast.error(`Cleared shopping cart`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        },
         getTotal: (state, action) => {
             const { total, quanti } = state.value.cart.cartItems.reduce(
                 (acc, curr) => {
@@ -169,7 +155,6 @@ export const userSlice = createSlice({
                     localStorage.setItem("userData", JSON.stringify(action.payload[0]))
                 }
             })
-
             .addCase(userPost.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -184,7 +169,7 @@ export const userSlice = createSlice({
             })
             .addCase(userPut.fulfilled, (state, action) => {
                 state.status = 'done'
-                // state.value = action.payload
+                state.value = action.payload
             })
     }
 })
@@ -213,7 +198,6 @@ export const userPost = createAsyncThunk("user,userPost",
         return user
     }
 )
-
 export const userPut = createAsyncThunk("user,userPut",
     async (user) => {
         fetch(`https://msi-data.herokuapp.com/api/users/${user.id}`, {
@@ -225,6 +209,5 @@ export const userPut = createAsyncThunk("user,userPut",
         return user
     }
 )
-
-export const { addToCart, removeCart, increaseCart, decreaseCart, clearCar, getTotal, setCart, logout, setUser } = userSlice.actions
+export const { addToCart, removeCart, increaseCart, decreaseCart, getTotal, setCart, logout, setUser } = userSlice.actions
 export default userSlice.reducer;

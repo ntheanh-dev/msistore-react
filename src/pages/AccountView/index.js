@@ -1,10 +1,11 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify"
+import FormInput from "~/components/Input";
 import { logout } from "~/redux/userSlice";
 import { userPut } from "~/redux/userSlice";
 import Button from "~/components/Button";
@@ -13,23 +14,57 @@ const cx = classNames.bind(style)
 function AccountView() {
     const { value } = useSelector(state => state.user)
     const [avata, setAvata] = useState(value.avata)
-    const [userName, setUserName] = useState(value.username)
-    const [password, setPassword] = useState(value.password)
     const [edit, setEdit] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const createAd = new Date(value.createdAt).toString()
+    const [values, setValues] = useState({
+        username: value.username,
+        password: value.password
+    })
+    const inputs = [
+        {
+            id: 1,
+            name: "username",
+            type: "text",
+            placeholder: "Username",
+            errormessage: "Username should be 3-16 characters and shouldn't include any special character!",
+            label: "Username",
+            pattern: "^[A-Za-z0-9]{3,16}$",
+            required: true,
+        },
+        {
+            id: 2,
+            name: "password",
+            type: "password",
+            placeholder: "Your password",
+            label: "Password",
+            errormessage: "Password should be 8-20 characters and include at least 1 number",
+            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            required: true,
+        }
+    ]
+    const onChange = e => {
+        setValues({ ...values, [e.target.name]: e.target.value })
+    }
     const handleEdit = () => {
         setEdit(!edit)
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newUser = { ...value };
-        newUser.username = userName
-        newUser.password = password
-        console.log(password)
+        const newUser = { ...value, ...values };
         newUser.avata = avata
         dispatch(userPut(newUser))
+        toast.success(`Register successful`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         setEdit(false)
     }
 
@@ -71,27 +106,17 @@ function AccountView() {
 
                     {edit ? (
                         <form onSubmit={handleSubmit}>
-                            <label className={cx('detail')}>Username</label>
-                            <input
-                                onChange={(e) => { setUserName(e.target.value) }}
-                                className={cx('input')}
-                                autoFocus
-                                value={userName}
-                                maxLength="30"
-                                type="text"
-                                required
-                            />
-                            <br />
-                            <label className={cx('detail')}>Password</label>
-                            <input
-                                value={password}
-                                className={cx('input')}
-                                onChange={e => setPassword(e.target.value)}
-                                required
-                                type="text"
-                                pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`}
-                            />
-                            <Button outline>Save</Button>
+                            {inputs.map((input) => (
+                                <FormInput
+                                    key={input.id}
+                                    {...input}
+                                    value={values[input.name]}
+                                    onChange={onChange}
+                                />
+                            ))}
+                            <div>
+                                <Button primary>Save</Button>
+                            </div>
                         </form>
                     ) : (
                         <Fragment>
@@ -102,7 +127,6 @@ function AccountView() {
                             <div className={cx('detail')}>Password:
                                 <span>{value.password}</span>
                             </div>
-                            <div className={cx('detail')}>Id: <span>{value.id}</span></div>
                             <div className={cx('detail')}>Create at:  <span>{createAd}</span></div>
                         </Fragment>
                     )}

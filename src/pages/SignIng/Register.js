@@ -57,8 +57,9 @@ function Register() {
             type: "password",
             placeholder: "Your password",
             label: "Password",
-            errormessage: "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character",
-            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            errormessage: "Password should be 8-20 characters and include at least 1 number",
+            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true,
         },
         {
@@ -106,10 +107,9 @@ function Register() {
                                 draggable: true,
                                 progress: undefined,
                             });
+                            // login
                             navigate('/login')
                         })
-
-
                 } else if (resp.length > 0) {
                     toast.warn(`Account already exists`, {
                         position: "top-right",
