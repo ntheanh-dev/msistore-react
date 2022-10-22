@@ -1,4 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
+.wrapper {
+    margin-top: var(--head-height);
+}
 .Cart-Head {
     font-size: 32px;
     color: var(--black);

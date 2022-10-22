@@ -73,18 +73,11 @@
     position: absolute;
     top: 0;
     right: 0;
-    // @include media-breakpoint-down(md) {
-    //     width: 40px;
-    // }
-    // @include media-breakpoint-down(lg) {
-    //     background-color: var(--whiteFFF);
-    // }
     &:hover {
         opacity: 0.8;
         cursor: pointer;
     }
 }
-// Tippy
 // isSearchResult
 .wrapper {
     flex-direction: column;

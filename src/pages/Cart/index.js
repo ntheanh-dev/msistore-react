@@ -78,7 +78,7 @@ function Cart() {
     ]
 
     return (
-        <Container>
+        <Container className={cx('wrapper')}>
             <Pageing pages={["Cart"]} />
             <h1 className={cx('Cart-Head')}>Shopping Cart</h1>
             {cart.cartItems.length > 0 ? (

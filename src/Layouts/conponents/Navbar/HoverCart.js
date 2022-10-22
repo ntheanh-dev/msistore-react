@@ -54,7 +54,7 @@ function Hovercart({ user }) {
                     </div>
                 )}
             >
-                <div onClick={() => navigate(id ? '/yourcar' : '/login')} className={cx('iconCart')}>
+                <div onClick={() => navigate(id ? '/yourcart' : '/login')} className={cx('iconCart')}>
                     <BsFillCartFill />
                     {cartTotalQuantity > 0 && (<div className={cx('quantity')}>
                         <span>{cartTotalQuantity}</span>

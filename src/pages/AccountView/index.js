@@ -74,7 +74,7 @@ function AccountView() {
     }
 
     return (
-        <Container>
+        <Container className={cx('wrapper')}>
             <Row className="justify-content-md-center">
                 <Col sm={12} md={4} className={cx('left')}>
                     {edit ? (

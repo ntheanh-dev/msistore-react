@@ -8,12 +8,14 @@ import style from "./Body.module.scss";
 
 const cx = classNames.bind(style)
 function ProductsType({ name, category, img }) {
-    const [data, setData] = useState(null)
+    const [data, setData] = useState([])
+
     useEffect(() => {
         const fetAPI = async () => {
             const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data?categorySlug=${category}&_page=1&_limit=4`)
             const responce = await responceJSON.json()
-            setData(responce)
+            const { data } = responce
+            setData(data)
         }
         fetAPI()
         // eslint-disable-next-line react-hooks/exhaustive-deps

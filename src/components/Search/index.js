@@ -4,7 +4,6 @@ import classNames from "classnames/bind";
 import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
-
 import Product from "../Product";
 import { ProductBySearch } from "../../Layouts/conponents/Navbar/ProductBySearch";
 import { setSerach } from "~/redux/filterSlice";

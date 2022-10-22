@@ -24,7 +24,7 @@ function ProductView() {
     const product = useSelector(ProductById)
 
     return (
-        <div>
+        <div className={cx('wrapper')}>
             {product[0] && (
                 <ProductDetail
                     data={product[0]}

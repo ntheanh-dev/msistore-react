@@ -14,31 +14,31 @@ function OverLay({ handle }) {
     const MAIN_NAV = [
         {
             display: "Laptops",
-            path: "/laptop"
+            path: "/filter"
         },
         {
             display: "Desktop PCs",
-            path: "/destop"
+            path: "/filter"
         },
         {
             display: "Netwoking Devices",
-            path: "/netwoking"
+            path: "/filter"
         },
         {
             display: "Printers & Scanners",
-            path: "/printers"
+            path: "/filter"
         },
         {
             display: "PC Parts",
-            path: "/pcparts"
+            path: "/filter"
         },
         {
             display: "All Other Products",
-            path: "/otherproducts"
+            path: "/filter"
         },
         {
             display: "Repairs",
-            path: "/repairs"
+            path: "/filter"
         }
     ]
 
@@ -62,7 +62,7 @@ function OverLay({ handle }) {
                         </div>
                     ))}
 
-                    <Button primary to="/ourdeals" >Our Deals</Button>
+                    <Button primary to="/comming" >Our Deals</Button>
                 </div>
             </Fragment>
         </div>

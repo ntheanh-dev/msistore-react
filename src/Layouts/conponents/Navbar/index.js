@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux';
 
 import Button from '~/components/Button';
@@ -17,6 +17,7 @@ const cx = classNames.bind(style)
 function Navbar() {
     const user = useSelector(state => state.user)
     const [bars, setBars] = useState(false)
+    const [scroll, setScroll] = useState(false)
     const [toogleSearch, setToogleSearch] = useState({
         input: false,
         icon: true,
@@ -56,8 +57,22 @@ function Navbar() {
         setToogleSearch({ input: true, icon: false, navLinks: false });
     }
 
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            if (document.body.scrollTop > 44 || document.documentElement.scrollTop > 44) {
+                setScroll(true)
+            } else {
+                setScroll(false)
+            }
+        })
+        return () => {
+            window.removeEventListener("scroll")
+        };
+    }, []);
+
+
     return (
-        <div className={cx('background')}>
+        <div className={cx('background', scroll && "shrink")}>
             <Container>
                 <div className={cx('wrapper')}>
 

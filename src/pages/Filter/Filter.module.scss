@@ -1,4 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
+.wrapper {
+    margin-top: var(--head-height);
+}
 .back {
     height: 50px;
     display: flex;
@@ -208,4 +211,44 @@
     overflow: hidden;
     -webkit-mask: linear-gradient(#000, #0000);
     mask: linear-gradient(#000, #0000);
+}
+//nodata
+.nodata {
+    text-align: center;
+    margin-top: 100px;
+
+    & > svg {
+        font-size: 46px;
+    }
+
+    & > h1 {
+        font-weight: 600;
+        font-size: 30px;
+    }
+}
+// pagination
+.pages {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0 60px;
+
+    & > button {
+        height: 38px;
+        width: 38px;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--gray8C8);
+        border: 2px solid var(--gray8C8);
+        margin: 0 5px;
+
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 20px;
+    }
+
+    & > .currentPage {
+        border: none;
+        color: var(--black);
+        background-color: #ebebeb;
+    }
 }

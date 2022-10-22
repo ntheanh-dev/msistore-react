@@ -1,6 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 .background {
     border: 1px solid #ccc;
+    position: fixed;
+    z-index: 10000;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+
+    background-color: #fff;
 
     @include media-breakpoint-down(lg) {
         border: unset;
@@ -11,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 92px;
+    height: var(--nav-height);
 
     @include media-breakpoint-down(lg) {
         color: var(--whiteFFF);
@@ -281,4 +288,9 @@
         font-weight: 600;
         color: var(--black);
     }
+}
+// bace
+.shrink {
+    top: 0;
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
 }

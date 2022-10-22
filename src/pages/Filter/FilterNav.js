@@ -1,12 +1,9 @@
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Row, Col } from "react-bootstrap";
 
-import { setFilters } from "~/redux/filterSlice";
 import img from '~/assets/images/chair.png'
 import Button from "~/components/Button";
 import style from "./Filter.module.scss"
@@ -18,31 +15,34 @@ import razez from '~/assets/images/brands/razez.png';
 import roccat from '~/assets/images/brands/roccat.png';
 const cx = classNames.bind(style)
 
-function FilterNav({ setIsFlter }) {
+function FilterNav({ filter, setFilter }) {
     const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
-    const dispatch = useDispatch()
-    const filter = useSelector(state => state.filter)
+    const [tempFilter, setTempFilter] = useState(filter)
     const handleSetFilter = () => {
-        setIsFlter(true);
+        const { _color, _category, ...otherFilter } = tempFilter
+        setFilter(otherFilter)
+    }
+    const handleSetPriceFilter = (e) => {
+        setTempFilter({
+            ...tempFilter,
+            newPrice_gte: e.target.value - 100,
+            newPrice_lte: e.target.value
+        })
+        setToogleList({ ...toogleList, price: !toogleList.price })
+    }
+    const handleClearFilter = () => {
+        const { _color, _category, newPrice_gte, newPrice_lte, ...otherFilter } = tempFilter
+        setTempFilter(otherFilter)
+        setFilter(otherFilter)
     }
     const getQtyFilter = (filter) => {
-        return Object.keys(filter).reduce((prve, key) => {
-            if (filter[key] !== '') {
-                return prve + 1
+        return Object.keys(filter).reduce((agr, key) => {
+            if (key.includes('_gte') || key.includes('_color') || key.includes('_category')) {
+                return agr + 1
             }
-            return prve
+            return agr
         }, 0)
     }
-
-    const handleClearFilter = () => {
-        setIsFlter(false);
-        dispatch(setFilters({
-            category: '',
-            price: '',
-            color: '',
-        }))
-    }
-
     const [toogleList, setToogleList] = useState({
         category: false,
         price: false,
@@ -154,7 +154,7 @@ function FilterNav({ setIsFlter }) {
         }
     ]
     return (
-        <Fragment>
+        <>
             <div className={cx('background')} >
                 {!isMobile && <h1>Filter</h1>}
                 {!isMobile && <Button outline onClick={handleClearFilter}>Clear Filter</Button>}
@@ -170,10 +170,10 @@ function FilterNav({ setIsFlter }) {
                     <option
                         key={ele.id}
                         value={ele.value}
-                        onClick={e => dispatch(setFilters({
-                            ...filter,
-                            category: e.target.value
-                        }))}
+                        onClick={e => setTempFilter({
+                            ...tempFilter,
+                            _category: e.target.value
+                        })}
                     >
                         {ele.title}
                     </option>
@@ -187,14 +187,12 @@ function FilterNav({ setIsFlter }) {
                     <h2>Prices</h2>
                     {toogleList.price ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
                 </div>
+
                 {toogleList.price && priceList.map(ele => (
                     <option
                         key={ele.id}
                         value={ele.value}
-                        onClick={e => dispatch(setFilters({
-                            ...filter,
-                            price: e.target.value
-                        }))}
+                        onClick={e => handleSetPriceFilter(e)}
                     >
                         {ele.title}
                     </option>
@@ -212,26 +210,26 @@ function FilterNav({ setIsFlter }) {
                         <input
                             type="color"
                             defaultValue='black'
-                            onClick={e => dispatch(setFilters({
-                                ...filter,
-                                color: e.target.value
-                            }))}
+                            onClick={e => setTempFilter({
+                                ...tempFilter,
+                                _color: e.target.value
+                            })}
                         />
                         <input
                             type="color"
                             defaultValue="#ff0000"
-                            onClick={e => dispatch(setFilters({
-                                ...filter,
-                                color: e.target.value
-                            }))}
+                            onClick={e => setTempFilter({
+                                ...tempFilter,
+                                _color: e.target.value
+                            })}
                         />
                     </div>
                 )}
                 {isMobile && <Button outline onClick={handleClearFilter}>Clear Filter</Button>}
-                <Button primary onClick={handleSetFilter} >Apply filters  ({getQtyFilter(filter)})</Button>
+                <Button primary onClick={handleSetFilter} >Apply filters {getQtyFilter(tempFilter) > 0 && `( ${getQtyFilter(tempFilter)} )`} </Button>
             </div>
             {!isMobile && (
-                <Fragment>
+                <>
                     <div className={cx('brands')}>
                         <h1>Brands</h1>
                         <Button outlineGray>All brands</Button>
@@ -252,10 +250,10 @@ function FilterNav({ setIsFlter }) {
                     <div className={cx('img')}>
                         <img src={img} alt="alt" />
                     </div>
-                </Fragment>
+                </>
             )}
-        </Fragment>
+        </>
     );
 }
 
-export default FilterNav;
+export default memo(FilterNav);

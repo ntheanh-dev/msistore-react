@@ -1,7 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 .wrapper {
+    margin-top: var(--head-height);
+
     @include media-breakpoint-down(lg) {
-        margin-top: 19px;
+        margin-top: calc(var(--header-height) + var(--nav-height) + 19px);
     }
 }
 .head {

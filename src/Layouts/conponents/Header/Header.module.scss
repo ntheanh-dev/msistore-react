@@ -16,7 +16,7 @@
     align-items: center;
     color: var(--whiteFFF);
     font-weight: 600;
-    height: 44px;
+    height: var(--header-height);
     @include media-breakpoint-down(xl) {
         font-size: 12px;
     }

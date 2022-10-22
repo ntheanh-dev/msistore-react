@@ -1,0 +1,56 @@
+@import '~bootstrap/scss/bootstrap';
+
+.wrapper {
+    height: 310px;
+    width: 1160px;
+    padding: 49px 120px 70px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--whiteF5F);
+    @include media-breakpoint-down(lg) {
+        width: unset;
+        padding: 20px 20px 40px;
+    }
+}
+.content {
+    display: flex;
+    & > svg {
+        font-size: 110px;
+        color: var(--black);
+        margin-right: 26px;
+    }
+    & > span {
+        display: block;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+    }
+}
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.author {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    text-align: right;
+}
+.changeReview {
+    display: flex;
+    & > div {
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        background-color: #ccc;
+        margin-left: 5px;
+    }
+
+    & > .active {
+        background-color: var(--blue015);
+    }
+}
