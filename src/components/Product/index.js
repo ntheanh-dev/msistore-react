@@ -115,7 +115,7 @@ function Product({
                             <HiOutlineHeart className={cx('icon-isHover')} />
                             <BsFillBarChartFill className={cx('icon-isHover')} />
                         </div>
-                        <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
+                        <Button onClick={(e) => handleAddToCart(data, e)} outline>Add to cart</Button>
                     </div>
                 </div>)
             }

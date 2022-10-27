@@ -65,18 +65,8 @@ export const userSlice = createSlice({
             const itemIndex = state.value.cart.cartItems.findIndex(
                 item => item.id === action.payload.id
             )
-
             if (state.value.cart.cartItems[itemIndex].cartQuantity > 1) {
                 state.value.cart.cartItems[itemIndex].cartQuantity -= 1;
-                toast.warn(`Decreased ${action.payload.name} quantity`, {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
             } else if (state.value.cart.cartItems[itemIndex].cartQuantity === 1) {
                 const newCart = state.value.cart.cartItems.filter(
                     (item) => item.id !== action.payload.id
@@ -92,7 +82,6 @@ export const userSlice = createSlice({
                     progress: undefined,
                 });
             }
-
         },
         increaseCart: (state, action) => {
             const itemIndex = state.value.cart.cartItems.findIndex(

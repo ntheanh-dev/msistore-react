@@ -26,6 +26,10 @@ function Cart() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
+    useEffect(() => {
+        document.title = 'Your Cart'
+    }, [])
+
     const handleUpdate = () => {
         dispath(userPut(user))
         toast.success(`Updated your shopping cart`, {

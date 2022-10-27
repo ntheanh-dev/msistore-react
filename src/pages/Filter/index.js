@@ -2,10 +2,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import Pageing from "~/components/Pageing";
 import classNames from "classnames/bind";
 import { useMediaQuery } from 'react-responsive'
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MdSort } from 'react-icons/md';
-import { useSelector } from "react-redux";
 import queryString from "query-string"
 import { AiOutlineInbox } from "react-icons/ai";
 
@@ -20,10 +19,6 @@ const cx = classNames.bind(style)
 
 function Filter() {
     const navigate = useNavigate();
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
 
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -38,7 +33,6 @@ function Filter() {
         _limit: (isMobile && 12) || (isTabletOrMobile && 9) || 12,
         _totalRows: 13,
     })
-
     const [filter, setFilter] = useState({
         _page: 1,
         _limit: (isMobile && 12) || (isTabletOrMobile && 9) || 12
@@ -50,12 +44,13 @@ function Filter() {
             _page: newPages,
         })
     }
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [product]);
 
-    console.log(pagination)
-
-    // const productAffter = useSelector(productRemening)
-    const { items } = useSelector(state => state.products)
-    const newItems = [...items]
+    useEffect(() => {
+        document.title = 'All our products'
+    }, [])
 
     useEffect(() => {
         async function fetchAPI() {

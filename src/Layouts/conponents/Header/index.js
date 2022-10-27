@@ -28,10 +28,10 @@ function Header() {
                             </div>
                             <div className={cx('right')}>
                                 <a className={cx('phone')} href="tel:+00 151515">+00 151515</a>
-                                <a href="/">
+                                <a href="https://www.facebook.com/theanhnguyenmgt">
                                     <AiFillFacebook className={cx('icon')} />
                                 </a>
-                                <a href="/">
+                                <a href="https://www.instagram.com/thean_20.04/">
                                     <AiFillInstagram className={cx('icon')} />
                                 </a>
                             </div>

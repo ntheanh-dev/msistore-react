@@ -34,7 +34,7 @@ function ProductsType({ name, category, img }) {
                 </Col>
                 <Col lg={10} md={9} sm={12} >
                     <Row>
-                        {data && (
+                        {data.length > 0 && (
                             data.map((ele, index) => (
                                 <Col lg={3} sm={6} xs={6} key={index} >
                                     <Product

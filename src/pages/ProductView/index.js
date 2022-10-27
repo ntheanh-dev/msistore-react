@@ -13,15 +13,18 @@ const cx = classNames.bind(style)
 function ProductView() {
 
     const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
 
     const dispatch = useDispatch()
     const { productid } = useParams()
 
     dispatch(setId(productid))
     const product = useSelector(ProductById)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.title = `${product[0].name}`
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
 
     return (
         <div className={cx('wrapper')}>

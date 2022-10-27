@@ -1,3 +1,4 @@
+@import '~bootstrap/scss/bootstrap';
 // autho
 .author {
     height: 70px;
@@ -17,7 +18,6 @@
     font-weight: 600;
 }
 // Product type
-@import '~bootstrap/scss/bootstrap';
 .wrapper {
     margin-bottom: 30px;
 }
@@ -40,9 +40,9 @@
     -o-transition: background-size 0.2s linear;
     -ms-transition: background-size 0.2s linear;
 
-    &:hover {
-        background-size: 150%;
-    }
+    // &:hover {
+    //     background-size: 150%;
+    // }
     @include media-breakpoint-down(sm) {
         height: 82px;
     }

@@ -194,9 +194,11 @@
 
 .icon-isHover {
     color: var(--grayA1A);
-    font-size: 28px;
+    font-size: 26px;
     margin-bottom: 5px;
-
+    border: 2px solid var(--grayA1A);
+    border-radius: 50%;
+    padding: 3px;
     &:hover {
         cursor: pointer;
     }
