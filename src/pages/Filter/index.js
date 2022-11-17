@@ -9,7 +9,6 @@ import queryString from "query-string"
 import { AiOutlineInbox } from "react-icons/ai";
 
 import PaginationProduct from "./PaginationProduct";
-// import { productRemening } from "./ProductRemaning";
 import Product from "~/components/Product";
 import FilterNav from "./FilterNav";
 import style from "./Filter.module.scss"
@@ -23,8 +22,6 @@ function Filter() {
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
-    // const [isFilter, setIsFlter] = useState(false)
-    // const [selected, setSelect] = useState('Position')
     const [showDesc, setShowDesc] = useState(false)
     const [showNavFillter, setShowNavFillter] = useState(!isMobile)
     const [product, setProduct] = useState([])

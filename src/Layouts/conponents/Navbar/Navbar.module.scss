@@ -137,6 +137,7 @@
 .icon {
     font-size: 22px;
     margin: 0 20px;
+    cursor: pointer;
     @include media-breakpoint-down(lg) {
         margin: 0 10px;
     }
@@ -145,7 +146,7 @@
 .iconCart {
     font-size: 22px;
     margin: 0 29px;
-
+    cursor: pointer;
     @include media-breakpoint-down(lg) {
         margin: 0 18px 0 0;
     }

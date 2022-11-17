@@ -15,15 +15,7 @@ function Account({ user }) {
     const dispath = useDispatch()
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
-    const ACCOUNT = [
-        {
-            title: "My wish list(0)",
-            path: '/comming'
-        },
-        {
-            title: "compate (0)",
-            path: '/comming'
-        },
+    let ACCOUNT = [
         {
             title: "Create an account",
             path: '/register'
@@ -35,10 +27,24 @@ function Account({ user }) {
     ]
 
     if (user.value.id) {
-        ACCOUNT.unshift({
-            title: "My Account",
-            path: '/account'
-        })
+        const hasUser = [
+            {
+                title: "My Account",
+                path: '/account'
+            },
+            {
+                title: "My wish list(0)",
+                path: '/comming'
+            },
+            {
+                title: "Compate (0)",
+                path: '/comming'
+            }
+
+        ]
+        ACCOUNT.splice(0, 1)
+        ACCOUNT = [...hasUser, ...ACCOUNT]
+        // ACCOUNT.splice(0,0,{ title: "My Account", path: '/account' },{ title: "My wish list(0)", path: '/comming'},{title: "Compate (0)",path: '/comming'})
     }
     const handleLogOut = () => {
         dispath(logout(null))

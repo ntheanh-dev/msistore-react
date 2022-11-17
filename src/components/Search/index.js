@@ -43,7 +43,9 @@ function Search() {
                 </button>
             )}
             {searchValue.length > 0 && !!productAfter[0] &&
-                <div className={cx('wrapper')} onClick={() => setSearchValue('')}>
+                <div className={cx('wrapper')}
+                    onClick={() => setSearchValue('')}
+                >
                     {productAfter.map((product) => (
                         <Product key={product.id} isSerachResult data={product} />
                     ))}

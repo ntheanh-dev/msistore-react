@@ -28,7 +28,7 @@ function Hovercart({ user }) {
     return (
         <div>
             <Tippy
-                disabled={isTabletOrMobile}
+                disabled={isTabletOrMobile || !id}
                 interactive
                 offset={[12, 8]}
                 placement='bottom-end'

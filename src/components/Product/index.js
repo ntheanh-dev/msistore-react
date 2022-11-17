@@ -45,7 +45,8 @@ function Product({
             })
         }
     }
-    const handleRemove = (data) => {
+    const handleRemove = (data, e) => {
+        e.stopPropagation()
         dispath(removeCart(data))
     }
     const handleIncrease = (data) => {
@@ -120,14 +121,14 @@ function Product({
                 </div>)
             }
             {isHorver &&
-                (<div className={cx('wrapper-isHover')}>
+                (<div className={cx('wrapper-isHover')} onClick={() => handleClickItem(data.id)}>
                     <div className={cx('quanti-isHover')}>{data.cartQuantity}<span>x</span></div>
                     <div className={cx('img-isHover')}>
                         <img src={data.images[0]} alt="img" />
                     </div>
                     <div className={cx('name-isHover')}>{data.title}</div>
                     <div className={cx('actions')}>
-                        <TiDeleteOutline className={cx('icon-isHover')} onClick={() => handleRemove(data)} />
+                        <TiDeleteOutline className={cx('icon-isHover')} onClick={(e) => handleRemove(data, e)} />
                         <TiPencil className={cx('icon-isHover')} />
                     </div>
                 </div>)

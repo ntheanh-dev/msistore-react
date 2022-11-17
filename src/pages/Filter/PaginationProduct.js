@@ -9,8 +9,7 @@ PaginationProduct.propTypes = {
     pagination: PropTypes.object.isRequired,
     onPageChange: PropTypes.func,
 }
-function PaginationProduct(props) {
-    const { pagination, onPageChange } = props
+function PaginationProduct({ pagination, onPageChange }) {
     const { _page, _limit, _totalRows } = pagination
     const totalPages = Math.ceil(_totalRows / _limit)
 

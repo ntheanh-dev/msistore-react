@@ -94,7 +94,7 @@ function Login() {
 
     }
     return (
-        <Container>
+        <Container className={cx("wrapper")}>
             <Pageing pages={["Login"]} />
             <h1 className={cx("heading")}>Login</h1>
             <Row className="justify-content-around">
