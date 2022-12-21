@@ -1,6 +1,6 @@
 
 # @name getoneuser
-GET https://msi-data.herokuapp.com/api/users
+GET https://json-server-sand.vercel.app/api/users
 ###
 
 
@@ -9,20 +9,23 @@ GET https://msi-data.herokuapp.com/api/users
 
 # @name getAllProDuctByID
 
-GET https://msi-data.herokuapp.com/api/users?email=admin1@gmail.com
+GET https://json-server-sand.vercel.app/api/users?email=admin1@gmail.com
 
 ###
 
 # @name PUTUSER
 
-POST https://msi-data.herokuapp.com/api/users HTTP/1.1
+POST https://json-server-sand.vercel.app/api/users HTTP/1.1
 Content-Type: application/json
 
 {
     "username": "amin",
-    "gmail": "anh@gmail.com",
+    "email": "anh@gmail.com",
     "password": "Theanh28@",
-    "products": [
-        
-    ]
+    "avata": "/images/avata1.jpg",
+    "cart": {
+      "cartItems": [],
+      "cartTotalAmount": 0,
+      "cartTotalQuantity": 0
+    }
 }

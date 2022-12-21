@@ -13,26 +13,29 @@ function Review() {
         },
         {
             content: 'MSI mãi đỉnh!',
-            author: 'Nguyễn Thế Anh'
+            author: 'Tran Dai Vang'
         },
         {
             content: 'Tôi đã mua lần thứ 3!',
-            author: 'Nguyễn Thế Anh'
+            author: 'Do Thi Hong Ngoc'
         },
         {
             content: 'Tuyệt vờiiii!',
-            author: 'Nguyễn Thế Anh'
+            author: 'Ho Huu Duc'
         },
     ]
-    const [review, setRivew] = useState(reviewData[0])
-
+    const [review, setReview] = useState(reviewData[0])
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('top')}>
                 <div className={cx('content')}>
-                    <MdOutlineRateReview />
-                    <span>{review.content}</span>
+                    <div className={cx('icon')}>
+                        <MdOutlineRateReview />
+                    </div>
+                    <span>
+                        {review.content}
+                    </span>
                 </div>
                 <div className={cx('author')}>
                     -{review.author}
@@ -41,10 +44,10 @@ function Review() {
             <div className={cx('bottom')}>
                 <Button outline to={"comming"}>Leave us a review </Button>
                 <div className={cx('changeReview')}>
-                    <div className={cx('active')}></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div className={(review === reviewData[0]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[0]))}></div>
+                    <div className={(review === reviewData[1]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[1]))}></div>
+                    <div className={(review === reviewData[2]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[2]))}></div>
+                    <div className={(review === reviewData[3]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[3]))}></div>
                 </div>
             </div>
         </div>);

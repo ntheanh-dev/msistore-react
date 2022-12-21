@@ -8,7 +8,6 @@ import { productsFetch } from './redux/productsSlice';
 import { publicRoutes } from './routes';
 import DefaultLayout from './Layouts/DefauLayout';
 function App() {
-
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(productsFetch())

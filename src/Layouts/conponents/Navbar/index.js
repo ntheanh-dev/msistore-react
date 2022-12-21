@@ -1,10 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from "react-responsive";
 
 import Button from '~/components/Button';
 import Nav from '~/components/Nav'
@@ -15,6 +17,7 @@ import Search from '~/components/Search';
 import Account from './Account';
 const cx = classNames.bind(style)
 function Navbar() {
+    let isLaptop = useMediaQuery({ query: '(min-width: 768px)' })
     const user = useSelector(state => state.user)
     const [bars, setBars] = useState(false)
     const [scroll, setScroll] = useState(false)
@@ -65,11 +68,7 @@ function Navbar() {
                 setScroll(false)
             }
         })
-        return () => {
-            window.removeEventListener("scroll")
-        };
     }, []);
-
 
     return (
         <div className={cx('background', scroll && "shrink")}>
@@ -80,9 +79,10 @@ function Navbar() {
                         <img src={logo} alt="logo" />
                     </Link>
 
-                    {!bars && <FaBars className={cx('bars')} onClick={() => setBars(true)} />}
+                    <FaBars className={cx('bars')} onClick={() => setBars(true)} />
 
-                    {bars && <Nav handle={() => setBars(false)} />}
+                    {/* if tablet or mobile then show Nav */}
+                    <Nav bars={bars} handle={() => setBars(false)} />
 
                     {toogleSearch.navLinks && (
                         <div className={cx('navLinks')}>
@@ -102,10 +102,19 @@ function Navbar() {
                     </div>
 
                     <div className={cx('actions')}>
-                        {toogleSearch.icon && (
+                        {toogleSearch.icon ? (
                             <div className={cx('hideTablet')} onClick={handleShowInput}>
                                 <AiOutlineSearch className={cx('icon')} />
                             </div>
+                        ) : (
+                            isLaptop &&
+                            <div
+                                className={cx('icon-close-search-input')}
+                                onClick={() => setToogleSearch({ input: false, icon: true, navLinks: true })}
+                            >
+                                <IoMdClose />
+                            </div>
+
                         )}
                         <Hovercart user={user} />
                         <Account user={user} />

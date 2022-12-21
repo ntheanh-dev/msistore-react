@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useState, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -73,6 +73,10 @@ function AccountView() {
         navigate('/')
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <Container className={cx('wrapper')}>
             <Row className="justify-content-md-center">
@@ -119,7 +123,7 @@ function AccountView() {
                             </div>
                         </form>
                     ) : (
-                        <Fragment>
+                        <>
                             <div className={cx('detail')}>Username:
                                 <span>{value.username}</span>
                             </div>
@@ -128,7 +132,7 @@ function AccountView() {
                                 <span>{value.password}</span>
                             </div>
                             <div className={cx('detail')}>Create at:  <span>{createAd}</span></div>
-                        </Fragment>
+                        </>
                     )}
 
                     {!edit && (

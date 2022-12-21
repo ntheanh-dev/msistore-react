@@ -1,7 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 .product {
     position: relative;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
+    padding: 22px;
+    margin-bottom: 4px;
     cursor: pointer;
     position: relative;
 
@@ -19,14 +21,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-
+    padding: 18px 18px 14px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     & > div {
-        animation: fadeInIcons 0.3s linear;
+        // animation: fadeInIcons 0.3s linear;
         align-items: flex-end;
     }
 
     & > button {
-        animation: fadeInBtn 0.3s linear;
+        // animation: fadeInBtn 0.3s linear;
         padding: 2px 0;
     }
 }
@@ -66,21 +69,21 @@
 }
 .tilte {
     display: inline-block;
-    margin-left: 8px;
-    font-size: 14px;
+    margin-left: 6px;
+    margin-right: -25px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 21px;
 
-    @include media-breakpoint-down(xl) {
-        font-size: 12px;
+    @include media-breakpoint-only(lg) {
+        font-size: 10px;
     }
 }
 .img {
     width: 150px;
     height: 150px;
-    margin: 0 auto;
+    margin: auto;
 }
-
 .reviews {
     margin: 10px 0 7px;
     display: flex;
@@ -109,8 +112,6 @@
 .star-color {
     color: var(--yellow);
 }
-.star-no-color {
-}
 .review-quanti {
     display: inline;
     font-size: 12px;
@@ -121,6 +122,7 @@
     color: var(--black);
     font-size: 13px;
     line-height: 20px;
+    height: 60px;
     font-weight: 400;
     overflow: hidden;
     display: -webkit-box;
@@ -155,7 +157,7 @@
     margin-right: -24px;
     padding: 0 24px;
     cursor: pointer;
-    & + .wrapper {
+    & + .wrapper-isHover {
         border-top: unset;
     }
 }
@@ -328,16 +330,11 @@
 .content {
     display: flex;
 }
-.left-isSearch {
-}
 .img-isSearch {
     width: 100px;
     height: 100px;
     margin: auto;
 }
-.img-isSearch {
-}
-
 .right-isSearch {
     margin-left: 15px;
     & button {

@@ -1,10 +1,9 @@
 import Tippy from '@tippyjs/react/headless';
-import { BsFillCartFill } from "react-icons/bs";
 import classNames from "classnames/bind";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { AiOutlineInbox } from "react-icons/ai";
+import { AiOutlineInbox, AiOutlineShoppingCart } from "react-icons/ai";
 import { useMediaQuery } from 'react-responsive';
 
 import { getTotal } from '~/redux/userSlice';
@@ -13,6 +12,7 @@ import Button from '~/components/Button';
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 function Hovercart({ user }) {
+    const { pathname } = useLocation()
     const navigate = useNavigate()
     const dispath = useDispatch()
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -26,9 +26,9 @@ function Hovercart({ user }) {
     }, [cartItems])
 
     return (
-        <div>
+        <>
             <Tippy
-                disabled={isTabletOrMobile || !id}
+                disabled={isTabletOrMobile || !id || pathname === '/yourcart'}
                 interactive
                 offset={[12, 8]}
                 placement='bottom-end'
@@ -55,13 +55,13 @@ function Hovercart({ user }) {
                 )}
             >
                 <div onClick={() => navigate(id ? '/yourcart' : '/login')} className={cx('iconCart')}>
-                    <BsFillCartFill />
+                    <AiOutlineShoppingCart />
                     {cartTotalQuantity > 0 && (<div className={cx('quantity')}>
                         <span>{cartTotalQuantity}</span>
                     </div>)}
                 </div>
             </Tippy>
-        </div>
+        </>
     );
 }
 

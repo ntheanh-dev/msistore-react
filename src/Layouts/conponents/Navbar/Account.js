@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
 import { useMediaQuery } from "react-responsive";
+import { memo } from "react";
 
 import { logout } from "~/redux/userSlice";
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 function Account({ user }) {
-
     const navigate = useNavigate()
     const dispath = useDispatch()
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
@@ -51,42 +51,38 @@ function Account({ user }) {
     }
 
     return (
-        <div>
-            <div>
-                <Tippy
-                    // delay={[0, 200]}
-                    disabled={isTabletOrMobile}
-                    interactive
-                    offset={[12, 8]}
-                    placement='bottom-end'
-                    render={attrs => (
-                        <div className={cx('account')} >
-                            {ACCOUNT.map((ele, index) => (
-                                <Link
-                                    to={ele.path}
-                                    key={index}
-                                    className={cx('account-item')}
-                                    onClick={ele.title === "Log out" ? handleLogOut : ''}
-                                >
-                                    {ele.title}
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                >
-                    {user.value.id ? (
-                        <div className={cx('avata')} onClick={() => navigate('/account')} >
-                            <img src={user.value.avata} alt='alt' />
-                        </div>
-                    ) : (
-                        <div onClick={() => navigate('/login')} className={cx('icon')}>
-                            <MdAccountCircle />
-                        </div>
-                    )}
-                </Tippy>
-            </div>
-        </div>
+        <Tippy
+            // delay={[0, 200]}
+            disabled={isTabletOrMobile}
+            interactive
+            offset={[12, 8]}
+            placement='bottom-end'
+            render={attrs => (
+                <div className={cx('account')} >
+                    {ACCOUNT.map((ele, index) => (
+                        <Link
+                            to={ele.path}
+                            key={index}
+                            className={cx('account-item')}
+                            onClick={ele.title === "Log out" ? handleLogOut : ''}
+                        >
+                            {ele.title}
+                        </Link>
+                    ))}
+                </div>
+            )}
+        >
+            {user.value.id ? (
+                <div className={cx('avata')} onClick={() => navigate('/account')} >
+                    <img src={user.value.avata} alt='alt' />
+                </div>
+            ) : (
+                <div onClick={() => navigate('/login')} className={cx('icon')}>
+                    <MdAccountCircle />
+                </div>
+            )}
+        </Tippy>
     );
 }
 
-export default Account;
+export default memo(Account);

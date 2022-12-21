@@ -72,15 +72,6 @@ export const userSlice = createSlice({
                     (item) => item.id !== action.payload.id
                 )
                 state.value.cart.cartItems = newCart
-                toast.error(`Remove ${action.payload.name} from cart`, {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
             }
         },
         increaseCart: (state, action) => {
@@ -88,17 +79,6 @@ export const userSlice = createSlice({
                 (item) => item.id === action.payload.id
             )
             state.value.cart.cartItems[itemIndex].cartQuantity += 1;
-
-            toast.info(`Increased ${action.payload.name} quantity`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            }
-            );
         },
         getTotal: (state, action) => {
             const { total, quanti } = state.value.cart.cartItems.reduce(
@@ -121,15 +101,6 @@ export const userSlice = createSlice({
                     cartTotalQuantity: 0,
                 }
             }
-            toast.success(`Logout successful`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
         }
     },
     extraReducers: (builder) => {
@@ -165,21 +136,21 @@ export const userSlice = createSlice({
 export const userFetch = createAsyncThunk("user,userFetch",
     async (userData) => {
         const { email, password } = userData
-        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?email=${email}&password=${password}`)
+        const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/users?email=${email}&password=${password}`)
         const responce = await responceJSON.json()
         return responce
     }
 )
 export const userByEmailFetch = createAsyncThunk("userByGmail,userByEmailFetch",
     async (email) => {
-        const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/users?email=${email}`)
+        const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/users?email=${email}`)
         const responce = await responceJSON.json()
         return responce
     }
 )
 export const userPost = createAsyncThunk("user,userPost",
     async (user) => {
-        fetch('https://msi-data.herokuapp.com/api/users/', {
+        fetch('https://json-server-sand.vercel.app/api/users/', {
             method: 'POST',
             body: JSON.stringify(user),
             headers: { 'Content-type': 'application/json; charset=UTF-8', }
@@ -189,7 +160,7 @@ export const userPost = createAsyncThunk("user,userPost",
 )
 export const userPut = createAsyncThunk("user,userPut",
     async (user) => {
-        fetch(`https://msi-data.herokuapp.com/api/users/${user.id}`, {
+        fetch(`https://json-server-sand.vercel.app/api/users/${user.id}`, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: { 'Content-Type': 'application/json' }

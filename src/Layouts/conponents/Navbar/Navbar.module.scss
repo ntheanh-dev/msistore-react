@@ -136,19 +136,23 @@
 }
 .icon {
     font-size: 22px;
-    margin: 0 20px;
+    margin-left: 20;
     cursor: pointer;
-    @include media-breakpoint-down(lg) {
-        margin: 0 10px;
+    @include media-breakpoint-only(lg) {
+        margin-left: 12px;
     }
 }
-
-.iconCart {
+.icon-close-search-input {
     font-size: 22px;
-    margin: 0 29px;
     cursor: pointer;
-    @include media-breakpoint-down(lg) {
-        margin: 0 18px 0 0;
+    color: var(--black);
+}
+.iconCart {
+    font-size: 24px;
+    margin: 0 25px;
+    cursor: pointer;
+    @include media-breakpoint-down(xl) {
+        margin: 0 18px;
     }
 }
 
@@ -160,7 +164,8 @@
     width: 310px;
     max-height: 430.8px;
     padding: 24px;
-    background-color: var(--whiteEBE);
+    background-color: var(--whiteFFF);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     overflow: hidden;
     border-radius: 5px;
 }
@@ -202,9 +207,6 @@
     }
 }
 // account
-.wrapper-account {
-    // position: relative;
-}
 .avata {
     height: 36px;
     width: 36px;
@@ -219,13 +221,10 @@
 .account {
     display: flex;
     border-radius: 5px;
-    // position: absolute;
-    // z-index: 10000;
-    // top: 41px;
-    // right: 0;
     flex-direction: column;
     width: 232px;
-    background-color: var(--whiteEBE);
+    background-color: var(--whiteFFF);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     color: var(--black);
     padding: 28px 0 28px 26px;
 

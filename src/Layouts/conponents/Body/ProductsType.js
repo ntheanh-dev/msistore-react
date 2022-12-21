@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from 'react-responsive'
 
 import Product from "~/components/Product"
 import style from "./Body.module.scss";
@@ -9,10 +10,11 @@ import style from "./Body.module.scss";
 const cx = classNames.bind(style)
 function ProductsType({ name, category, img }) {
     const [data, setData] = useState([])
+    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
     useEffect(() => {
         const fetAPI = async () => {
-            const responceJSON = await fetch(`https://msi-data.herokuapp.com/api/data?categorySlug=${category}&_page=1&_limit=4`)
+            const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/data?categorySlug=${category}&_page=1&_limit=${isTabletOrMobile ? 2 : 4}`)
             const responce = await responceJSON.json()
             const { data } = responce
             setData(data)

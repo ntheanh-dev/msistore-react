@@ -1,7 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai"
 import { BiSearchAlt } from "react-icons/bi"
 import classNames from "classnames/bind";
-import { useState, useRef } from "react"
+import { useState, useRef, memo } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 import Product from "../Product";
@@ -11,11 +11,10 @@ import style from './Search.module.scss'
 const cx = classNames.bind(style)
 function Search() {
     const [searchValue, setSearchValue] = useState('')
-    // const [showResult, setShowResult] = useState(false)
-
     const inputRef = useRef()
     const dispatch = useDispatch()
     const productAfter = useSelector(ProductBySearch)
+
     const handleOnchange = (e) => {
         setSearchValue(e.target.value)
         dispatch(setSerach(e.target.value))
@@ -55,4 +54,4 @@ function Search() {
     );
 }
 
-export default Search;
+export default memo(Search);

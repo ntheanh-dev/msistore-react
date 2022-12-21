@@ -1,10 +1,11 @@
 import classNames from "classnames/bind";
 import PropTypes from 'prop-types';
 import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill, BsFillBarChartFill } from "react-icons/bs";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { TiDeleteOutline, TiPencil } from "react-icons/ti";
+import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { TiPencil } from "react-icons/ti";
 import { HiOutlineHeart } from "react-icons/hi";
-import { Fragment, memo } from "react";
+import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
@@ -18,17 +19,17 @@ const cx = classNames.bind(style)
 
 function Product({
     data,
-
     primary,
     isHorver,
     isInCart,
     isSerachResult
 
 }) {
-    const { id } = useSelector(state => state.user.value)
-
     const navigate = useNavigate()
     const dispath = useDispatch()
+    const { id } = useSelector(state => state.user.value)
+    let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
+
     const handleAddToCart = (data, e) => {
         e.stopPropagation()
         if (id) {
@@ -46,7 +47,6 @@ function Product({
         }
     }
     const handleRemove = (data, e) => {
-        e.stopPropagation()
         dispath(removeCart(data))
     }
     const handleIncrease = (data) => {
@@ -67,14 +67,15 @@ function Product({
             stars.push('star-no-color')
         }
     }
-    // Item in cart
-    let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     return (
-        <Fragment>
+        <>
             {primary &&
-                (<div className={cx("product")} onClick={() => handleClickItem(data.id)}>
-                    <div >
+                (<div
+                    className={cx("product")}
+                    onClick={() => handleClickItem(data.id)}
+                >
+                    <>
                         {data.condition.includes("in stock") ? (
                             <div>
                                 <BsFillCheckCircleFill className={cx('stock-icon')} />
@@ -110,13 +111,19 @@ function Product({
                             <div className={cx("old")}>${data.oldPrice}</div>
                             <div className={cx("new")}>${data.newPrice}</div>
                         </div>
-                    </div>
+                    </>
                     <div className={cx('layout-hover')}>
                         <div className={cx('actions')}>
                             <HiOutlineHeart className={cx('icon-isHover')} />
                             <BsFillBarChartFill className={cx('icon-isHover')} />
                         </div>
-                        <Button onClick={(e) => handleAddToCart(data, e)} outline>Add to cart</Button>
+                        <Button
+                            onClick={(e) => handleAddToCart(data, e)}
+                            outline
+                            lefticon={<AiOutlineShoppingCart />}
+                        >
+                            Add to cart
+                        </Button>
                     </div>
                 </div>)
             }
@@ -128,12 +135,11 @@ function Product({
                     </div>
                     <div className={cx('name-isHover')}>{data.title}</div>
                     <div className={cx('actions')}>
-                        <TiDeleteOutline className={cx('icon-isHover')} onClick={(e) => handleRemove(data, e)} />
+                        <IoMdClose className={cx('icon-isHover')} onClick={(e) => handleRemove(data, e)} />
                         <TiPencil className={cx('icon-isHover')} />
                     </div>
                 </div>)
             }
-
             {isInCart &&
                 (<Row className={cx('wrapper-isInCart')}>
                     <Col md={2} className={cx('img-isInCart')}>
@@ -163,7 +169,7 @@ function Product({
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
-                        <TiDeleteOutline onClick={() => handleRemove(data)} />
+                        <IoMdClose onClick={() => handleRemove(data)} />
                         <TiPencil />
                     </Col>
 
@@ -216,7 +222,7 @@ function Product({
                     </div>
                 </div>
             )}
-        </Fragment>
+        </>
     );
 }
 

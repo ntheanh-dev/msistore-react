@@ -14,7 +14,6 @@ import Button from "~/components/Button";
 import style from './Cart.module.scss';
 const cx = classNames.bind(style)
 function Cart() {
-
     const dispath = useDispatch()
     const isMobile = useMediaQuery({ query: '(max-width: 426px)' })
     const cart = useSelector(state => state.user.value.cart)
@@ -27,7 +26,8 @@ function Cart() {
     }, [cart])
 
     useEffect(() => {
-        document.title = 'Your Cart'
+        window.scrollTo(0, 0);
+        document.title = 'YOUR CART'
     }, [])
 
     const handleUpdate = () => {
@@ -85,6 +85,7 @@ function Cart() {
         <Container className={cx('wrapper')}>
             <Pageing pages={["Cart"]} />
             <h1 className={cx('Cart-Head')}>Shopping Cart</h1>
+            {/* Products */}
             {cart.cartItems.length > 0 ? (
                 <Row>
                     <Col lg={9} sm={12}>
@@ -126,7 +127,6 @@ function Cart() {
                         <Button primary>Proceed to Checkout</Button>
                     </Col>
                 </Row>
-
             ) : (
                 <div className={cx('nodata')}>
                     <AiOutlineInbox />

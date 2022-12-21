@@ -16,17 +16,21 @@
 }
 .content {
     display: flex;
-    & > svg {
-        font-size: 110px;
-        color: var(--black);
-        margin-right: 26px;
-    }
+    min-height: 130px;
     & > span {
         display: block;
         font-size: 18px;
         font-weight: 400;
         line-height: 20px;
         text-align: left;
+    }
+}
+.icon {
+    margin-right: 26px;
+    text-align: left;
+    & > svg {
+        color: var(--black);
+        font-size: 26px;
     }
 }
 .bottom {
@@ -48,9 +52,9 @@
         border-radius: 50%;
         background-color: #ccc;
         margin-left: 5px;
+        cursor: pointer;
     }
-
-    & > .active {
-        background-color: var(--blue015);
-    }
+}
+.review-active {
+    background-color: var(--blue015) !important;
 }

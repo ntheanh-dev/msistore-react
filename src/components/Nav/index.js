@@ -1,16 +1,13 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
-import { Fragment } from "react";
 
 import Button from '~/components/Button';
 import logo from '~/assets/images/logo.png'
 import style from './Nav.module.scss'
 const cx = classNames.bind(style)
 
-function OverLay({ handle }) {
-
-    //isNav
+function Nav({ bars, handle }) {
     const MAIN_NAV = [
         {
             display: "Laptops",
@@ -43,10 +40,10 @@ function OverLay({ handle }) {
     ]
 
     return (
-        <div className={cx('isNav')}>
-            <Fragment>
+        <>
+            <div className={cx('wappter', bars && 'active-nav')}>
                 <div className={cx('isNavTablet-head')}>
-                    <Link to="/">
+                    <Link to="/" onClick={handle}>
                         <img src={logo} alt="logo" />
                     </Link>
 
@@ -57,16 +54,25 @@ function OverLay({ handle }) {
                 </div>
                 <div className={cx('isNavTablet-body')}>
                     {MAIN_NAV.map((item, index) => (
-                        <div key={index} className={cx('isLinksTab')}>
+                        <div
+                            key={index}
+                            className={cx('isLinksTab')}
+                            onClick={handle}
+                        >
                             <Link to={item.path}>{item.display}</Link>
                         </div>
                     ))}
 
-                    <Button primary to="/comming" >Our Deals</Button>
+                    <Button primary to="/comming" onClick={handle}>Our Deals</Button>
                 </div>
-            </Fragment>
-        </div>
+            </div>
+            <div
+                className={cx('overlay', bars && 'active-overlay')}
+                onClick={handle}
+            >
+            </div>
+        </>
     );
 }
 
-export default OverLay;
+export default Nav;

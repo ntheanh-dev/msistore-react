@@ -34,17 +34,17 @@
     position: relative;
     overflow: hidden;
     background: center / cover no-repeat;
-    background-size: 110%;
+    background-size: 150%;
     transition: background-size 0.2s linear;
     -moz-transition: background-size 0.2s linear;
     -o-transition: background-size 0.2s linear;
     -ms-transition: background-size 0.2s linear;
 
-    // &:hover {
-    //     background-size: 150%;
-    // }
     @include media-breakpoint-down(sm) {
         height: 82px;
+    }
+    @include media-breakpoint-down(md) {
+        background-size: 110%;
     }
 }
 .title {

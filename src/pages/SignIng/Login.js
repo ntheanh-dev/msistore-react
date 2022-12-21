@@ -6,6 +6,10 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
 import { useState, useEffect } from "react";
 
+// import { collection, addDoc, query, where, getDocs, getDoc, doc, onSnapshot } from "firebase/firestore";
+// import { setUserData } from "~/components/firebase/config";
+// import { setLogin } from "~/redux/authSlice";
+// import { auth, db } from "~/components/firebase/config";
 import { userFetch } from "~/redux/userSlice";
 import FormInput from "~/components/Input";
 import Pageing from "~/components/Pageing";
@@ -13,20 +17,34 @@ import Button from "~/components/Button";
 import style from './Register.module.scss'
 const cx = classNames.bind(style)
 function Login() {
-
     const { pathname } = useLocation();
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    const dispatch = useDispatch()
-    let navigate = useNavigate()
     const [values, setValues] = useState({
         username: '',
         email: '',
         password: '',
         confirmPassword: '',
     })
+
+    // const dispatchData = (value) => dispatch(setLogin(value));
+    // const handleGoogleLogin = async () => {
+    //     const to = "/home"
+    //     try {
+    //         setUserData(dispatchData, to, "googleLogin");
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    // const handleGoogleLoout = () => {
+    //     auth.signOut()
+    //     console.log("log out successfull")
+    // }
 
     const inputs = [
         {
@@ -125,6 +143,9 @@ function Login() {
                         <li>Track orders and more</li>
                     </ul>
                     <Button to={"/register"} primary>Create An Account</Button>
+                    {/* <Button onClick={handleGoogleLogin} primary>Login Google</Button>
+                    <Button onClick={handleGoogleLoout} primary>Logout Google</Button>
+                    <Button onClick={handleUPdate} outlineGray>Update cart</Button> */}
                 </Col>
             </Row>
         </Container>

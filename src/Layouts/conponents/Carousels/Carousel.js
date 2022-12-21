@@ -4,21 +4,19 @@ import { useSelector } from "react-redux";
 
 import Product from "~/components/Product";
 const Carousel = () => {
-
     const { items } = useSelector(state => state.products)
-
     var settings = {
         infinite: true,
         slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 1500,
+        speed: 1800,
         autoplaySpeed: 2000,
         dots: true,
         cssEase: "linear",
         responsive: [
             {
-                breakpoint: 768,
+                breakpoint: 800,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4,
@@ -36,19 +34,15 @@ const Carousel = () => {
         ]
     };
     return (
-        <div>
-            {
-                <Slider {...settings}>
-                    {items.map((ele, index) => (
-                        <Product
-                            key={index}
-                            primary
-                            data={ele}
-                        />
-                    ))}
-                </Slider>
-            }
-        </div>
+        <Slider {...settings}>
+            {items.map((ele, index) => (
+                <Product
+                    key={index}
+                    primary
+                    data={ele}
+                />
+            ))}
+        </Slider>
     );
 }
 

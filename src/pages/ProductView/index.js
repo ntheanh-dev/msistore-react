@@ -1,6 +1,6 @@
 import ProductDetail from "~/components/ProductDetail";
-import { useParams, useLocation } from "react-router-dom";
-import { memo, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,20 +11,17 @@ import style from './ProducView.module.scss'
 import slide from '~/assets/images/detail-slide.png'
 const cx = classNames.bind(style)
 function ProductView() {
-
-    const { pathname } = useLocation();
-
+    // const { pathname } = useLocation();
     const dispatch = useDispatch()
     const { productid } = useParams()
-
     dispatch(setId(productid))
     const product = useSelector(ProductById)
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = `${product[0].name}`
+        // document.title = `${product[0].name}`
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname]);
+    }, []);
 
     return (
         <div className={cx('wrapper')}>
@@ -59,4 +56,4 @@ function ProductView() {
     );
 }
 
-export default memo(ProductView);
+export default ProductView;

@@ -41,6 +41,7 @@ function Filter() {
             _page: newPages,
         })
     }
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [product]);
@@ -53,7 +54,7 @@ function Filter() {
         async function fetchAPI() {
             try {
                 const paramstring = queryString.stringify(filter)
-                const requestURL = `https://msi-data.herokuapp.com/api/data?${paramstring}`
+                const requestURL = `https://json-server-sand.vercel.app/api/data?${paramstring}`
                 const response = await fetch(requestURL);
                 const responseJSON = await response.json()
                 const { data, pagination } = responseJSON
@@ -64,7 +65,6 @@ function Filter() {
                 console.log(error)
             }
         }
-
         fetchAPI()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter])

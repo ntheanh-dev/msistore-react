@@ -1,23 +1,15 @@
-.isNav {
+.wappter {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    right: 40%;
     bottom: 0;
     z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform linear 0.2s, opacity linear 0.2s;
+    opacity: 0;
     background-color: var(--whiteFFF);
     padding: 0 25px;
-    animation: FadeIn 0.2s linear;
-}
-@keyframes FadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-90%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 .isNavTablet-head {
     display: flex;
@@ -40,10 +32,21 @@
     font-weight: 400;
     color: var(--black);
 }
-// isFiller nav
-.heading {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 27px;
-    color: var(--black);
+.active-nav {
+    transform: translateX(0);
+    opacity: 1;
+}
+.overlay {
+    opacity: 0;
+    transition: opacity linear 0.2s;
+}
+.active-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.6);
 }
