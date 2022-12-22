@@ -19,7 +19,15 @@ function FormInput(props) {
 
     return (
         <div className={cx('wrapper')}>
-            <label>{label}</label><br />
+            {label &&
+                <>
+                    <label className={cx('label')}>
+                        {label}
+                        <span className={cx('importantmark')}> *</span>
+                    </label>
+                    <br />
+                </>
+            }
             <input
                 {...inputProps}
                 type={showPassword}
@@ -36,7 +44,10 @@ function FormInput(props) {
             <span>{errormessage}</span>
 
             {type === 'password' && props.value && (
-                <div className={cx('icons')} onClick={handleShowPassword}>
+                <div
+                    className={cx('icon', !label && 'icon-without-lable')}
+                    onClick={handleShowPassword}
+                >
                     {showPassword === 'password' ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </div>
             )}

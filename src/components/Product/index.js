@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify"
 
+import { Formatter } from "../FormatCurrency";
 import style from './Product.module.scss'
 import Button from "../Button";
 import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/userSlice";
@@ -108,8 +109,8 @@ function Product({
                             {data.title}
                         </div>
                         <div className={cx("prices")}>
-                            <div className={cx("old")}>${data.oldPrice}</div>
-                            <div className={cx("new")}>${data.newPrice}</div>
+                            <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
+                            <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
                         </div>
                     </>
                     <div className={cx('layout-hover')}>
@@ -152,7 +153,7 @@ function Product({
 
                     <Col md={2} className={cx('price-isInCart')}>
                         {isMobile && <div className={cx('priceInMobile')}>Price</div>}
-                        ${data.newPrice}
+                        {Formatter.format(data.newPrice)}
                     </Col>
 
                     <Col md={1} className={cx('quanti-isInCart')}>
@@ -165,7 +166,7 @@ function Product({
 
                     <Col md={2} className={cx('total-isInCart')}>
                         {isMobile && <div className={cx('totalInMobile')}>Subtotal</div>}
-                        <div>${data.newPrice * data.cartQuantity}</div>
+                        <div>{Formatter.format(data.newPrice * data.cartQuantity)}</div>
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
@@ -214,8 +215,8 @@ function Product({
                                 {data.title}
                             </div>
                             <div className={cx("prices-isSearch")}>
-                                <div className={cx("old")}>${data.oldPrice}</div>
-                                <div className={cx("new")}>${data.newPrice}</div>
+                                <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
+                                <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
                             </div>
                             <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
                         </div>

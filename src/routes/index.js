@@ -6,8 +6,7 @@ import Login from '~/pages/SignIng/Login'
 import ProductView from '~/pages/ProductView';
 import NotFount from '~/pages/NotFound';
 import CommingSoon from '~/pages/CommingSoon';
-import AccountView from '~/pages/AccountView';
-import AdminView from '~/pages/AdminView';
+import UserDashboard from '~/pages/UserDashboard';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -15,10 +14,9 @@ const publicRoutes = [
     { path: '/filter', component: Filter },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/account', component: AccountView },
+    { path: '/dashboard', component: UserDashboard },
     { path: '/product/:productid', component: ProductView },
     { path: '/comming', component: CommingSoon },
-    { path: '/admin', component: AdminView },
     { path: '*', isNotDefault: true, component: NotFount },
 ]
 

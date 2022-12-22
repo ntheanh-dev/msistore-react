@@ -3,10 +3,12 @@ import { Row, Col } from "react-bootstrap";
 import { BsHeadset } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { AiTwotoneTag } from "react-icons/ai";
+import { useLocation } from "react-router-dom";
 
 import style from './Footer.module.scss';
 const cx = classNames.bind(style)
 function Features() {
+    const { pathname } = useLocation()
 
     const features = [
         {
@@ -27,7 +29,10 @@ function Features() {
     ]
 
     return (
-        <div className={cx('features-wrapper')}>
+        <div
+            className={cx('features-wrapper')}
+            style={{ backgroundColor: pathname !== "/" && '#F5F7FF' }}
+        >
             <Row className="justify-content-center">
                 {
                     features.map((feature, index) => (

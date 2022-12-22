@@ -52,7 +52,7 @@ function Login() {
             name: "email",
             type: "email",
             placeholder: "Your email",
-            lable: "Email",
+            label: "Email",
             errormessage: "It should be a valid email address",
             required: true,
         },
@@ -61,7 +61,7 @@ function Login() {
             name: "password",
             type: "password",
             placeholder: "Your password",
-            lable: "Password",
+            label: "Password",
             errormessage: "Password should be 8-20 characters and include at least 1 number",
             // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
@@ -113,7 +113,7 @@ function Login() {
     }
     return (
         <Container className={cx("wrapper")}>
-            <Pageing pages={["Login"]} />
+            <Pageing pages={[{ title: 'Login', path: 'login' }]} />
             <h1 className={cx("heading")}>Login</h1>
             <Row className="justify-content-around">
                 <Col md={5} sm={12} className={cx("box")}>
@@ -136,8 +136,8 @@ function Login() {
                 </Col>
                 <Col md={5} sm={12} className={cx("box")}>
                     <h1 className={cx("head")}>New Customer?</h1>
-                    <p className={cx("desc")}>If you have an account, sign in with your email address.</p>
-                    <ul className={cx("desc-list")}>
+                    <p className={cx("desc")}>Creating an account has many benefits:</p>
+                        <ul className={cx("desc-list")}>
                         <li>Check out faster </li>
                         <li>Keep more than one address</li>
                         <li>Track orders and more</li>

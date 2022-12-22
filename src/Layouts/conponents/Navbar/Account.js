@@ -4,8 +4,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
-import { useMediaQuery } from "react-responsive";
-import { memo } from "react";
+import { memo, useState } from "react";
 
 import { logout } from "~/redux/userSlice";
 import style from './Navbar.module.scss'
@@ -13,7 +12,10 @@ const cx = classNames.bind(style)
 function Account({ user }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+    const [visible, setVisible] = useState(false);
+    const show = () => setVisible(true);
+    const hide = () => setVisible(false);
 
     let ACCOUNT = [
         {
@@ -30,7 +32,7 @@ function Account({ user }) {
         const hasUser = [
             {
                 title: "My Account",
-                path: '/account'
+                path: '/dashboard'
             },
             {
                 title: "My wish list(0)",
@@ -46,17 +48,24 @@ function Account({ user }) {
         ACCOUNT = [...hasUser, ...ACCOUNT]
         // ACCOUNT.splice(0,0,{ title: "My Account", path: '/account' },{ title: "My wish list(0)", path: '/comming'},{title: "Compate (0)",path: '/comming'})
     }
-    const handleLogOut = () => {
-        dispath(logout(null))
+
+    const handleClick = (title) => {
+        if (title === 'Log out') {
+            dispath(logout(null))
+        }
+        if (visible) {
+            hide()
+        } else {
+            show()
+        }
     }
 
     return (
         <Tippy
-            // delay={[0, 200]}
-            disabled={isTabletOrMobile}
             interactive
             offset={[12, 8]}
             placement='bottom-end'
+            content="Tooltip" visible={visible} onClickOutside={hide}
             render={attrs => (
                 <div className={cx('account')} >
                     {ACCOUNT.map((ele, index) => (
@@ -64,7 +73,7 @@ function Account({ user }) {
                             to={ele.path}
                             key={index}
                             className={cx('account-item')}
-                            onClick={ele.title === "Log out" ? handleLogOut : ''}
+                            onClick={() => handleClick(ele.title)}
                         >
                             {ele.title}
                         </Link>
@@ -73,7 +82,10 @@ function Account({ user }) {
             )}
         >
             {user.value.id ? (
-                <div className={cx('avata')} onClick={() => navigate('/account')} >
+                <div
+                    className={cx('avata')}
+                    onClick={() => { visible ? hide() : show() }}
+                >
                     <img src={user.value.avata} alt='alt' />
                 </div>
             ) : (

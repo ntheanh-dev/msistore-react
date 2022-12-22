@@ -125,7 +125,7 @@ function Register() {
     }
     return (
         <Container className={cx("wrapper")}>
-            <Pageing pages={["Register"]} />
+            <Pageing pages={[{ title: 'Register', path: 'register' }]} />
             <h1 className={cx("heading")}>Register</h1>
             <Row className="justify-content-around">
                 <Col md={5} sm={12} className={cx("box")}>

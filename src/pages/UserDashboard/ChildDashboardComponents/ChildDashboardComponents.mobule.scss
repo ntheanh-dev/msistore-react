@@ -1,0 +1,94 @@
+@import '~bootstrap/scss/bootstrap';
+.wrapper {
+    @include media-breakpoint-up(md) {
+        padding-left: 50px;
+    }
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+    color: var(--black);
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--grayCCC);
+}
+.sub-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--black);
+    padding: 16px 0 8px;
+}
+.body {
+    min-height: 80px;
+}
+.content {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: 0em;
+    color: #666666;
+}
+.change-info {
+    > span {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 20px;
+        color: var(--blue015);
+        text-decoration: underline;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+        &:nth-child(2) {
+            margin: 0 25px;
+        }
+    }
+}
+.avatas {
+    display: flex;
+    justify-content: space-around;
+
+    & > div {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
+.avataActive {
+    border: 2px solid var(--gray8C8);
+}
+.current-avata {
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    overflow: hidden;
+}
+.disible-edit {
+    user-select: none;
+    color: var(--gray8C8) !important;
+    text-decoration: line-through !important;
+}
+
+// my orders
+.nodata {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > svg {
+        font-size: 46px;
+        color: var(--gray8C8);
+    }
+
+    & > h1 {
+        color: var(--gray8C8);
+        font-weight: 600;
+        line-height: 22px;
+    }
+}

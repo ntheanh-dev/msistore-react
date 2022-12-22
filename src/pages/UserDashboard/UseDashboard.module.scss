@@ -1,0 +1,78 @@
+@import '~bootstrap/scss/bootstrap';
+.wrapper {
+    margin-top: var(--head-height);
+    margin-bottom: 46px;
+
+    @include media-breakpoint-down(md) {
+        margin-bottom: 12px;
+    }
+}
+.title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+    color: var(--black);
+
+    margin: 20px 0 30px;
+
+    @include media-breakpoint-down(lg) {
+        margin: 14px 0;
+    }
+    @include media-breakpoint-down(md) {
+        margin: 14px 0 17px;
+    }
+}
+.wrapper-lef-col {
+    background-color: #f5f7ff;
+    padding: 20px;
+}
+.data-active {
+    font-weight: 600 !important;
+    color: #212121 !important;
+    position: relative;
+
+    &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -20px;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--blue015);
+    }
+}
+.option {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 23px;
+    color: #666666;
+    margin-bottom: 7px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.background {
+    background-color: var(--whiteF5F);
+    padding: 20px 16px;
+    margin-top: 7px;
+
+    & > h1 {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        color: var(--black);
+        margin-bottom: 10px;
+    }
+
+    & > p {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 17px;
+        color: var(--black);
+        text-align: center;
+    }
+}

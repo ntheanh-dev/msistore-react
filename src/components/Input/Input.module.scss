@@ -1,6 +1,16 @@
 .wrapper {
     position: relative;
 }
+.label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 27px;
+    color: var(--black);
+}
+.importantmark {
+    color: #c94d3f;
+    font-size: 16px;
+}
 .input {
     height: 50px;
     width: 100%;
@@ -25,7 +35,7 @@
         display: block;
     }
 }
-.icons {
+.icon {
     position: absolute;
     font-size: 20px;
     top: 50px;
@@ -36,4 +46,7 @@
     & > svg {
         color: var(--gray8C8);
     }
+}
+.icon-without-lable {
+    top: 25px !important;
 }

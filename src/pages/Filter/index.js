@@ -71,7 +71,7 @@ function Filter() {
 
     return (
         <Container className={cx('wrapper')}>
-            <Pageing pages={['Laptops']} />
+            <Pageing pages={[{ title: 'Laptops', path: 'filter' }]} />
             <Row>
                 {!isMobile && (
                     <Col lg={2} md={3}>

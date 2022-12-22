@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { useEffect } from "react";
 import { AiOutlineInbox } from "react-icons/ai";
 
+import { Formatter } from "~/components/FormatCurrency";
 import { userPut } from "~/redux/userSlice";
 import { getTotal } from '~/redux/userSlice';
 import Pageing from "~/components/Pageing";
@@ -65,25 +66,25 @@ function Cart() {
     const checkoutItems = [
         {
             title: "Subtotal",
-            ship: cart.cartItems.length > 0 ? `$${cartTotalAmount}` : 0
+            ship: cart.cartItems.length > 0 ? `${cartTotalAmount}` : 0
         },
         {
             title: "Shipping",
-            ship: "$21.00"
+            ship: 21
         },
         {
             title: "Tax",
-            ship: "$1.91"
+            ship: 1.91
         },
         {
             title: "Order Total",
-            ship: cart.cartItems.length > 0 ? `$${cartTotalAmount + 21 + 1.91}` : 0
+            ship: cart.cartItems.length > 0 ? `${cartTotalAmount + 21 + 1.91}` : 0
         }
     ]
 
     return (
         <Container className={cx('wrapper')}>
-            <Pageing pages={["Cart"]} />
+            <Pageing pages={[{ title: 'Cart', path: 'yourcart' }]} />
             <h1 className={cx('Cart-Head')}>Shopping Cart</h1>
             {/* Products */}
             {cart.cartItems.length > 0 ? (
@@ -119,7 +120,7 @@ function Cart() {
                                 checkoutItems.map((item, index) => (
                                     <li key={index}>
                                         <h2>{item.title}</h2>
-                                        <span>{item.ship}</span>
+                                        <span>{Formatter.format(item.ship)}</span>
                                     </li>
                                 ))
                             }
