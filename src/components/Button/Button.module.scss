@@ -47,8 +47,13 @@
     color: var(--whiteFFF);
     border-color: transparent;
 
+    transition: all 0.2s;
+
     &:hover {
-        color: var(--whiteFFF);
+        color: var(--blue015);
+        border-color: var(--blue015);
+        background-color: transparent;
+
         opacity: 0.8;
     }
 }
@@ -56,6 +61,7 @@
 .outline {
     color: var(--blue015);
     border-color: currentColor;
+    transition: all 0.2s;
 
     &:hover {
         color: var(--blue015);
@@ -67,9 +73,12 @@
 .black {
     color: var(--whiteFFF);
     background-color: var(--black);
+    transition: all 0.2s;
 
     &:hover {
-        border-color: currentColor;
+        border-color: var(--black);
+        background-color: transparent;
+        color: var(--black);
         opacity: 0.8;
     }
 }

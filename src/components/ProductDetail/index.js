@@ -10,7 +10,8 @@ import { Col, Row, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify"
 
-import { addToCart } from "~/redux/userSlice";
+import { Formatter } from "../FormatCurrency";
+import { addToCart } from "~/redux/userCartSlice";
 import Button from "../Button";
 import Pageing from "../Pageing";
 import style from './ProductDetail.module.scss'
@@ -18,7 +19,7 @@ const cx = classNames.bind(style)
 
 function ProductDetail({ data }) {
     const dispath = useDispatch()
-    const { id } = useSelector(state => state.user.value)
+    const { uid } = useSelector(state => state.auth)
 
     const [qty, setQty] = useState(1)
     const [detail, setDetail] = useState(false)
@@ -32,8 +33,11 @@ function ProductDetail({ data }) {
         }
     }
     const handleAddItem = (data, e) => {
-        if (id) {
-            dispath(addToCart(data))
+        if (uid) {
+            dispath(addToCart({
+                ...data,
+                cartQuantity: qty
+            }))
         } else {
             toast.warn(`Please login to add product`, {
                 position: "top-right",
@@ -69,7 +73,7 @@ function ProductDetail({ data }) {
                     <div className={cx('control')}>
                         <div className={cx('price')}>
                             <p>On Sale from</p>
-                            <span>${total}</span>
+                            <span>{Formatter.format(data.oldPrice)}</span>
                         </div>
                         <div className={cx('quanti')}>
                             <span className={cx('number')}>{qty}</span>

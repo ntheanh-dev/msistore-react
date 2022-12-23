@@ -18,7 +18,8 @@ import Account from './Account';
 const cx = classNames.bind(style)
 function Navbar() {
     let isLaptop = useMediaQuery({ query: '(min-width: 768px)' })
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.auth)
+    const cart = useSelector(state => state.userCart)
     const [bars, setBars] = useState(false)
     const [scroll, setScroll] = useState(false)
     const [toogleSearch, setToogleSearch] = useState({
@@ -116,7 +117,7 @@ function Navbar() {
                             </div>
 
                         )}
-                        <Hovercart user={user} />
+                        <Hovercart cart={cart} hasUser={user.uid} />
                         <Account user={user} />
                     </div>
                 </div>

@@ -6,13 +6,16 @@ import { useDispatch } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
 import { memo, useState } from "react";
 
-import { logout } from "~/redux/userSlice";
+import { LogOut } from "~/components/firebase/config";
+import { setLogoutUserInfo } from "~/redux/authSlice";
+import { setLogoutCart } from "~/redux/userCartSlice";
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 function Account({ user }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-
+    const dispathLogoutUserInfo = () => dispath(setLogoutUserInfo())
+    const dispathLogoutCart = () => dispath(setLogoutCart())
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -23,12 +26,12 @@ function Account({ user }) {
             path: '/register'
         },
         {
-            title: user.value.id ? "Log out" : "Sign in",
-            path: user.value.id ? "/" : "/login"
+            title: user.uid ? "Log out" : "Sign in",
+            path: user.uid ? "/" : "/login"
         },
     ]
 
-    if (user.value.id) {
+    if (user.uid) {
         const hasUser = [
             {
                 title: "My Account",
@@ -51,7 +54,7 @@ function Account({ user }) {
 
     const handleClick = (title) => {
         if (title === 'Log out') {
-            dispath(logout(null))
+            LogOut(dispathLogoutUserInfo, dispathLogoutCart)
         }
         if (visible) {
             hide()
@@ -81,12 +84,12 @@ function Account({ user }) {
                 </div>
             )}
         >
-            {user.value.id ? (
+            {user.uid ? (
                 <div
                     className={cx('avata')}
                     onClick={() => { visible ? hide() : show() }}
                 >
-                    <img src={user.value.avata} alt='alt' />
+                    <img src={user.photoURL} alt='alt' />
                 </div>
             ) : (
                 <div onClick={() => navigate('/login')} className={cx('icon')}>

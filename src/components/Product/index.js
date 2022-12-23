@@ -15,7 +15,7 @@ import { toast } from "react-toastify"
 import { Formatter } from "../FormatCurrency";
 import style from './Product.module.scss'
 import Button from "../Button";
-import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/userSlice";
+import { addToCart, removeCart, increaseCart, decreaseCart } from "~/redux/userCartSlice";
 const cx = classNames.bind(style)
 
 function Product({
@@ -24,17 +24,18 @@ function Product({
     isHorver,
     isInCart,
     isSerachResult
-
 }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-    const { id } = useSelector(state => state.user.value)
+    const { uid } = useSelector(state => state.auth)
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     const handleAddToCart = (data, e) => {
         e.stopPropagation()
-        if (id) {
-            dispath(addToCart(data))
+        if (uid) {
+            dispath(addToCart({
+                ...data
+            }))
         } else {
             toast.warn(`Please login to add product`, {
                 position: "top-right",
@@ -48,12 +49,15 @@ function Product({
         }
     }
     const handleRemove = (data, e) => {
+        e.stopPropagation()
         dispath(removeCart(data))
     }
-    const handleIncrease = (data) => {
+    const handleIncrease = (data, e) => {
+        e.stopPropagation()
         dispath(increaseCart(data))
     }
-    const handleDecrease = (data) => {
+    const handleDecrease = (data, e) => {
+        e.stopPropagation()
         dispath(decreaseCart(data))
     }
     const handleClickItem = (id) => {
@@ -142,7 +146,7 @@ function Product({
                 </div>)
             }
             {isInCart &&
-                (<Row className={cx('wrapper-isInCart')}>
+                (<Row className={cx('wrapper-isInCart')} onClick={() => handleClickItem(data.id)}>
                     <Col md={2} className={cx('img-isInCart')}>
                         <img src={data.images[0]} alt="alt" />
                     </Col>
@@ -159,8 +163,8 @@ function Product({
                     <Col md={1} className={cx('quanti-isInCart')}>
                         <span className={cx('number')}>{data.cartQuantity}</span>
                         <div className={cx('wrap-icon')}>
-                            <IoIosArrowUp onClick={() => handleIncrease(data)} />
-                            <IoIosArrowDown onClick={() => handleDecrease(data)} />
+                            <IoIosArrowUp onClick={(e) => handleIncrease(data, e)} />
+                            <IoIosArrowDown onClick={(e) => handleDecrease(data, e)} />
                         </div>
                     </Col>
 
@@ -170,7 +174,7 @@ function Product({
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
-                        <IoMdClose onClick={() => handleRemove(data)} />
+                        <IoMdClose onClick={(e) => handleRemove(data, e)} />
                         <TiPencil />
                     </Col>
 

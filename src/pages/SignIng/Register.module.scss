@@ -46,6 +46,56 @@
     display: inline;
     margin-left: 23px;
     margin-bottom: 0;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    @include media-breakpoint-down(lg) {
+        font-size: 12px;
+        margin-left: 5px;
+    }
+}
+.orther-login {
+    margin-top: 12px;
+}
+.head-orther-login {
+    display: flex;
+    align-items: center;
+
+    & > div:nth-child(2) {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 27px;
+        text-align: left;
+        color: var(--black);
+        padding: 0 12px;
+
+        @include media-breakpoint-down(lg) {
+            font-size: 16px;
+            padding: 0 10px;
+        }
+    }
+}
+.line-through {
+    flex-grow: 1;
+    border-bottom: 2px solid var(--black);
+}
+.btns {
+    display: flex;
+    justify-content: space-between;
+    & > button {
+        width: 45%;
+
+        @include media-breakpoint-down(lg) {
+            width: 100%;
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        display: block;
+    }
 }
 .desc-list {
     padding-left: 16px;

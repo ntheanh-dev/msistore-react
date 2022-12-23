@@ -1,16 +1,17 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
 import { useState, useEffect } from "react";
+import { FaFacebookF, FaGooglePlusG } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-// import { collection, addDoc, query, where, getDocs, getDoc, doc, onSnapshot } from "firebase/firestore";
-// import { setUserData } from "~/components/firebase/config";
-// import { setLogin } from "~/redux/authSlice";
-// import { auth, db } from "~/components/firebase/config";
-import { userFetch } from "~/redux/userSlice";
+import { loginWithFirebase } from "~/components/firebase/config";
+import { setUserInfo } from "~/redux/authSlice";
+import { setUserCart } from "~/redux/userCartSlice";
+import { getUserByEmail } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
@@ -31,20 +32,16 @@ function Login() {
         confirmPassword: '',
     })
 
-    // const dispatchData = (value) => dispatch(setLogin(value));
-    // const handleGoogleLogin = async () => {
-    //     const to = "/home"
-    //     try {
-    //         setUserData(dispatchData, to, "googleLogin");
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // const handleGoogleLoout = () => {
-    //     auth.signOut()
-    //     console.log("log out successfull")
-    // }
+    const dispatchUserInfo = (value) => dispatch(setUserInfo(value));
+    const dispatchUserCart = (value) => dispatch(setUserCart(value));
+    const toFrom = () => navigate("/");
+    const handleGoogleLogin = async () => {
+        try {
+            loginWithFirebase(dispatchUserInfo, dispatchUserCart, toFrom, "googleLogin");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const inputs = [
         {
@@ -73,31 +70,20 @@ function Login() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const handleSumit = (e) => {
+    const handleSumit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
         const { email, password } = Object.fromEntries(data.entries())
 
-        const userData = {
-            email: email,
+        const user = {
+            uid: email,
             password: password
         }
 
-        dispatch(userFetch(userData))
+        dispatch(getUserByEmail(user))
             .then(unwrapResult)
             .then(resp => {
-                if (resp[0]) {
-                    toast.success(`Login successful`, {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                    navigate('/')
-                } else {
+                if (resp === -1) {
                     toast.warn(`Account not found`, {
                         position: "top-right",
                         autoClose: 2000,
@@ -107,8 +93,46 @@ function Login() {
                         draggable: true,
                         progress: undefined,
                     });
+                } else {
+                    dispatchUserCart({ ...resp.cart })
+                    toast.success(`Logined successful`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    navigate('/')
                 }
             })
+        // dispatch(userFetch(userData))
+        //     .then(unwrapResult)
+        //     .then(resp => {
+        //         if (resp[0]) {
+        //             toast.success(`Login successful`, {
+        //                 position: "top-right",
+        //                 autoClose: 2000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 progress: undefined,
+        //             });
+        //             navigate('/')
+        //         } else {
+        //             toast.warn(`Account not found`, {
+        //                 position: "top-right",
+        //                 autoClose: 2000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 progress: undefined,
+        //             });
+        //         }
+        //     })
 
     }
     return (
@@ -133,19 +157,27 @@ function Login() {
                             <p className={cx("left-foot")}>Forgot Your Password?</p>
                         </div>
                     </form>
+                    <div className={cx("orther-login")}>
+                        <div className={cx("head-orther-login")}>
+                            <div className={cx("line-through")}></div>
+                            <div>Or login with</div>
+                            <div className={cx("line-through")}></div>
+                        </div>
+                        <div className={cx("btns")}>
+                            <Button primary lefticon={<FaFacebookF />}>FACEBOOK</Button>
+                            <Button onClick={handleGoogleLogin} primary lefticon={<FaGooglePlusG />}>GOOGLE</Button>
+                        </div>
+                    </div>
                 </Col>
                 <Col md={5} sm={12} className={cx("box")}>
                     <h1 className={cx("head")}>New Customer?</h1>
                     <p className={cx("desc")}>Creating an account has many benefits:</p>
-                        <ul className={cx("desc-list")}>
+                    <ul className={cx("desc-list")}>
                         <li>Check out faster </li>
                         <li>Keep more than one address</li>
                         <li>Track orders and more</li>
                     </ul>
                     <Button to={"/register"} primary>Create An Account</Button>
-                    {/* <Button onClick={handleGoogleLogin} primary>Login Google</Button>
-                    <Button onClick={handleGoogleLoout} primary>Logout Google</Button>
-                    <Button onClick={handleUPdate} outlineGray>Update cart</Button> */}
                 </Col>
             </Row>
         </Container>

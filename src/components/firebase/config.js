@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, getAdditionalUserInfo } from "firebase/auth";
+import { useSelector } from 'react-redux';
 
-import { collection, addDoc, query, where, getDocs, getDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 import { GoogleLogin, FaceBookLogin } from '~/redux/authSlice';
 
 const firebaseConfig = {
@@ -20,17 +21,18 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export const setUserData = async (loginDispach, naviage, type) => {
+export const loginWithFirebase = async (userInfoDispatch, userCartDispatch, navigate, type) => {
     if (type === "googleLogin") {
         const result = await GoogleLogin()
         const { isNewUser, profile } = getAdditionalUserInfo(result)
         if (isNewUser) {
             try {
-                await addDoc(collection(db, "users"), {
+                await setDoc(doc(db, "users", profile.id), {
                     displayName: profile.name,
                     email: profile.email,
                     uid: profile.id,
                     photoURL: profile.picture,
+                    password: -1,
                     cart: {
                         cartItems: [],
                         cartTotalAmount: 0,
@@ -57,15 +59,64 @@ export const setUserData = async (loginDispach, naviage, type) => {
     // }
     auth.onAuthStateChanged(user => {
         if (user) {
-            // loginDispach({
-            //     displayName: user.displayName,
-            //     email: user.email,
-            //     uid: user.uid,
-            //     photoURL: user.photoURL
-            // });
-            console.log("Changed: 1")
+            (async () => {
+                const { uid } = user.providerData[0]
+                const q = query(collection(db, "users"), where("uid", "==", uid));
+                const querySnapshot = await getDocs(q);
+                // tim thay user
+                querySnapshot.forEach((doc) => {
+                    // doc.data() is never undefined for query doc snapshots
+                    const data = doc.data()
+                    const { cart, ...userInfo } = data
+                    userInfoDispatch({
+                        ...userInfo
+                    })
+                    userCartDispatch({
+                        ...cart
+                    })
+                    navigate()
+                });
+            })()
         }
+
     })
+}
+
+export const updateCartData = async (data) => {
+    const { uid } = JSON.parse(localStorage.getItem("userLocal"))
+    if (uid) {
+        const docRef = doc(db, "users", uid);
+        setDoc(docRef, {
+            cart: {
+                ...data
+            }
+        }, { merge: true })
+            .then()
+            .catch(e => {
+                console.log(e)
+            })
+    }
+}
+
+export const getPasswordFromFirebase = async () => {
+    const { uid } = JSON.parse(localStorage.getItem("userLocal"))
+    const q = query(collection(db, "users"), where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+    // tim thay user
+    if (querySnapshot.docs.length === 1) {
+        let data = null
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            data = doc.data()
+        });
+        return data.password
+    }
+}
+
+export const LogOut = (dispatchLogoutUser, dispatchLogoutCart) => {
+    dispatchLogoutUser()
+    dispatchLogoutCart()
+    auth.signOut()
 }
 
 export { db, app, auth }

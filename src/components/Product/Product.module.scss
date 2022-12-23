@@ -215,7 +215,7 @@
     align-items: center;
     border-bottom: 1px solid var(--gray8C8);
     color: var(--black);
-
+    cursor: pointer;
     @include media-breakpoint-down(lg) {
         height: 125px;
     }
@@ -229,8 +229,8 @@
 }
 .img-isInCart {
     @include media-breakpoint-down(md) {
-        width: 120px;
-        height: 120px;
+        width: 120px !important;
+        height: 120px !important;
         margin: 0 auto;
     }
 }
@@ -284,6 +284,12 @@
         font-size: 34px;
         color: var(--grayF5F);
         cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     @include media-breakpoint-down(lg) {
         & > svg {

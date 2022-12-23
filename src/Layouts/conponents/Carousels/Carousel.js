@@ -16,7 +16,7 @@ const Carousel = () => {
         cssEase: "linear",
         responsive: [
             {
-                breakpoint: 800,
+                breakpoint: 1224,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4,

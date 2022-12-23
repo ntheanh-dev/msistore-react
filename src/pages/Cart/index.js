@@ -6,9 +6,9 @@ import { toast } from "react-toastify"
 import { useEffect } from "react";
 import { AiOutlineInbox } from "react-icons/ai";
 
+import { clearCart } from "~/redux/userCartSlice";
 import { Formatter } from "~/components/FormatCurrency";
-import { userPut } from "~/redux/userSlice";
-import { getTotal } from '~/redux/userSlice';
+import { getTotal } from '~/redux/userCartSlice';
 import Pageing from "~/components/Pageing";
 import Product from "~/components/Product";
 import Button from "~/components/Button";
@@ -17,9 +17,8 @@ const cx = classNames.bind(style)
 function Cart() {
     const dispath = useDispatch()
     const isMobile = useMediaQuery({ query: '(max-width: 426px)' })
-    const cart = useSelector(state => state.user.value.cart)
-    const user = useSelector(state => state.user.value)
-    const { cartTotalAmount } = useSelector(state => state.user.value.cart)
+    const cart = useSelector(state => state.userCart)
+    const { cartTotalAmount } = cart
 
     useEffect(() => {
         dispath(getTotal(null));
@@ -31,27 +30,8 @@ function Cart() {
         document.title = 'YOUR CART'
     }, [])
 
-    const handleUpdate = () => {
-        dispath(userPut(user))
-        toast.success(`Updated your shopping cart`, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-    }
-
     const handleClear = () => {
-        const cart = {
-            cartItems: [],
-            cartTotalAmount: 0,
-            cartTotalQuantity: 0,
-        }
-        const newUser = { ...user, cart }
-        dispath(userPut(newUser))
+        dispath(clearCart())
         toast.error(`Cleared shopping cart`, {
             position: "top-right",
             autoClose: 2000,
@@ -109,7 +89,6 @@ function Cart() {
                         <div className={cx('buttons')}>
                             <Button to='/' outlineGray>Continue Shopping</Button>
                             <Button onClick={handleClear} black>Clear Shopping Cart</Button>
-                            <Button onClick={handleUpdate} black>Update Shopping Cart</Button>
                         </div>
                     </Col>
 

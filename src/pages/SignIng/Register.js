@@ -1,14 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
-import Pageing from "~/components/Pageing";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
-import { useEffect } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-import { userByEmailFetch, userPost } from "~/redux/userSlice";
+import Pageing from "~/components/Pageing";
+import { registerFirebase } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
@@ -16,13 +15,9 @@ import { useState } from "react";
 const cx = classNames.bind(style)
 function Register() {
 
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-
     const dispatch = useDispatch();
     let navigate = useNavigate();
+    const [avata, setAvata] = useState('/images/avata1.jpg')
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -30,7 +25,6 @@ function Register() {
         confirmPassword: '',
     })
 
-    const [avata, setAvata] = useState('/images/avata1.jpg')
     const inputs = [
         {
             id: 1,
@@ -78,39 +72,27 @@ function Register() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
         const { confirmPassword, ...user } = Object.fromEntries(data.entries())
-        const initialCart = {
-            cartItems: [],
-            cartTotalAmount: 0,
-            cartTotalQuantity: 0,
+        const newUserFirebase = {
+            displayName: user.username,
+            email: user.email,
+            uid: user.email,
+            password: user.password,
+            photoURL: avata,
+            cart: {
+                cartItems: [],
+                cartTotalAmount: 0,
+                cartTotalQuantity: 0,
+            }
         }
-        user.cart = initialCart
-        user.avata = avata
-
-        dispatch(userByEmailFetch(user.email))
+        dispatch(registerFirebase(newUserFirebase))
             .then(unwrapResult)
             .then(resp => {
-                // khong trung tai khoan
-                if (resp.length === 0) {
-                    dispatch(userPost(user))
-                        .then(unwrapResult)
-                        .then(resp => {
-                            toast.success(`Register successful`, {
-                                position: "top-right",
-                                autoClose: 2000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                            });
-                            // login
-                            navigate('/login')
-                        })
-                } else if (resp.length > 0) {
+                console.log(resp)
+                if (resp === -1) {
                     toast.warn(`Account already exists`, {
                         position: "top-right",
                         autoClose: 2000,
@@ -120,8 +102,55 @@ function Register() {
                         draggable: true,
                         progress: undefined,
                     });
+                } else {
+                    toast.success(`Successful registration, redirecting to homepage`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    // login
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 2000)
                 }
             })
+
+        // dispatch(userByEmailFetch(user.email))
+        //     .then(unwrapResult)
+        //     .then(resp => {
+        //         // khong trung tai khoan
+        //         if (resp.length === 0) {
+        //             dispatch(userPost(user))
+        //                 .then(unwrapResult)
+        //                 .then(resp => {
+        //                     toast.success(`Register successful`, {
+        //                         position: "top-right",
+        //                         autoClose: 2000,
+        //                         hideProgressBar: false,
+        //                         closeOnClick: true,
+        //                         pauseOnHover: true,
+        //                         draggable: true,
+        //                         progress: undefined,
+        //                     });
+        //                     // login
+        //                     navigate('/login')
+        //                 })
+        //         } else if (resp.length > 0) {
+        //             toast.warn(`Account already exists`, {
+        //                 position: "top-right",
+        //                 autoClose: 2000,
+        //                 hideProgressBar: false,
+        //                 closeOnClick: true,
+        //                 pauseOnHover: true,
+        //                 draggable: true,
+        //                 progress: undefined,
+        //             });
+        //         }
+        //     })
     }
     return (
         <Container className={cx("wrapper")}>
