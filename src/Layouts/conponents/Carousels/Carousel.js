@@ -40,7 +40,7 @@ const Carousel = () => {
     };
     return (
         <Slider {...settings}>
-            {items ? (
+            {items.length > 0 ? (
                 items.map((ele, index) => (
                     <Product
                         key={index}

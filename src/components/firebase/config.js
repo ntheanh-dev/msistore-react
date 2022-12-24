@@ -43,20 +43,31 @@ export const loginWithFirebase = async (userInfoDispatch, userCartDispatch, navi
             }
         }
     }
-    // else if (type === "facebookLogin") {
-    //     const result = await FaceBookLogin()
-    //     const { isNewUser, profile } = getAdditionalUserInfo(result)
-    //     if (isNewUser) {
-    //         const data = {
-    //             displayName: profile.name,
-    //             email: profile.email,
-    //             uid: profile.id,
-    //             photoURL: profile.picture
-    //         }
-    //         console.log(data)
-    //     }
-    // }
+    else if (type === "facebookLogin") {
+        const result = await FaceBookLogin()
+        const { isNewUser, profile } = getAdditionalUserInfo(result)
+        console.log(isNewUser, profile)
+        if (isNewUser) {
+            try {
+                await setDoc(doc(db, "users", profile.id), {
+                    displayName: profile.name,
+                    email: profile.email ? profile.email : 'Do not have eamil to display',
+                    uid: profile.id,
+                    photoURL: profile.picture.data.url,
+                    password: -1,
+                    cart: {
+                        cartItems: [],
+                        cartTotalAmount: 0,
+                        cartTotalQuantity: 0,
+                    }
+                });
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+    }
     auth.onAuthStateChanged(user => {
+        console.log(user)
         if (user) {
             (async () => {
                 const { uid } = user.providerData[0]
@@ -77,7 +88,6 @@ export const loginWithFirebase = async (userInfoDispatch, userCartDispatch, navi
                 });
             })()
         }
-
     })
 }
 

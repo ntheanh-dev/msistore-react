@@ -16,18 +16,14 @@ function ProductsType({ name, category, img }) {
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            const fetAPI = async () => {
-                const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/data?categorySlug=${category}&_page=1&_limit=${isTabletOrMobile ? 2 : 4}`)
-                const responce = await responceJSON.json()
-                const { data } = responce
-                setData(data)
-                setIsLoading(false)
-            }
-            fetAPI()
-        }, 5)
-
-        return () => clearTimeout(timer)
+        const fetAPI = async () => {
+            const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/data?categorySlug=${category}&_page=1&_limit=${isTabletOrMobile ? 2 : 4}`)
+            const responce = await responceJSON.json()
+            const { data } = responce
+            setData(data)
+            setIsLoading(false)
+        }
+        fetAPI()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

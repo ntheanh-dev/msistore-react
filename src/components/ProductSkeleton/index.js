@@ -1,6 +1,5 @@
 import Skeleton from "react-loading-skeleton";
 import classNames from "classnames/bind";
-import { Fragment } from "react";
 
 import style from "./ProductSkeleton.module.scss";
 

@@ -38,9 +38,9 @@ function Login() {
     const dispatchUserInfo = (value) => dispatch(setUserInfo(value));
     const dispatchUserCart = (value) => dispatch(setUserCart(value));
     const toFrom = () => navigate("/");
-    const handleGoogleLogin = async () => {
+    const handleLoginwithMedia = async (type) => {
         try {
-            loginWithFirebase(dispatchUserInfo, dispatchUserCart, toFrom, "googleLogin");
+            loginWithFirebase(dispatchUserInfo, dispatchUserCart, toFrom, type);
         } catch (error) {
             console.log(error);
         }
@@ -132,8 +132,8 @@ function Login() {
                             <div className={cx("line-through")}></div>
                         </div>
                         <div className={cx("btns")}>
-                            <Button primary lefticon={<FaFacebookF />}>FACEBOOK</Button>
-                            <Button onClick={handleGoogleLogin} primary lefticon={<FaGooglePlusG />}>GOOGLE</Button>
+                            <Button onClick={() => handleLoginwithMedia('facebookLogin')} primary lefticon={<FaFacebookF />}>FACEBOOK</Button>
+                            <Button onClick={() => handleLoginwithMedia('googleLogin')} primary lefticon={<FaGooglePlusG />}>GOOGLE</Button>
                         </div>
                     </div>
                 </Col>
