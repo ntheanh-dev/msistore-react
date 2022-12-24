@@ -62,7 +62,6 @@ export const userCartSlice = createSlice({
             const data = getTotalProducts(currentCart)
             localStorage.setItem("localCart", JSON.stringify(data));
             updateCartData(data);
-
         },
         increaseCart: (state, action) => {
             const itemIndex = state.cartItems.findIndex(

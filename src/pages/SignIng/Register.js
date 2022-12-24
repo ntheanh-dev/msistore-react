@@ -2,10 +2,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify"
 import { unwrapResult } from "@reduxjs/toolkit";
 
+import LoadingSpinner from "~/components/LoadingSpinner";
 import Pageing from "~/components/Pageing";
 import { registerFirebase } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
@@ -14,9 +15,9 @@ import style from './Register.module.scss'
 import { useState } from "react";
 const cx = classNames.bind(style)
 function Register() {
-
     const dispatch = useDispatch();
     let navigate = useNavigate();
+    const { status } = useSelector(state => state.auth)
     const [avata, setAvata] = useState('/images/avata1.jpg')
     const [values, setValues] = useState({
         username: '',
@@ -91,7 +92,6 @@ function Register() {
         dispatch(registerFirebase(newUserFirebase))
             .then(unwrapResult)
             .then(resp => {
-                console.log(resp)
                 if (resp === -1) {
                     toast.warn(`Account already exists`, {
                         position: "top-right",
@@ -115,49 +115,17 @@ function Register() {
                     // login
                     setTimeout(() => {
                         navigate('/')
-                    }, 2000)
+                    }, 2700)
                 }
             })
-
-        // dispatch(userByEmailFetch(user.email))
-        //     .then(unwrapResult)
-        //     .then(resp => {
-        //         // khong trung tai khoan
-        //         if (resp.length === 0) {
-        //             dispatch(userPost(user))
-        //                 .then(unwrapResult)
-        //                 .then(resp => {
-        //                     toast.success(`Register successful`, {
-        //                         position: "top-right",
-        //                         autoClose: 2000,
-        //                         hideProgressBar: false,
-        //                         closeOnClick: true,
-        //                         pauseOnHover: true,
-        //                         draggable: true,
-        //                         progress: undefined,
-        //                     });
-        //                     // login
-        //                     navigate('/login')
-        //                 })
-        //         } else if (resp.length > 0) {
-        //             toast.warn(`Account already exists`, {
-        //                 position: "top-right",
-        //                 autoClose: 2000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 progress: undefined,
-        //             });
-        //         }
-        //     })
     }
     return (
         <Container className={cx("wrapper")}>
+            {status === 'loading' && <LoadingSpinner />}
             <Pageing pages={[{ title: 'Register', path: 'register' }]} />
             <h1 className={cx("heading")}>Register</h1>
             <Row className="justify-content-around">
-                <Col md={5} sm={12} className={cx("box")}>
+                <Col md={7} sm={12} className={cx("box")}>
                     <h1 className={cx("head")}>Registered Customers</h1>
                     <p className={cx("desc")}>If you have an account, sign in with your email address.</p>
                     <form onSubmit={handleSubmit}>

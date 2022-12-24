@@ -7,7 +7,9 @@ import { useState, useEffect } from "react";
 import { FaFacebookF, FaGooglePlusG } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
+import LoadingSpinner from "~/components/LoadingSpinner";
 import { loginWithFirebase } from "~/components/firebase/config";
 import { setUserInfo } from "~/redux/authSlice";
 import { setUserCart } from "~/redux/userCartSlice";
@@ -21,6 +23,7 @@ function Login() {
     const { pathname } = useLocation();
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { status } = useSelector(state => state.auth)
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
@@ -95,48 +98,13 @@ function Login() {
                     });
                 } else {
                     dispatchUserCart({ ...resp.cart })
-                    toast.success(`Logined successful`, {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
                     navigate('/')
                 }
             })
-        // dispatch(userFetch(userData))
-        //     .then(unwrapResult)
-        //     .then(resp => {
-        //         if (resp[0]) {
-        //             toast.success(`Login successful`, {
-        //                 position: "top-right",
-        //                 autoClose: 2000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 progress: undefined,
-        //             });
-        //             navigate('/')
-        //         } else {
-        //             toast.warn(`Account not found`, {
-        //                 position: "top-right",
-        //                 autoClose: 2000,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 progress: undefined,
-        //             });
-        //         }
-        //     })
-
     }
     return (
         <Container className={cx("wrapper")}>
+            {status === 'loading' && <LoadingSpinner />}
             <Pageing pages={[{ title: 'Login', path: 'login' }]} />
             <h1 className={cx("heading")}>Login</h1>
             <Row className="justify-content-around">

@@ -4,22 +4,30 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive'
 
+import ProductSkeleton from "~/components/ProductSkeleton";
 import Product from "~/components/Product"
 import style from "./Body.module.scss";
 
 const cx = classNames.bind(style)
 function ProductsType({ name, category, img }) {
     const [data, setData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+    let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     useEffect(() => {
-        const fetAPI = async () => {
-            const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/data?categorySlug=${category}&_page=1&_limit=${isTabletOrMobile ? 2 : 4}`)
-            const responce = await responceJSON.json()
-            const { data } = responce
-            setData(data)
-        }
-        fetAPI()
+        const timer = setTimeout(() => {
+            const fetAPI = async () => {
+                const responceJSON = await fetch(`https://json-server-sand.vercel.app/api/data?categorySlug=${category}&_page=1&_limit=${isTabletOrMobile ? 2 : 4}`)
+                const responce = await responceJSON.json()
+                const { data } = responce
+                setData(data)
+                setIsLoading(false)
+            }
+            fetAPI()
+        }, 5)
+
+        return () => clearTimeout(timer)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -36,7 +44,27 @@ function ProductsType({ name, category, img }) {
                 </Col>
                 <Col lg={10} md={9} sm={12} >
                     <Row>
-                        {data.length > 0 && (
+                        {/* {data.length > 0 && (
+                            data.map((ele, index) => (
+                                <Col lg={3} sm={6} xs={6} key={index} >
+                                    <Product
+                                        primary
+                                        data={ele}
+                                    />
+                                </Col>
+                            ))
+                        )} */}
+                        {isLoading ? (
+                            Array(isMobile ? 2 : 4)
+                                .fill()
+                                .map((item, index) => {
+                                    return (
+                                        <Col lg={3} sm={6} xs={6} key={index}  >
+                                            <ProductSkeleton />
+                                        </Col>
+                                    )
+                                })
+                        ) : (
                             data.map((ele, index) => (
                                 <Col lg={3} sm={6} xs={6} key={index} >
                                     <Product

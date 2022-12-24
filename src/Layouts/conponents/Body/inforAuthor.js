@@ -10,10 +10,7 @@ function InforAuthor() {
                 <a href="https://www.facebook.com/theanhnguyenmgt"
                     className={cx("name")}
                     alt="theanh"
-                >
-                    TheAnhNguyen
-                </a>
-                form 22/9/2022.
+                > TheAnhNguyen </a> form 9/2022.
             </div>
         </div>
     );

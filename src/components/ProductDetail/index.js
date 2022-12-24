@@ -13,7 +13,6 @@ import { toast } from "react-toastify"
 import { Formatter } from "../FormatCurrency";
 import { addToCart } from "~/redux/userCartSlice";
 import Button from "../Button";
-import Pageing from "../Pageing";
 import style from './ProductDetail.module.scss'
 const cx = classNames.bind(style)
 
@@ -54,7 +53,6 @@ function ProductDetail({ data }) {
     return (
         <Fragment>
             <Container>
-                <Pageing pages={['Laptops']} />
                 <div className={cx('head')}>
                     <div className={cx('category')}>
                         <Link
@@ -73,7 +71,7 @@ function ProductDetail({ data }) {
                     <div className={cx('control')}>
                         <div className={cx('price')}>
                             <p>On Sale from</p>
-                            <span>{Formatter.format(data.oldPrice)}</span>
+                            <span>{Formatter.format(total)}</span>
                         </div>
                         <div className={cx('quanti')}>
                             <span className={cx('number')}>{qty}</span>

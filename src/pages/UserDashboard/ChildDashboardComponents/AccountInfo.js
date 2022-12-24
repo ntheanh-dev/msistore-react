@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+import LoadingSpinner from "~/components/LoadingSpinner";
 import { getPasswordFromFirebase } from "~/components/firebase/config";
 import { changeUserInfo } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
@@ -12,6 +13,7 @@ const cx = classNames.bind(style)
 function AccountInfo() {
     const dispatch = useDispatch()
     const userInfo = useSelector(state => state.auth)
+    const { status } = useSelector(state => state.auth)
     // check if user login with gg or fb
     const isUserLoginedWithGoogle = userInfo.uid && !userInfo.uid.includes('@')
     const [changeInfo, setChangeInfo] = useState({
@@ -47,8 +49,6 @@ function AccountInfo() {
         else if (type === 'changeAvata' && changeInfo.changeAvata === false) {
             setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: true })
         }
-        // const newUser = { ...value, ...values };
-        // dispatch(userPut(newUser))
         const data = Object.keys(values).reduce((object, key) => {
             if (values[key] !== false && values[key] !== userInfo[key]) {
                 object[key] = values[key]
@@ -92,6 +92,7 @@ function AccountInfo() {
 
     return (
         <div className={cx('wrapper')}>
+            {status === 'loading' && <LoadingSpinner />}
             <div className={cx('title')}>Account Information</div>
             <Row>
                 <Col lg={4}>

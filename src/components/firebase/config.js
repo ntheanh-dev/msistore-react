@@ -1,9 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, getAdditionalUserInfo } from "firebase/auth";
-import { useSelector } from 'react-redux';
 
-import { collection, addDoc, query, where, getDocs, doc, setDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 import { GoogleLogin, FaceBookLogin } from '~/redux/authSlice';
 
 const firebaseConfig = {

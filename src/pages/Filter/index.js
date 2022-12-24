@@ -8,6 +8,7 @@ import { MdSort } from 'react-icons/md';
 import queryString from "query-string"
 import { AiOutlineInbox } from "react-icons/ai";
 
+import LoadingSpinner from "~/components/LoadingSpinner";
 import PaginationProduct from "./PaginationProduct";
 import Product from "~/components/Product";
 import FilterNav from "./FilterNav";
@@ -18,7 +19,7 @@ const cx = classNames.bind(style)
 
 function Filter() {
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false)
     let isMobile = useMediaQuery({ query: '(max-width: 576px)' })
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
@@ -53,6 +54,7 @@ function Filter() {
     useEffect(() => {
         async function fetchAPI() {
             try {
+                setIsLoading(true)
                 const paramstring = queryString.stringify(filter)
                 const requestURL = `https://json-server-sand.vercel.app/api/data?${paramstring}`
                 const response = await fetch(requestURL);
@@ -60,8 +62,10 @@ function Filter() {
                 const { data, pagination } = responseJSON
                 setProduct(data)
                 setPagination(pagination)
+                setIsLoading(false)
             }
             catch (error) {
+                setIsLoading(false)
                 console.log(error)
             }
         }
@@ -71,6 +75,7 @@ function Filter() {
 
     return (
         <Container className={cx('wrapper')}>
+            {isLoading && <LoadingSpinner />}
             <Pageing pages={[{ title: 'Laptops', path: 'filter' }]} />
             <Row>
                 {!isMobile && (
@@ -141,13 +146,12 @@ function Filter() {
                                 </Button>
                             </div>
                         </>
-                    ) : (
+                    ) : (!isLoading &&
                         <div className={cx('nodata')}>
                             <AiOutlineInbox />
                             <h1>No data</h1>
                         </div>
                     )}
-
                 </Col>
             </Row>
         </Container>

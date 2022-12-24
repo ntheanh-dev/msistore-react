@@ -1,10 +1,15 @@
 import React from "react";
 import Slider from "react-slick";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
+import ProductSkeleton from "~/components/ProductSkeleton";
 import Product from "~/components/Product";
 const Carousel = () => {
     const { items } = useSelector(state => state.products)
+
+    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
     var settings = {
         infinite: true,
         slidesToShow: 6,
@@ -35,13 +40,23 @@ const Carousel = () => {
     };
     return (
         <Slider {...settings}>
-            {items.map((ele, index) => (
-                <Product
-                    key={index}
-                    primary
-                    data={ele}
-                />
-            ))}
+            {items ? (
+                items.map((ele, index) => (
+                    <Product
+                        key={index}
+                        primary
+                        data={ele}
+                    />
+                ))
+            ) : (
+                Array(isTabletOrMobile ? 4 : 6)
+                    .fill()
+                    .map((item, index) => {
+                        return (
+                            <ProductSkeleton key={index} />
+                        )
+                    })
+            )}
         </Slider>
     );
 }
