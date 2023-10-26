@@ -1,22 +1,20 @@
 <!-- PROJECT LOGO -->
 <div align="center" id="readme-top">
   <p align="center">
-    <a href="https://msi-atn.netlify.app/">View Demo</a>
+    <a href="https://msi-store.vercel.app">View Demo</a>
   </p>
 </div>
 <!-- ABOUT THE PROJECT -->
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 -   [![React][react.js]][react-url]
 -   [![Bootstrap][bootstrap.com]][bootstrap-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
+
 ### Available Scripts
+
 In the project directory, you can run:
 
 npm start
@@ -52,15 +50,12 @@ You don't have to ever use eject. The curated feature set is suitable for small 
 
 ## Contact
 
-Project Link: [https://github.com/Theanhmgt/misstore-react](https://github.com/Theanhmgt/misstore-react)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Facebook: [Nguyễn Thế Anh](https://www.facebook.com/theanhnguyenmgt)
+Linkedin: [The Anh Nguyen](https://www.linkedin.com/in/theanh-ta/)
 
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 -   [Choose an Open Source License](https://choosealicense.com)
 -   [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
