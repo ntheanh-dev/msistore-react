@@ -1,5 +1,4 @@
 import classNames from "classnames/bind";
-import PropTypes from 'prop-types';
 import { BsFillStarFill, BsFillCheckCircleFill, BsFillTelephoneXFill, BsFillBarChartFill } from "react-icons/bs";
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -20,19 +19,21 @@ const cx = classNames.bind(style)
 
 function Product({
     data,
+    quanti,
     primary,
     isHorver,
     isInCart,
-    isSerachResult
+    isSerachResult,
+    isCheckout
 }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-    const { uid } = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.auth)
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     const handleAddToCart = (data, e) => {
         e.stopPropagation()
-        if (uid) {
+        if (user.id) {
             dispath(addToCart({
                 ...data
             }))
@@ -61,12 +62,12 @@ function Product({
         dispath(decreaseCart(data))
     }
     const handleClickItem = (id) => {
-        navigate(`/product/${id}`)
+        navigate(`/products/${id}`)
     }
     // isPrimary
     const stars = [];
     for (let i = 0; i < 5; i++) {
-        if (i < data.review) {
+        if (i < 3) {
             stars.push('star-color')
         } else {
             stars.push('star-no-color')
@@ -81,16 +82,16 @@ function Product({
                     onClick={() => handleClickItem(data.id)}
                 >
                     <>
-                        {data.condition.includes("in stock") ? (
+                        {data.is_active ? (
                             <div>
                                 <BsFillCheckCircleFill className={cx('stock-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
+                                <div className={cx('tilte')}>{'in stock'}</div>
                             </div>
 
                         ) : (
                             <div>
                                 <BsFillTelephoneXFill className={cx('phone-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
+                                <div className={cx('tilte')}>{'check availability'}</div>
                             </div>
                         )
                         }
@@ -106,15 +107,15 @@ function Product({
                                 }
                             </div>
                             <div className={cx("review-quanti")}>
-                                Reviews ({data.review})
+                                Reviews ({20})
                             </div>
                         </div>
                         <div className={cx("name")}>
-                            {data.title}
+                            {data.description}
                         </div>
                         <div className={cx("prices")}>
-                            <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
-                            <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
+                            <div className={cx("old")}>{Formatter.format(data.old_price)}</div>
+                            <div className={cx("new")}>{Formatter.format(data.new_price)}</div>
                         </div>
                     </>
                     <div className={cx('layout-hover')}>
@@ -138,7 +139,7 @@ function Product({
                     <div className={cx('img-isHover')}>
                         <img src={data.images[0]} alt="img" />
                     </div>
-                    <div className={cx('name-isHover')}>{data.title}</div>
+                    <div className={cx('name-isHover')}>{data.description}</div>
                     <div className={cx('actions')}>
                         <IoMdClose className={cx('icon-isHover')} onClick={(e) => handleRemove(data, e)} />
                         <TiPencil className={cx('icon-isHover')} />
@@ -152,12 +153,12 @@ function Product({
                     </Col>
 
                     <Col md={4} className={cx('name-isInCart')}>
-                        <span>{data.title}</span>
+                        <span>{data.description}</span>
                     </Col>
 
                     <Col md={2} className={cx('price-isInCart')}>
                         {isMobile && <div className={cx('priceInMobile')}>Price</div>}
-                        {Formatter.format(data.newPrice)}
+                        {Formatter.format(data.new_price)}
                     </Col>
 
                     <Col md={1} className={cx('quanti-isInCart')}>
@@ -170,7 +171,7 @@ function Product({
 
                     <Col md={2} className={cx('total-isInCart')}>
                         {isMobile && <div className={cx('totalInMobile')}>Subtotal</div>}
-                        <div>{Formatter.format(data.newPrice * data.cartQuantity)}</div>
+                        <div>{Formatter.format(data.new_price * data.cartQuantity)}</div>
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
@@ -183,20 +184,20 @@ function Product({
             {isSerachResult && (
                 <div className={cx('wrapper-isSearch')} onClick={() => handleClickItem(data.id)}>
                     <div className={cx('conditon')}>
-                        {data.condition.includes("in stock")
+                        {data.is_active
                             ? <div>
                                 <BsFillCheckCircleFill className={cx('stock-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
+                                <div className={cx('tilte')}>{'in stock'}</div>
                             </div>
                             : <div>
                                 <BsFillTelephoneXFill className={cx('phone-icon')} />
-                                <div className={cx('tilte')}>{data.condition}</div>
+                                <div className={cx('tilte')}>{'check availability'}</div>
                             </div>
                         }
                     </div>
                     <div className={cx('content')}>
                         <div className={cx('left-isSearch')}>
-                            <div className={cx('img-isSearch')} ><img src={`/${data.images[0]}`} alt="img" /></div>
+                            <div className={cx('img-isSearch')} ><img src={data.images[0]} alt="img" /></div>
                             <div className={cx("reviews")}>
                                 <div className={cx("stars")}>
                                     {
@@ -206,7 +207,7 @@ function Product({
                                     }
                                 </div>
                                 <div className={cx("review-quanti")}>
-                                    Reviews ({data.review})
+                                    Reviews ({20})
                                 </div>
                             </div>
                         </div>
@@ -216,14 +217,25 @@ function Product({
                                 {data.name}
                             </div>
                             <div className={cx("title-isSearch")}>
-                                {data.title}
+                                {data.description}
                             </div>
                             <div className={cx("prices-isSearch")}>
-                                <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
-                                <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
+                                <div className={cx("old")}>{Formatter.format(data.old_price)}</div>
+                                <div className={cx("new")}>{Formatter.format(data.new_price)}</div>
                             </div>
                             <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
                         </div>
+                    </div>
+                </div>
+            )}
+            {isCheckout && (
+                <div className={cx('product-wrapper')} onClick={() => handleClickItem(data.id)}>
+                    <div className={cx('img-incheckout')}>
+                        <img src={data.images[0]} />
+                    </div>
+                    <div className={cx('detail')}>
+                        <span className={cx('product-description')}>{data.description}</span>
+                        <span>{`Qty:${quanti} $${quanti * data.new_price}.00`}</span>
                     </div>
                 </div>
             )}
@@ -231,11 +243,5 @@ function Product({
     );
 }
 
-Product.propTypes = {
-    data: PropTypes.object.isRequired,
-    primary: PropTypes.bool,
-    isHorver: PropTypes.bool,
-    isInCart: PropTypes.bool
-}
 
 export default memo(Product);

@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import Tippy from '@tippyjs/react/headless';
 import { memo, useState } from "react";
 
-import { LogOut } from "~/components/firebase/config";
 import { setLogoutUserInfo } from "~/redux/authSlice";
 import { setLogoutCart } from "~/redux/userCartSlice";
 import style from './Navbar.module.scss'
@@ -26,12 +25,12 @@ function Account({ user }) {
             path: '/register'
         },
         {
-            title: user.uid ? "Log out" : "Sign in",
-            path: user.uid ? "/" : "/login"
+            title: user.id ? "Log out" : "Sign in",
+            path: user.id ? "/" : "/login"
         },
     ]
 
-    if (user.uid) {
+    if (user.id) {
         const hasUser = [
             {
                 title: "My Account",
@@ -54,7 +53,8 @@ function Account({ user }) {
 
     const handleClick = (title) => {
         if (title === 'Log out') {
-            LogOut(dispathLogoutUserInfo, dispathLogoutCart)
+            dispathLogoutUserInfo()
+            dispathLogoutCart()
         }
         if (visible) {
             hide()
@@ -84,12 +84,12 @@ function Account({ user }) {
                 </div>
             )}
         >
-            {user.uid ? (
+            {user.id ? (
                 <div
                     className={cx('avata')}
                     onClick={() => { visible ? hide() : show() }}
                 >
-                    <img src={user.photoURL} alt='alt' />
+                    <img src={user.image} alt='alt' />
                 </div>
             ) : (
                 <div onClick={() => navigate('/login')} className={cx('icon')}>

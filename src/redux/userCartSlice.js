@@ -1,13 +1,15 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { updateCartData } from "~/components/firebase/config";
+import cookie from "react-cookies";
 // import { auth, db } from "~/components/firebase/config";
+const INIT_CART = {
+    cartItems: [],
+    cartTotalAmount: 0,
+    cartTotalQuantity: 0,
+}
 export const userCartSlice = createSlice({
     name: "usercart",
-    initialState: JSON.parse(localStorage.getItem("localCart")) || {
-        cartItems: [],
-        cartTotalAmount: 0,
-        cartTotalQuantity: 0,
-    },
+    initialState: cookie.load('cart') || INIT_CART,
     reducers: {
         setUserCart: (state, action) => {
             state.cartItems = action.payload.cartItems
@@ -16,7 +18,7 @@ export const userCartSlice = createSlice({
 
             const currentCart = current(state)
             const data = getTotalProducts(currentCart)
-            localStorage.setItem("localCart", JSON.stringify(data));
+            cookie.save('cart', data)
         },
         addToCart: (state, action) => {
             const itemIndex = state.cartItems.findIndex(
@@ -31,8 +33,8 @@ export const userCartSlice = createSlice({
 
             const currentCart = current(state)
             const data = getTotalProducts(currentCart)
-            localStorage.setItem("localCart", JSON.stringify(data));
-            updateCartData(data);
+            cookie.save('cart', data)
+
         },
         removeCart: (state, action) => {
             const newCart = state.cartItems.filter(
@@ -42,8 +44,8 @@ export const userCartSlice = createSlice({
 
             const currentCart = current(state)
             const data = getTotalProducts(currentCart)
-            localStorage.setItem("localCart", JSON.stringify(data));
-            updateCartData(data);
+            cookie.save('cart', data)
+
         },
         decreaseCart: (state, action) => {
             const itemIndex = state.cartItems.findIndex(
@@ -60,8 +62,8 @@ export const userCartSlice = createSlice({
 
             const currentCart = current(state)
             const data = getTotalProducts(currentCart)
-            localStorage.setItem("localCart", JSON.stringify(data));
-            updateCartData(data);
+            cookie.save('cart', data)
+
         },
         increaseCart: (state, action) => {
             const itemIndex = state.cartItems.findIndex(
@@ -70,46 +72,29 @@ export const userCartSlice = createSlice({
             state.cartItems[itemIndex].cartQuantity += 1;
             const currentCart = current(state)
             const data = getTotalProducts(currentCart)
-            localStorage.setItem("localCart", JSON.stringify(data));
-            updateCartData(data);
-
+            cookie.save('cart', data)
         },
         clearCart: (state) => {
-            const initialCart = {
-                cartItems: [],
-                cartTotalAmount: 0,
-                cartTotalQuantity: 0,
-            }
-            state.cartItems = initialCart.cartItems
-            state.cartTotalAmount = initialCart.cartTotalAmount
-            state.cartTotalQuantity = initialCart.cartTotalQuantity
-
-            localStorage.setItem("localCart", JSON.stringify(initialCart));
-            updateCartData(initialCart);
+            Object.assign(state, INIT_CART)
+            cookie.remove('cart')
         },
         setLogoutCart: (state) => {
-            const initialCart = {
-                cartItems: [],
-                cartTotalAmount: 0,
-                cartTotalQuantity: 0,
-            }
-            state.cartItems = initialCart.cartItems
-            state.cartTotalAmount = initialCart.cartTotalAmount
-            state.cartTotalQuantity = initialCart.cartTotalQuantity
-
-            localStorage.removeItem("localCart");
+            Object.assign(state, INIT_CART)
+            cookie.remove('cart')
         },
         getTotal: (state) => {
             const { total, quanti } = state.cartItems.reduce(
                 (acc, curr) => {
-                    const { newPrice, cartQuantity } = curr
-                    const toltalPrice = newPrice * cartQuantity
+                    const { new_price, cartQuantity } = curr
+                    const toltalPrice = Number(new_price) * cartQuantity
                     acc.total += toltalPrice
                     acc.quanti += cartQuantity
                     return acc
                 }, { total: 0, quanti: 0 })
             state.cartTotalAmount = total
             state.cartTotalQuantity = quanti
+
+            cookie.save('cart', current(state))
         }
     }
 })
@@ -117,8 +102,8 @@ export const userCartSlice = createSlice({
 const getTotalProducts = (cart) => {
     const { total, quanti } = cart.cartItems.reduce(
         (acc, curr) => {
-            const { newPrice, cartQuantity } = curr
-            const toltalPrice = newPrice * cartQuantity
+            const { new_price, cartQuantity } = curr
+            const toltalPrice = Number(new_price) * cartQuantity
             acc.total += toltalPrice
             acc.quanti += cartQuantity
             return acc
@@ -126,6 +111,16 @@ const getTotalProducts = (cart) => {
     cart.cartTotalAmount = total
     cart.cartTotalQuantity = quanti
     return cart
+}
+
+export const orderItemDjango = (items) => {
+    const result = items.map(ele => {
+        return {
+            id: ele.id,
+            quantity: ele.cartQuantity
+        }
+    })
+    return result
 }
 
 export const { setUserCart, getTotal, addToCart, removeCart, increaseCart, clearCart, setLogoutCart, decreaseCart } = userCartSlice.actions

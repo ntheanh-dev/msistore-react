@@ -42,7 +42,7 @@ function Review() {
                 </div>
             </div>
             <div className={cx('bottom')}>
-                <Button outline to={"comming"}>Leave us a review </Button>
+                <Button outline to={"contactus"}>Leave us a review </Button>
                 <div className={cx('changeReview')}>
                     <div className={(review === reviewData[0]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[0]))}></div>
                     <div className={(review === reviewData[1]) ? cx('review-active') : ' '} onClick={() => (setReview(reviewData[1]))}></div>

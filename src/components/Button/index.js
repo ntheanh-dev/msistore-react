@@ -18,6 +18,7 @@ function Button({
 
     small = false,
     large = false,
+    fullwitdh = false,
 
     className,
 
@@ -58,7 +59,9 @@ function Button({
         disable,
 
         small,
-        large
+        large,
+
+        fullwitdh
     })
 
     if (to) {

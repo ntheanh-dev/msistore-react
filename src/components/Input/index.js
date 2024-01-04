@@ -6,7 +6,7 @@ import style from './Input.module.scss'
 const cx = classNames.bind(style)
 function FormInput(props) {
     const [focused, setFocused] = useState(false);
-    const { label, onChange, id, errormessage, type, ...inputProps } = props
+    const { label, onChange, onClick, id, errormessage, type, avatar, ...inputProps } = props
     const [showPassword, setShowPassword] = useState(type)
     const handleShowPassword = () => {
         setShowPassword(showPassword === 'password' ? 'text' : 'password')
@@ -28,28 +28,49 @@ function FormInput(props) {
                     <br />
                 </>
             }
-            <input
-                {...inputProps}
-                type={showPassword}
-                onChange={onChange}
-                className={cx('input')}
-                onBlur={handleForcus}
-                ref={inputRef}
-                onFocus={() =>
-                    inputProps.name === "confirmPassword" && setFocused(true)
-                }
-                focused={focused.toString()}
-            />
+            {type === "textarea" ? (
+                <>
+                    <textarea
+                        className={cx('textarea')}
+                        name={inputProps.name}
+                        rows="7"
+                        onChange={onChange}
+                        onClick={onClick}
+                        ref={inputRef}
+                        focused={focused.toString()}
+                        defaultValue={'Jot us a note and we’ll get back to you as quickly as possible'}
+                    >
 
-            <span>{errormessage}</span>
+                    </textarea>
+                    <span>{errormessage}</span>
+                </>
+            ) : (
+                <>
+                    <input
+                        {...inputProps}
+                        type={showPassword}
+                        onChange={onChange}
+                        className={cx('input')}
+                        onBlur={handleForcus}
+                        ref={type === "file" ? avatar : inputRef}
+                        onFocus={() =>
+                            inputProps.name === "confirmPassword" && setFocused(true)
+                        }
+                        focused={focused.toString()}
+                    />
 
-            {type === 'password' && props.value && (
-                <div
-                    className={cx('icon', !label && 'icon-without-lable')}
-                    onClick={handleShowPassword}
-                >
-                    {showPassword === 'password' ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                </div>
+                    <span>{errormessage}</span>
+
+                    {type === 'password' && props.value && (
+                        <div
+                            className={cx('icon', !label && 'icon-without-lable')}
+                            onClick={handleShowPassword}
+                        >
+                            {showPassword === 'password' ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </div>
+                    )}
+                </>
+
             )}
         </div>
     );

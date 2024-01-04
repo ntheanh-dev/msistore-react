@@ -62,7 +62,44 @@
     font-weight: 600;
     line-height: 36px;
     color: var(--black);
-    border-bottom: 1px solid var(--gray8C8);
+}
+.border-b {
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #CCCCCC !important;
+}
+.right-title {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 5px 0 25px;
+
+    & > span {
+        color: #000;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include media-breakpoint-down(lg) {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 0px;
+            text-align: left;
+        }
+    }
+
+    & > svg {
+        font-size: 18px;
+        color: #000;
+    }
+}
+.form-discount {
+    padding: 5px 0 20px;
+
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 18px;
 }
 .menu {
     @include media-breakpoint-down(md) {

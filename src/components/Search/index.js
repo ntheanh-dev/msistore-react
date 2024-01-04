@@ -1,27 +1,42 @@
 import { AiOutlineClose } from "react-icons/ai"
 import { BiSearchAlt } from "react-icons/bi"
 import classNames from "classnames/bind";
-import { useState, useRef, memo } from "react"
+import { useState, useRef, memo, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 import Product from "../Product";
-import { ProductBySearch } from "../../Layouts/conponents/Navbar/ProductBySearch";
-import { setSerach } from "~/redux/filterSlice";
 import style from './Search.module.scss'
+import API, { endpoints } from "~/configs/API";
+import useDebounce from "~/hooks/useDebounce";
 const cx = classNames.bind(style)
 function Search() {
     const [searchValue, setSearchValue] = useState('')
+    const [searchResult, setSearchResual] = useState([])
+    const debounceValue = useDebounce(searchValue, 600)
+
+    useEffect(() => {
+        if (!debounceValue.trim()) {
+            setSearchResual([])
+            return
+        }
+        const fetchApi = async () => {
+            const res = await API.get(endpoints['product_filter'](`kw=${debounceValue}`))
+            setSearchResual(res.data.results)
+        }
+        fetchApi()
+    }, [debounceValue])
     const inputRef = useRef()
-    const dispatch = useDispatch()
-    const productAfter = useSelector(ProductBySearch)
 
     const handleOnchange = (e) => {
-        setSearchValue(e.target.value)
-        dispatch(setSerach(e.target.value))
+        const searchValues = e.target.value;
+        if (!searchValues.startsWith(' ')) {
+            setSearchValue(searchValues);
+        }
     }
 
     const handleClear = () => {
         setSearchValue('');
+        setSearchResual([])
         inputRef.current.focus();
     }
 
@@ -41,11 +56,11 @@ function Search() {
                     <AiOutlineClose />
                 </button>
             )}
-            {searchValue.length > 0 && !!productAfter[0] &&
+            {searchValue.length > 0 && searchResult.length > 0 &&
                 <div className={cx('wrapper')}
                     onClick={() => setSearchValue('')}
                 >
-                    {productAfter.map((product) => (
+                    {searchResult.map((product) => (
                         <Product key={product.id} isSerachResult data={product} />
                     ))}
                 </div>

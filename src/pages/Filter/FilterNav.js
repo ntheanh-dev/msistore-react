@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { Row, Col } from "react-bootstrap";
@@ -13,117 +13,128 @@ import gigabyte from '~/assets/images/brands/gigabyte.png';
 import hp from '~/assets/images/brands/hp.png';
 import razez from '~/assets/images/brands/razez.png';
 import roccat from '~/assets/images/brands/roccat.png';
+import queryString from "query-string"
+import { useNavigate } from "react-router-dom";
+import API, { endpoints } from "~/configs/API";
+
 const cx = classNames.bind(style)
 
 function FilterNav({ filter, setFilter }) {
     const isMobile = useMediaQuery({ query: '(max-width: 576px)' })
+    let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+    const navigate = useNavigate();
     const [tempFilter, setTempFilter] = useState(filter)
-    const handleSetFilter = () => {
-        const { _color, _category, ...otherFilter } = tempFilter
-        setFilter(otherFilter)
+    const [cate, setCate] = useState([])
+    const INIT_TOGGLE_LIST = {
+        category: false,
+        price: false,
+        color: false
     }
-    const handleSetPriceFilter = (e) => {
-        setTempFilter({
-            ...tempFilter,
-            newPrice_gte: e.target.value - 100,
-            newPrice_lte: e.target.value
-        })
-        setToogleList({ ...toogleList, price: !toogleList.price })
+    const [toogleList, setToogleList] = useState(INIT_TOGGLE_LIST)
+
+    const handleApplyFilter = () => {
+        const { color, ...otherFilter } = filter
+        const paramstring = queryString.stringify(otherFilter)
+        setFilter(tempFilter)
+        setToogleList(INIT_TOGGLE_LIST)
+        navigate(`/filter/?${paramstring}`)
     }
+
+    const handleSetFilter = (e, type) => {
+        if (type === 'price') {
+            const prices = e.target.text.split(' - ')
+            console.log(e.target.fromPrice)
+            // setTempFilter({
+            //     ...filter,
+            //     fromPrice: Number(prices[0].substring(1)),
+            //     toPrice: Number(prices[1].substring(1))
+            // })
+            setToogleList({ ...toogleList, price: false })
+        } else if (type === 'cate') {
+            setTempFilter({
+                ...filter,
+                cateId: e.target.value
+            })
+            setToogleList({ ...toogleList, category: false })
+        }
+    }
+
     const handleClearFilter = () => {
-        const { _color, _category, newPrice_gte, newPrice_lte, ...otherFilter } = tempFilter
-        setTempFilter(otherFilter)
-        setFilter(otherFilter)
+        setFilter({
+            page: 1,
+            page_size: (isMobile && 12) || (isTabletOrMobile && 9) || 12
+        })
+        setTempFilter({
+            page: 1,
+            page_size: (isMobile && 12) || (isTabletOrMobile && 9) || 12
+        })
+        setToogleList(INIT_TOGGLE_LIST)
     }
-    const getQtyFilter = (filter) => {
+
+    const getNumFilter = (filter) => {
         return Object.keys(filter).reduce((agr, key) => {
-            if (key.includes('_gte') || key.includes('_color') || key.includes('_category')) {
+            if (key.includes('fromPrice') || key.includes('cateId') || key.includes('color')) {
                 return agr + 1
             }
             return agr
         }, 0)
     }
-    const [toogleList, setToogleList] = useState({
-        category: false,
-        price: false,
-        color: false
-    })
-    const categoryList = [
-        {
-            title: 'CUSTOM PCS',
-            value: 'custompcs',
-            id: 1
-        },
-        {
-            title: 'MSI ALL-IN-ONE',
-            value: 'masiallinone',
-            id: 2
-        }
-    ]
+
     const priceList = [
         {
-            title: '$0.00 - $100.00',
-            value: 100,
+            title: '$0.00 - $300.00',
             id: 3
         },
         {
-            title: '$100.00 - $200.00',
-            value: 200,
+            title: '$300.00 - $600.00',
             id: 4
         },
         {
-            title: '$200.00 - $300.00',
-            value: 300,
+            title: '$600.00 - $900.00',
             id: 5
         },
         {
-            title: '$300.00 - $400.00',
-            value: 400,
+            title: '$900.00 - $1.200.00',
+            id: 99
+        },
+        {
+            title: '$1.200.00 - $.1500.00',
             id: 6
         },
         {
-            title: '$400.00 - $500.00',
-            value: 500,
+            title: '$1.500.00 - $1.800.00',
             id: 7
         },
         {
-            title: '$500.00 - $600.00',
-            value: 600,
+            title: '$1.800.00 - $2.100.00',
             id: 8
         },
         {
-            title: '$600.00 - $700.00',
-            value: 700,
+            title: '$2.100.00 - $2.500.00',
             id: 9
         },
         {
-            title: '$700.00 - $800.00',
-            value: 800,
+            title: '$2.500.00 - $2.800.00',
             id: 10
         },
         {
-            title: '$800.00 - $900.00',
-            value: 900,
+            title: '$2.800.00 - $3.100.00',
             id: 11
         },
         {
-            title: '$900.00 - $1.000.00',
-            value: 1000,
+            title: '$3.100.00 - $3.400.00',
             id: 12
         },
         {
-            title: '$1.000.00 - $1.100.00',
-            value: 1100,
+            title: '$3.400.00 - $3.700.00',
             id: 13
         },
         {
-            title: '$1.100.00 - $1.200.00',
-            value: 1200,
+            title: '$3.700.00 - $4.000.00',
             id: 14
         },
         {
-            title: '$1.200.00 - $1.300.00',
-            value: 1300,
+            title: '$4.000.00 And Above',
             id: 15
         }
     ]
@@ -153,6 +164,17 @@ function FilterNav({ filter, setFilter }) {
             href: "https://www.adata.com/vn/",
         }
     ]
+    useEffect(() => {
+        const fetchAPI = async () => {
+            try {
+                const res = await API.get(endpoints['category'])
+                setCate(res.data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchAPI()
+    }, [])
     return (
         <>
             <div className={cx('background')} >
@@ -164,18 +186,16 @@ function FilterNav({ filter, setFilter }) {
                     onClick={() => setToogleList({ ...toogleList, category: !toogleList.category })}
                 >
                     <h2>Category</h2>
-                    {toogleList.category ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+                    {toogleList?.category ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
                 </div>
-                {toogleList.category && categoryList.map(ele => (
+                {toogleList.category && cate?.map(ele => (
                     <option
                         key={ele.id}
-                        value={ele.value}
-                        onClick={e => setTempFilter({
-                            ...tempFilter,
-                            _category: e.target.value
-                        })}
+                        onClick={e => handleSetFilter(e, 'cate')}
+                        fromPrice={2300}
+                        value={ele.id}
                     >
-                        {ele.title}
+                        {ele.name}
                     </option>
                 ))
                 }
@@ -191,8 +211,7 @@ function FilterNav({ filter, setFilter }) {
                 {toogleList.price && priceList.map(ele => (
                     <option
                         key={ele.id}
-                        value={ele.value}
-                        onClick={e => handleSetPriceFilter(e)}
+                        onClick={e => handleSetFilter(e, 'price')}
                     >
                         {ele.title}
                     </option>
@@ -211,22 +230,22 @@ function FilterNav({ filter, setFilter }) {
                             type="color"
                             defaultValue='black'
                             onClick={e => setTempFilter({
-                                ...tempFilter,
-                                _color: e.target.value
+                                ...filter,
+                                color: e.target.value
                             })}
                         />
                         <input
                             type="color"
                             defaultValue="#ff0000"
                             onClick={e => setTempFilter({
-                                ...tempFilter,
-                                _color: e.target.value
+                                ...filter,
+                                color: e.target.value
                             })}
                         />
                     </div>
                 )}
                 {isMobile && <Button outline onClick={handleClearFilter}>Clear Filter</Button>}
-                <Button primary onClick={handleSetFilter} >Apply filters {getQtyFilter(tempFilter) > 0 && `( ${getQtyFilter(tempFilter)} )`} </Button>
+                <Button primary onClick={handleApplyFilter}>Apply filters {getNumFilter(tempFilter) > 0 && `( ${getNumFilter(tempFilter)} )`} </Button>
             </div>
             {!isMobile && (
                 <>

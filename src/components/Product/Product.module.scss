@@ -165,6 +165,8 @@
 .img-isHover {
     height: 65px;
     width: 220px;
+    display: flex;
+    align-items: center;
 }
 
 .name-isHover {
@@ -201,8 +203,9 @@
     padding-bottom: 20px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--gray8C8);
+    // border-bottom: 1px solid var(--gray8C8);
     color: var(--black);
+    position: relative;
     cursor: pointer;
     @include media-breakpoint-down(lg) {
         height: 125px;
@@ -213,6 +216,17 @@
 
     & + div {
         margin-top: 20px;
+    }
+
+    & ::before {
+        content : "";
+        position: absolute;
+        left    : 50%;
+        bottom  : 0;
+        height  : 1px;
+        width   : 95%;  /* or 100px */
+        transform: translateX(-50%);
+        border-bottom: 1px solid var(--gray8C8);
     }
 }
 .img-isInCart {
@@ -364,4 +378,36 @@
     & > div {
         margin-right: 12px;
     }
+}
+///in checkout page
+.product-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    cursor: pointer;
+}
+
+.img-incheckout {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 100px !important;
+    margin: 0 auto;
+
+    @include media-breakpoint-down(lg) {
+        width: 200px !important;
+    }
+    @include media-breakpoint-down(md) {
+        width: 250px !important;
+    }
+}
+.product-description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--black);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }

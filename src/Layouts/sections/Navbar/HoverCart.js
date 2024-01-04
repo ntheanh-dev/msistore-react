@@ -49,7 +49,7 @@ function Hovercart({ cart, hasUser }) {
                                 ))
                             )}
                         </div>
-                        <Button primary to={hasUser ? "/yourcart" : '/login'} >Go to Checkout</Button>
+                        <Button primary to={hasUser ? "/checkout" : '/login'} >Go to Checkout</Button>
                     </div>
                 )}
             >

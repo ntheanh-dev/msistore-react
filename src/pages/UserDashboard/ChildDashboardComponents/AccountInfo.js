@@ -1,90 +1,129 @@
 import classNames from "classnames/bind";
 import style from "./ChildDashboardComponents.mobule.scss"
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import LoadingSpinner from "~/components/LoadingSpinner";
 import { getPasswordFromFirebase } from "~/components/firebase/config";
-import { changeUserInfo } from "~/redux/authSlice";
+import { changePassword, changeUserInfo, update } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import cookie from "react-cookies";
+import { unwrapResult } from "@reduxjs/toolkit";
+import LoadingSpinner from "~/components/LoadingSpinner";
+import Dialog from "~/components/Dialog";
+import { Toast } from "~/configs/Toast";
 const cx = classNames.bind(style)
 function AccountInfo() {
     const dispatch = useDispatch()
-    const userInfo = useSelector(state => state.auth)
-    const { status } = useSelector(state => state.auth)
+    const { user, status } = useSelector(state => state.auth)
     // check if user login with gg or fb
-    const isUserLoginedWithGoogle = userInfo.uid && !userInfo.uid.includes('@')
-    const [changeInfo, setChangeInfo] = useState({
-        changeUsername: false,
-        changePassword: false,
-        changeAvata: false
-    })
-    const [values, setValues] = useState({
-        displayName: userInfo.displayName,
-        password: false,
-        photoURL: userInfo.photoURL
-    })
-    useEffect(() => {
-        getPasswordFromFirebase()
-            .then(resp => {
-                setValues({
-                    ...values,
-                    password: resp !== -1 ? resp : false
-                })
-            })
-            .catch(e => {
-                console.log(e)
-            })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    const handleChangeInfo = (type) => {
-        if (type === 'changeUsername' && changeInfo.changeUsername === false) {
-            setChangeInfo({ changeUsername: true, changePassword: false, changeAvata: false })
-        }
-        else if (type === 'changePassword' && changeInfo.changePassword === false) {
-            setChangeInfo({ changeUsername: false, changePassword: true, changeAvata: false })
-        }
-        else if (type === 'changeAvata' && changeInfo.changeAvata === false) {
-            setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: true })
-        }
-        const data = Object.keys(values).reduce((object, key) => {
-            if (values[key] !== false && values[key] !== userInfo[key]) {
-                object[key] = values[key]
+    const isUserLoginedWithGoogle = false
+    const [editInfo, setEditInfo] = useState(false)
+    const [editPassword, setEditPassword] = useState(false)
+    const [editAvata, setEditAvatar] = useState(false)
+
+    const [values, setValues] = useState({ ...user, old_password: 'Theanh30', new_password: 'Theanh28' })
+
+    const handleChangeInfo = () => {
+        if (editInfo) {
+            if (values.first_name && values.last_name && values.email) {
+                const isEdited = (values.first_name !== user.first_name) ||
+                    (values.last_name !== user.last_name) ||
+                    (values.email !== user.email) ? true : false
+                if (isEdited) {
+                    const { password, ...newUser } = values
+                    var form_data = new FormData();
+                    for (var k in newUser) {
+                        form_data.append(k, newUser[k]);
+                    }
+                    dispatch(update(form_data))
+                        .then(unwrapResult)
+                        .then(res => {
+                            Toast('success', 'Update successfully')
+                            setEditInfo(false)
+                        })
+                } else {
+                    Toast('warn', `Please fill with new information`)
+                }
+            } else {
+                Toast('warn', `Please fill with correct information`)
             }
-            return object
-        }, {})
-        if (Object.keys(data).length > 0) {
-            dispatch(changeUserInfo({
-                ...data,
-                uid: userInfo.uid
-            }))
-            setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: false })
+        } else {
+            setEditInfo(true)
         }
     }
-    const inputs = [
+
+    const handleChangePassword = () => {
+        if (editPassword) {
+            var form_data = new FormData();
+            for (var k in values) {
+                form_data.append(k, values[k]);
+            }
+            dispatch(changePassword(form_data))
+                .then(unwrapResult)
+                .then(res => {
+                    Toast('success', 'Update successfully')
+                })
+        } else {
+            setEditPassword(true)
+        }
+    }
+
+    const handleClose = (type) => {
+        if (type === 'editInfo') {
+            setEditInfo(false)
+        } else if (type === 'editPassword') {
+            setEditPassword(false)
+        }
+        setValues({ ...user, old_password: 'Theanh25', new_password: 'Theanh30' })
+    }
+
+    const INPUT_INFO = [
         {
-            id: 1,
-            name: "displayName",
+            name: "first_name",
             type: "text",
-            placeholder: "Username",
-            label: false,
-            errormessage: "Username should be 3-16 characters and shouldn't include any special character!",
-            pattern: "^[A-Za-z0-9]{3,16}$",
+            label: "First name",
+            errormessage: "First name should be 3-16 characters and shouldn't include any special character!",
+            pattern: "^([a-z]+)((\s{1}[a-z]+){1,})$",
             required: true,
         },
         {
-            id: 2,
-            name: "password",
+            name: "last_name",
+            type: "text",
+            errormessage: "Last name should be 3-16 characters",
+            label: "Last name",
+            pattern: "^([a-z]+)((\s{1}[a-z]+){1,})$",
+            required: true,
+        },
+        {
+            name: "email",
+            type: "email",
+            placeholder: "Your email",
+            label: "Email",
+            errormessage: "It should be a valid email address",
+            required: true,
+        },
+    ]
+    const INPUT_PASSWORD = [
+        {
+            name: "old_password",
             type: "password",
-            placeholder: "Your password",
-            label: false,
+            label: "Current password",
             errormessage: "Password should be 8-20 characters and include at least 1 number",
             // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true,
-        }
+        },
+        {
+            name: "new_password",
+            type: "password",
+            label: "New password",
+            errormessage: "Password should be 8-20 characters and include at least 1 number",
+            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            required: true,
+        },
+
     ]
     const onChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -92,90 +131,91 @@ function AccountInfo() {
 
     return (
         <div className={cx('wrapper')}>
-            {status === 'loading' && <LoadingSpinner />}
+            {status === 'pending' && <LoadingSpinner />}
             <div className={cx('title')}>Account Information</div>
             <Row>
                 <Col lg={4}>
                     <div className={cx('sub-title')}>Contact Information</div>
                     <div className={cx('body')}>
-                        {changeInfo.changeUsername ? (
-                            <form>
-                                <FormInput
-                                    {...inputs[0]}
-                                    value={values[inputs[0].name]}
-                                    onChange={onChange}
-                                />
-                            </form>
-                        ) : (
-                            <div className={cx('content')}>{values.displayName}</div>
+                        {!editPassword && (
+                            editInfo ? (
+                                <form >
+                                    {INPUT_INFO.map((ele, index) => (
+                                        <FormInput
+                                            {...ele}
+                                            key={index}
+                                            value={values[ele.name]}
+                                            onChange={onChange}
+                                        />
+                                    ))}
+                                </form>
+                            ) : (
+                                <>
+                                    <div className={cx('content')}>{`${values.first_name} ${values.last_name}`}</div>
+                                    <div className={cx('content')}>{user.email}</div>
+                                </>
+                            )
                         )}
-                        {changeInfo.changePassword ? (
+                        {editPassword && (
                             <form>
-                                <FormInput
-                                    {...inputs[1]}
-                                    value={values[inputs[1].name]}
-                                    onChange={onChange}
-                                />
+                                {INPUT_PASSWORD.map((ele, index) => (
+                                    <FormInput
+                                        key={index}
+                                        {...ele}
+                                        value={values[ele.name]}
+                                        onChange={onChange}
+                                    />
+                                ))}
                             </form>
-                        ) : (
-                            <div className={cx('content')}>{userInfo.email}</div>
                         )}
                     </div>
                     <div className={cx('change-info')}>
-                        <span onClick={() => handleChangeInfo('changeUsername')}>{changeInfo.changeUsername ? 'Save' : 'Edit'}</span>
-                        <span
-                            onClick={() => handleChangeInfo('changePassword')}
-                            className={cx(isUserLoginedWithGoogle && 'disible-edit')}
-                        >
-                            {changeInfo.changePassword ? 'Save' : 'Change password'}
-                        </span>
-                        {changeInfo.changeUsername && (
-                            <span onClick={() => setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: false })}>Close</span>
+                        {editPassword ? (
+                            <span onClick={() => handleClose("editPassword")}>Close</span>
+                        ) : (
+                            <span onClick={handleChangeInfo}>{editInfo ? 'Save' : 'Edit'}</span>
                         )}
-                        {changeInfo.changePassword && (
-                            <span onClick={() => setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: false })}>Close</span>
+
+
+                        {editInfo ? (
+                            <span onClick={() => handleClose("editInfo")}>Close</span>
+                        ) : (
+                            <span
+                                onClick={handleChangePassword}
+                                className={cx(isUserLoginedWithGoogle && 'disible-edit')}
+                            >
+                                {editPassword ? 'Save' : 'Change password'}
+                            </span>
                         )}
+
                     </div>
                 </Col>
                 <Col lg={4}>
                     <div className={cx('sub-title')}>Newsletters</div>
                     <div className={cx('body')}><div className={cx('content')}>You don't subscribe to our newsletter.</div></div>
                     <div className={cx('change-info')}>
-                        <span className={cx('disible-edit')}>Edit</span>
+                        <span>Edit</span>
                     </div>
                 </Col>
                 <Col lg={4}>
                     <div className={cx('sub-title')}>My Avata</div>
                     <div className={cx('body')}>
-                        {changeInfo.changeAvata ? (
-                            <div className={cx('avatas')}>
-                                <div
-                                    className={cx(values.photoURL === '/images/avata1.jpg' ? 'avataActive' : ' ')}
-                                    onClick={() => setValues({ ...values, photoURL: '/images/avata1.jpg' })}
-                                >
-                                    <img src={'/images/avata1.jpg'} alt="alt" />
-                                </div>
-                                <div
-                                    className={cx(values.photoURL === '/images/avata2.jpg' ? 'avataActive' : ' ')}
-                                    onClick={() => setValues({ ...values, photoURL: '/images/avata2.jpg' })}
-                                >
-                                    <img src={'/images/avata2.jpg'} alt="alt" />
-                                </div>
-                                <div
-                                    className={cx(values.photoURL === '/images/avata3.jpg' ? 'avataActive' : ' ')}
-                                    onClick={() => setValues({ ...values, photoURL: '/images/avata3.jpg' })}
-                                >
-                                    <img src={'/images/avata3.jpg'} alt="alt" />
-                                </div>
-                            </div>
+                        {editAvata ? (
+                            <form >
+                                {/* <FormInput
+                                    {...inputs[3]}
+                                    value={''}
+                                    onChange={onChange}
+                                /> */}
+                            </form>
                         ) : (
-                            <div className={cx('current-avata')}><img src={values.photoURL} alt="alt" /></div>
+                            <div className={cx('current-avata')}><img src={values.image} alt="alt" /></div>
                         )}
                     </div>
                     <div className={cx('change-info')}>
-                        <span onClick={() => handleChangeInfo('changeAvata')}>{changeInfo.changeAvata ? 'Save' : 'Edit'}</span>
-                        {changeInfo.changeAvata && (
-                            <span onClick={() => setChangeInfo({ changeUsername: false, changePassword: false, changeAvata: false })}>Close</span>
+                        <span onClick={() => handleChangeInfo('changeAvata')}>{editAvata ? 'Save' : 'Edit'}</span>
+                        {editAvata && (
+                            <span onClick={() => setEditAvatar(false)}>Close</span>
                         )}
                     </div>
                 </Col>

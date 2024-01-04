@@ -10,8 +10,8 @@ function Body() {
     return (
         <Container>
             <InforAuthor />
-            <ProductsType name={'MSI Laptops'} img={lap} category={'laptop-gaming'} />
-            <ProductsType name={'Desktops'} img={des} category={'pc-gaming'} />
+            <ProductsType name={'MSI Laptops'} img={lap} cateId={6} />
+            <ProductsType name={'Desktops'} img={des} cateId={2} />
             <Brands />
             <Review />
         </Container>

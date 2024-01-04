@@ -1,5 +1,6 @@
 .wrapper {
     position: relative;
+    margin-bottom: 10px;
 }
 .label {
     font-size: 13px;
@@ -49,4 +50,8 @@
 }
 .icon-without-lable {
     top: 25px !important;
+}
+.textarea {
+    width: 100%;
+    resize: none;
 }

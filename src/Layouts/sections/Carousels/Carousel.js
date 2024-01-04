@@ -5,8 +5,24 @@ import { useMediaQuery } from "react-responsive";
 
 import ProductSkeleton from "~/components/ProductSkeleton";
 import Product from "~/components/Product";
+import { useState } from "react";
+import { useEffect } from "react";
+import API, { endpoints } from "~/configs/API";
 const Carousel = () => {
-    const { items } = useSelector(state => state.products)
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            try {
+                const res = await API.get(endpoints['product_filter']('limit=12'))
+                setProducts(res.data.results)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchApi()
+
+    }, [])
 
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
@@ -40,8 +56,8 @@ const Carousel = () => {
     };
     return (
         <Slider {...settings}>
-            {items.length > 0 ? (
-                items.map((ele, index) => (
+            {products.length > 0 ? (
+                products.map((ele, index) => (
                     <Product
                         key={index}
                         primary

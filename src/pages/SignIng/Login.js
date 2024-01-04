@@ -11,13 +11,14 @@ import { useSelector } from "react-redux";
 
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { loginWithFirebase } from "~/components/firebase/config";
-import { setUserInfo } from "~/redux/authSlice";
+import { login, setUserInfo } from "~/redux/authSlice";
 import { setUserCart } from "~/redux/userCartSlice";
 import { getUserByEmail } from "~/redux/authSlice";
 import FormInput from "~/components/Input";
 import Pageing from "~/components/Pageing";
 import Button from "~/components/Button";
 import style from './Register.module.scss'
+import { getUserInfo } from "~/redux/userAddressSlice";
 const cx = classNames.bind(style)
 function Login() {
     const { pathname } = useLocation();
@@ -30,30 +31,18 @@ function Login() {
 
     const [values, setValues] = useState({
         username: '',
-        email: '',
         password: '',
-        confirmPassword: '',
     })
-
-    const dispatchUserInfo = (value) => dispatch(setUserInfo(value));
-    const dispatchUserCart = (value) => dispatch(setUserCart(value));
-    const toFrom = () => navigate("/");
-    const handleLoginwithMedia = async (type) => {
-        try {
-            loginWithFirebase(dispatchUserInfo, dispatchUserCart, toFrom, type);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const inputs = [
         {
             id: 1,
-            name: "email",
-            type: "email",
-            placeholder: "Your email",
-            label: "Email",
-            errormessage: "It should be a valid email address",
+            name: "username",
+            type: "text",
+            placeholder: "Username",
+            errormessage: "Username should be 3-16 characters and shouldn't include any special character!",
+            label: "Username",
+            pattern: "^[A-Za-z0-9]{3,16}$",
             required: true,
         },
         {
@@ -76,35 +65,29 @@ function Login() {
     const handleSumit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
-        const { email, password } = Object.fromEntries(data.entries())
+        const user = Object.fromEntries(data.entries())
 
-        const user = {
-            uid: email,
-            password: password
-        }
-
-        dispatch(getUserByEmail(user))
+        dispatch(login(user))
             .then(unwrapResult)
             .then(resp => {
-                if (resp === -1) {
-                    toast.warn(`Account not found`, {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                } else {
-                    dispatchUserCart({ ...resp.cart })
-                    navigate('/')
-                }
+                // dispatchUserCart({ ...resp.cart })
+                dispatch(getUserInfo())
+                navigate('/')
+            }).catch(err => {
+                toast.warn(`Account not found`, {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
     }
     return (
         <Container className={cx("wrapper")}>
-            {status === 'loading' && <LoadingSpinner />}
+            {status === 'peding' && <LoadingSpinner />}
             <Pageing pages={[{ title: 'Login', path: 'login' }]} />
             <h1 className={cx("heading")}>Login</h1>
             <Row className="justify-content-around">
@@ -131,10 +114,10 @@ function Login() {
                             <div>Or login with</div>
                             <div className={cx("line-through")}></div>
                         </div>
-                        <div className={cx("btns")}>
+                        {/* <div className={cx("btns")}>
                             <Button onClick={() => handleLoginwithMedia('facebookLogin')} primary lefticon={<FaFacebookF />}>FACEBOOK</Button>
                             <Button onClick={() => handleLoginwithMedia('googleLogin')} primary lefticon={<FaGooglePlusG />}>GOOGLE</Button>
-                        </div>
+                        </div> */}
                     </div>
                 </Col>
                 <Col md={5} sm={12} className={cx("box")}>

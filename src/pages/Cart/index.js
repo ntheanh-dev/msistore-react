@@ -3,9 +3,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineInbox } from "react-icons/ai";
+import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/ri";
 
+import FormInput from "~/components/Input";
 import { clearCart } from "~/redux/userCartSlice";
 import { Formatter } from "~/components/FormatCurrency";
 import { getTotal } from '~/redux/userCartSlice';
@@ -16,6 +18,10 @@ import style from './Cart.module.scss';
 const cx = classNames.bind(style)
 function Cart() {
     const dispath = useDispatch()
+    const [showDiscount, setShowDiscount] = useState(false)
+    const [values, setValues] = useState({
+        code: ''
+    })
     const isMobile = useMediaQuery({ query: '(max-width: 426px)' })
     const cart = useSelector(state => state.userCart)
     const { cartTotalAmount } = cart
@@ -32,7 +38,7 @@ function Cart() {
 
     const handleClear = () => {
         dispath(clearCart())
-        toast.error(`Cleared shopping cart`, {
+        toast.error(`Cart cleared successfully`, {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -49,19 +55,28 @@ function Cart() {
             ship: cart.cartItems.length > 0 ? `${cartTotalAmount}` : 0
         },
         {
-            title: "Shipping",
-            ship: 21
-        },
-        {
             title: "Tax",
-            ship: 1.91
+            ship: 0
         },
         {
             title: "Order Total",
-            ship: cart.cartItems.length > 0 ? `${cartTotalAmount + 21 + 1.91}` : 0
+            ship: cart.cartItems.length > 0 ? `${cartTotalAmount}` : 0
         }
     ]
 
+    const INPUT = {
+        name: "discount",
+        type: "text",
+        errormessage: "Discount code must be number!",
+        label: "Enter discount code",
+        pattern: "^([0-8})$",
+        required: true,
+    }
+
+
+    const onChange = e => {
+        setValues({ ...values, [e.target.name]: e.target.value })
+    }
     return (
         <Container className={cx('wrapper')}>
             <Pageing pages={[{ title: 'Cart', path: 'yourcart' }]} />
@@ -92,19 +107,35 @@ function Cart() {
                         </div>
                     </Col>
 
-                    <Col lg={3} sm={12} className={cx('right')}>
-                        <h1 className={cx('right-head')}>Summary</h1>
-                        <ul className={cx('menu')}>
-                            {
-                                checkoutItems.map((item, index) => (
-                                    <li key={index}>
-                                        <h2>{item.title}</h2>
-                                        <span>{Formatter.format(item.ship)}</span>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                        <Button primary>Proceed to Checkout</Button>
+                    <Col lg={3} sm={12}>
+                        <div className={cx('right')}>
+                            <h1 className={cx('right-head')}>Summary</h1>
+                            <ul className={cx('menu')}>
+                                <div className={cx('right-title' && (!showDiscount && 'border-b'))} onClick={() => setShowDiscount(!showDiscount)}>
+                                    <span>Apply Discount Code</span>
+                                    {showDiscount ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+                                </div>
+                                {showDiscount && (
+                                    <div className={cx('form-discount')}>
+                                        <FormInput
+                                            {...INPUT}
+                                            value={values[INPUT.name]}
+                                            onChange={onChange}
+                                        />
+                                        <Button fullwitdh outline>Apply Discount</Button>
+                                    </div>
+                                )}
+                                {
+                                    checkoutItems.map((item, index) => (
+                                        <li key={index}>
+                                            <h2>{item.title}</h2>
+                                            <span>{Formatter.format(item.ship)}</span>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                            <Button primary to={'/checkout'}>Proceed to Checkout</Button>
+                        </div>
                     </Col>
                 </Row>
             ) : (

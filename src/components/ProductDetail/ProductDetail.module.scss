@@ -209,6 +209,7 @@
         -moz-border-radius: 50%;
         border-radius: 50%;
         -khtml-border-radius: 50%;
+        cursor: pointer;
     }
 
     & > div:first-child {
@@ -285,11 +286,13 @@
         border-radius: 50%;
         margin: 0 10px;
         background-color: var(--blue015);
+        cursor: pointer;
     }
 }
 .change-img-active {
     animation: fadeIn 0.3s linear;
     opacity: 1 !important;
+
 }
 
 @keyframes fadeIn {

@@ -16,7 +16,11 @@ function Pageing({ pages }) {
                 pages.map((ele, ind) => (
                     <Fragment key={ind}>
                         <IoIosArrowForward className={cx('icon')} />
-                        <Link to={`/${ele.path}`} className={cx('link')} >{ele.title}</Link>
+                        {ele.path ? (
+                            <Link to={`/${ele.path}`} className={cx('link')} >{ele.title}</Link>
+                        ) : (
+                            <Link className={cx('link')} >{ele.title}</Link>
+                        )}
                     </Fragment>
                 ))
             }

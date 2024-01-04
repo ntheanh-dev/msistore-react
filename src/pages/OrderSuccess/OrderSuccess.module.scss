@@ -1,0 +1,115 @@
+@import '~bootstrap/scss/bootstrap';
+.wrapper {
+    margin-top: var(--head-height);
+    margin-bottom: 70px;
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 33px;
+    }
+    @include media-breakpoint-down(md) {
+        margin-bottom: 15px;
+    }
+}
+.left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    & > svg {
+        font-size: 60px;
+        color: #3cb043;
+    }
+
+    & > span {
+        text-align: center;
+    }
+
+    &-body {
+        width: 100%;
+        padding: 10px 18px;
+        margin-top: 8px;
+        border: 1px solid #000;
+        border-radius: 6px;
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        &-content {
+
+        }
+    }
+
+    &-footer {
+        width: 100%;
+        margin-top: 22px;
+        display: flex;
+        justify-content: space-between;
+
+        @include media-breakpoint-down(md) {
+            flex-direction: column;
+        }
+    }
+}
+.right {
+    margin-top: 37px;
+    padding: 25px;
+    background-color: var(--blueF5F);
+    height: -webkit-fill-available;
+
+    @include media-breakpoint-down(lg) {
+        margin: 37px 0 30px;
+        padding: 15px;
+    }
+    @include media-breakpoint-down(md) {
+        margin-bottom:0 0 30px;
+        padding: 10px;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 36px;
+        color: var(--black);
+        padding-bottom: 15px;
+        border-bottom: 1px solid #CCCCCC;
+
+
+        @include media-breakpoint-down(lg) {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 21px;
+            letter-spacing: 0px;
+            text-align: left;
+        }
+    }
+    &-footer {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #CCCCCC;
+        display: flex;
+        justify-content: space-between;
+
+        & > h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+}
+.right-head {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 36px;
+    padding-bottom: 15px;
+    margin-bottom: 18px;
+    color: var(--black);
+    border-bottom: 1px solid #CCCCCC;
+
+    @include media-breakpoint-down(lg) {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        letter-spacing: 0px;
+        text-align: left;
+    }
+}
