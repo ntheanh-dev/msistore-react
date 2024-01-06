@@ -15,10 +15,7 @@ export const userCartSlice = createSlice({
             state.cartItems = action.payload.cartItems
             state.cartTotalAmount = action.payload.cartTotalAmount
             state.cartTotalQuantity = action.payload.cartTotalQuantity
-
-            const currentCart = current(state)
-            const data = getTotalProducts(currentCart)
-            cookie.save('cart', data)
+            cookie.save('cart', current(state))
         },
         addToCart: (state, action) => {
             const itemIndex = state.cartItems.findIndex(
@@ -30,10 +27,7 @@ export const userCartSlice = createSlice({
                 const { cartQuantity } = action.payload
                 state.cartItems[itemIndex].cartQuantity += cartQuantity ? cartQuantity : 1;
             }
-
-            const currentCart = current(state)
-            const data = getTotalProducts(currentCart)
-            cookie.save('cart', data)
+            cookie.save('cart', current(state))
 
         },
         removeCart: (state, action) => {
@@ -42,9 +36,7 @@ export const userCartSlice = createSlice({
             )
             state.cartItems = newCart
 
-            const currentCart = current(state)
-            const data = getTotalProducts(currentCart)
-            cookie.save('cart', data)
+            cookie.save('cart', current(state))
 
         },
         decreaseCart: (state, action) => {
@@ -59,10 +51,7 @@ export const userCartSlice = createSlice({
                 )
                 state.cartItems = newCart
             }
-
-            const currentCart = current(state)
-            const data = getTotalProducts(currentCart)
-            cookie.save('cart', data)
+            cookie.save('cart', current(state))
 
         },
         increaseCart: (state, action) => {
@@ -70,15 +59,10 @@ export const userCartSlice = createSlice({
                 (item) => item.id === action.payload.id
             )
             state.cartItems[itemIndex].cartQuantity += 1;
-            const currentCart = current(state)
-            const data = getTotalProducts(currentCart)
-            cookie.save('cart', data)
+            cookie.save('cart', current(state))
+
         },
         clearCart: (state) => {
-            Object.assign(state, INIT_CART)
-            cookie.remove('cart')
-        },
-        setLogoutCart: (state) => {
             Object.assign(state, INIT_CART)
             cookie.remove('cart')
         },
@@ -123,5 +107,5 @@ export const orderItemDjango = (items) => {
     return result
 }
 
-export const { setUserCart, getTotal, addToCart, removeCart, increaseCart, clearCart, setLogoutCart, decreaseCart } = userCartSlice.actions
+export const { setUserCart, getTotal, addToCart, removeCart, increaseCart, clearCart, decreaseCart } = userCartSlice.actions
 export default userCartSlice.reducer

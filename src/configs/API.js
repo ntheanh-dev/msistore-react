@@ -1,8 +1,8 @@
 import axios from "axios";
 import cookie from "react-cookies";
 
-// const BASE_URL = "http://127.0.0.1:8000/"
-const BASE_URL = "https://anhthenguyen28.pythonanywhere.com/"
+const BASE_URL = "http://127.0.0.1:8000/"
+// const BASE_URL = "https://anhthenguyen28.pythonanywhere.com/"
 export const endpoints = {
     'register': '/users/',
     'current-user': '/users/current-user/',

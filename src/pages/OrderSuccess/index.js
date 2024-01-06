@@ -25,7 +25,7 @@ const OrderSuccess = () => {
     }
     const getToltalPrice = () => {
         let total = 0
-        if (receipt.order_items) {
+        if (receipt?.order_items) {
             receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.new_price)
         }
         return total
@@ -41,7 +41,6 @@ const OrderSuccess = () => {
                         'Content-Type': 'multipart/form-data',
                     },
                 })
-                console.log(res.data)
                 dispath(clearCart())
                 setReceipt(res.data)
             } catch (e) {

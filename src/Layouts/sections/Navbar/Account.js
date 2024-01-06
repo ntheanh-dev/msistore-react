@@ -7,14 +7,14 @@ import Tippy from '@tippyjs/react/headless';
 import { memo, useState } from "react";
 
 import { setLogoutUserInfo } from "~/redux/authSlice";
-import { setLogoutCart } from "~/redux/userCartSlice";
+import { clearCart } from "~/redux/userCartSlice";
 import style from './Navbar.module.scss'
 const cx = classNames.bind(style)
 function Account({ user }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
     const dispathLogoutUserInfo = () => dispath(setLogoutUserInfo())
-    const dispathLogoutCart = () => dispath(setLogoutCart())
+    const dispathLogoutCart = () => dispath(clearCart())
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
