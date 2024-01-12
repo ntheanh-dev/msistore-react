@@ -17,6 +17,7 @@ import Button from "~/components/Button";
 import style from './Cart.module.scss';
 const cx = classNames.bind(style)
 function Cart() {
+    const { user } = useSelector(state => state.auth)
     const dispath = useDispatch()
     const [showDiscount, setShowDiscount] = useState(false)
     const [values, setValues] = useState({
@@ -134,7 +135,7 @@ function Cart() {
                                     ))
                                 }
                             </ul>
-                            <Button primary to={'/checkout'}>Proceed to Checkout</Button>
+                            <Button primary to={user.id ? '/checkout' : "/login"}>Proceed to Checkout</Button>
                         </div>
                     </Col>
                 </Row>

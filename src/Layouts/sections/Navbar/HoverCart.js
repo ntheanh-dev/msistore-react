@@ -35,7 +35,7 @@ function Hovercart({ cart, hasUser }) {
                     <div className={cx('yourcart')} tabIndex="-1" {...attrs}>
                         <h3 className={cx('heading')}>My cart</h3>
                         <p className={cx('total')}>{cartTotalQuantity} item in cart</p>
-                        <Button to={hasUser ? "/yourcart" : '/login'} outline >View or Edit Your Cart</Button>
+                        <Button to={"/yourcart"} outline >View or Edit Your Cart</Button>
                         <div className={cx('items')}>
                             {(!hasUser || cartItems.length === 0) && (
                                 <div className={cx('nodata')}>
@@ -53,7 +53,7 @@ function Hovercart({ cart, hasUser }) {
                     </div>
                 )}
             >
-                <div onClick={() => navigate(hasUser ? '/yourcart' : '/login')} className={cx('iconCart')}>
+                <div onClick={() => navigate('/yourcart')} className={cx('iconCart')}>
                     <AiOutlineShoppingCart />
                     {cartTotalQuantity > 0 && (<div className={cx('quantity')}>
                         <span>{cartTotalQuantity}</span>
