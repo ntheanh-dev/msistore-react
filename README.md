@@ -1,102 +1,120 @@
-<!-- PROJECT LOGO -->
-<div align="center" id="readme-top">
-  <p align="center">
-    <a href="https://msi-store.vercel.app">View Demo</a>
-  </p>
-</div>
-<!-- ABOUT THE PROJECT -->
 
-### Built With
+# Msistore Ecommerce website
+## Description: 
+This project is a clone of the [MSI official website](https://vn.msi.com/) based on the design provided in Figma. It is created solely for educational purposes and should not be used for any commercial activities, including but not limited to selling products, engaging in business transactions, or misleading users. The intention behind this project is to enhance learning and practice web development skills.
 
--   [![React][react.js]][react-url]
--   [![Bootstrap][bootstrap.com]][bootstrap-url]
+Note: It is essential to respect intellectual property rights, and this project should be used responsibly and ethically.
 
-<!-- GETTING STARTED -->
 
-### Available Scripts
 
-In the project directory, you can run:
+## Work Under Progress
 
-npm start
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
+**Version 1**
+* The data is stored locally and must be re-new periodically 
+* Backend has not been added. 
+* APIs are faked by [JSon Server](https://github.com/typicode/json-server) (a libary typicall create simple CRUD api using mostly json data)
+* Version 1 is hosted [HERE!](https://msi-store.vercel.app/)
+* Fake Apis is hosted [HERE!](https://json-server-sand.vercel.app/api/data)
+**Version 2 (recommend)**
+* Fixed bugs from predecessor, add some pages, updated ui... 
+* Backend django has been added [learn more](https://github.com/Theanhmgt/msistore-django)
+* Data is stored in Mysql database
+* Version 2 is hosted [HERE!](https://msistore.vercel.app/) and still updated daily
+## Tech Stack
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
+**Client:** ReactJs, Redux,Redux-Thunk, Bootstrap,Css, Scss
 
-npm test
-Launches the test runner in the interactive watch mode.
-See the section about running tests for more information.
+**Server:** Apache, Django
 
-npm run build
-Builds the app for production to the build folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Database:** Mysql
 
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
 
-See the section about deployment for more information.
+## Database Schema
+![Databse schema](src/assets/screenshots/database-schema.png)
+## Features
 
-npm run eject
-Note: this is a one-way operation. Once you eject, you can't go back!
+- DeskTop/Tablet/Mobile Responsiveness
+- Search Functionality
+- Product Pages
+- Shopping Cart
+- User Accounts
+- Loading Speed Optimization
 
-If you aren't satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except eject will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Screenshots
 
-You don't have to ever use eject. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Home page Screenshot](src/assets/screenshots/main-screen.png)
+![Product Preview:](src/assets/screenshots/products.png)
+![Product Detail:](src/assets/screenshots/product-detail.png)
+![User cart:](src/assets/screenshots/cart.png)
+![Sign-in Page:](src/assets/screenshots/sign-in.png)
+![User-dashboard Page:](src/assets/screenshots/orders.png)
 
-<!-- CONTACT -->
 
-## Contact
 
-Facebook: [Nguyễn Thế Anh](https://www.facebook.com/theanhnguyenmgt)
-Linkedin: [The Anh Nguyen](https://www.linkedin.com/in/theanh-ta/)
+## Demo
 
-<!-- ACKNOWLEDGMENTS -->
+Version 1: [Click here!](https://msistore.vercel.app/)
 
-## Acknowledgments
+Version 2: [Click here!](https://msi-store.vercel.app/)
 
--   [Choose an Open Source License](https://choosealicense.com)
--   [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
--   [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
--   [Malven's Grid Cheatsheet](https://grid.malven.co/)
--   [Img Shields](https://shields.io)
--   [GitHub Pages](https://pages.github.com)
--   [Font Awesome](https://fontawesome.com)
--   [React Icons](https://react-icons.github.io/react-icons/search)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Prerequisites
+The following software is required to be installed on your system:
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+* node: 21.x
+* npm: 10.x
+Type the following commands in the terminal to verify your node and npm versions
+```bash
+  node -v
+  npm -v
+```
+## Run Locally
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
-[next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[next-url]: https://nextjs.org/
-[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[react-url]: https://reactjs.org/
-[vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[vue-url]: https://vuejs.org/
-[angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[angular-url]: https://angular.io/
-[svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[svelte-url]: https://svelte.dev/
-[laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[laravel-url]: https://laravel.com
-[bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[bootstrap-url]: https://getbootstrap.com
-[jquery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[jquery-url]: https://jquery.com
+Clone the project
+
+```bash
+  git clone https://github.com/Theanhmgt/msistore-react.git
+```
+
+Go to the project directory
+
+```bash
+  cd misstore-react
+```
+
+Install dependencies
+
+```bash
+  npm -i install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
+## Developed With
+
+* [Visual Studio Code](https://code.visualstudio.com/) - A source code editor developed by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring
+* [React](https://reactjs.org/) - A javascript library for building user interfaces
+* [Create react app](https://create-react-app.dev/) - A quick method to start developing a react application.
+* [Babel](https://babeljs.io/) - A transpiler for javascript
+* [Webpack](https://webpack.js.org/) - A module bundler
+* [SCSS](http://sass-lang.com/) - A css metalanguage
+## Authors
+
+ [@Nguyễn Thế Anh](https://github.com/Theanhmgt)
+
+
+## License
+
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Support
+
+For support, email theanhnguye.work@gmail.com
+
