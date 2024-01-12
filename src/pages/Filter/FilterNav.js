@@ -43,12 +43,19 @@ function FilterNav({ filter, setFilter }) {
     const handleSetFilter = (e, type) => {
         if (type === 'price') {
             const prices = e.target.text.split(' - ')
-            console.log(e.target.fromPrice)
-            // setTempFilter({
-            //     ...filter,
-            //     fromPrice: Number(prices[0].substring(1)),
-            //     toPrice: Number(prices[1].substring(1))
-            // })
+            if (prices.length == 2) {
+                setTempFilter({
+                    ...filter,
+                    fromPrice: convertDecimalNumber(prices[0].slice(1, -3)),
+                    toPrice: convertDecimalNumber(prices[1].slice(1, -3))
+                })
+            } else {
+                const fromPrice = e.target.text.split(' ')[0].slice(1, -3)
+                setTempFilter({
+                    ...filter,
+                    fromPrice: convertDecimalNumber(fromPrice),
+                })
+            }
             setToogleList({ ...toogleList, price: false })
         } else if (type === 'cate') {
             setTempFilter({
@@ -57,6 +64,11 @@ function FilterNav({ filter, setFilter }) {
             })
             setToogleList({ ...toogleList, category: false })
         }
+    }
+
+    const convertDecimalNumber = (str) => {
+        let n = Number(str)
+        return n > 100 ? n : n * 1000
     }
 
     const handleClearFilter = () => {

@@ -151,17 +151,11 @@ export const changePassword = createAsyncThunk('user,loginUser',
                 },
             })
 
-            console.log(res.data)
-            // cookie.save('access-token', res.data.access_token)
-            // let user = await authAPI().get(endpoints['current-user'])
-            // cookie.save('current-user', user.data)
-
             return res.data
         } catch (err) {
             console.log(err)
-            return rejectWithValue(err.response.data)
+            return rejectWithValue({ data: err.response.data, status: err.response.status })
         }
-        return
     }
 )
 
@@ -173,10 +167,8 @@ export const update = createAsyncThunk('user,updateUser',
             cookie.save('current-user', user.data)
             return user.data
         } catch (err) {
-            console.log(err)
             return rejectWithValue(err.response.data)
         }
-        return
     }
 )
 

@@ -16,13 +16,14 @@ const cx = classNames.bind(style)
 function AccountInfo() {
     const dispatch = useDispatch()
     const { user, status } = useSelector(state => state.auth)
+    const formRef = useRef(null)
     // check if user login with gg or fb
     const isUserLoginedWithGoogle = false
     const [editInfo, setEditInfo] = useState(false)
     const [editPassword, setEditPassword] = useState(false)
     const [editAvata, setEditAvatar] = useState(false)
 
-    const [values, setValues] = useState({ ...user, old_password: 'Theanh30', new_password: 'Theanh28' })
+    const [values, setValues] = useState({ ...user, old_password: '', new_password: '' })
 
     const handleChangeInfo = () => {
         if (editInfo) {
@@ -55,17 +56,29 @@ function AccountInfo() {
 
     const handleChangePassword = () => {
         if (editPassword) {
-            var form_data = new FormData();
-            for (var k in values) {
-                form_data.append(k, values[k]);
+            if (values.old_password.length < 8 || values.new_password.length < 8) {
+
+            } else {
+                var form_data = new FormData();
+                form_data.append('old_password', values.old_password)
+                form_data.append('new_password', values.new_password)
+
+                dispatch(changePassword(form_data))
+                    .then(unwrapResult)
+                    .then(res => {
+                        Toast('success', 'Changed password successlly')
+                        setValues({ ...user, old_password: '', new_password: '' })
+                        setEditPassword(false)
+                    })
+                    .catch(err => {
+                        if (err.status === 400) {
+                            Toast('warn', 'Current password is incorrect')
+                        }
+                    })
             }
-            dispatch(changePassword(form_data))
-                .then(unwrapResult)
-                .then(res => {
-                    Toast('success', 'Update successfully')
-                })
         } else {
             setEditPassword(true)
+            setValues({ ...user, old_password: '', new_password: '' })
         }
     }
 
@@ -139,7 +152,7 @@ function AccountInfo() {
                     <div className={cx('body')}>
                         {!editPassword && (
                             editInfo ? (
-                                <form >
+                                <form ref={formRef} >
                                     {INPUT_INFO.map((ele, index) => (
                                         <FormInput
                                             {...ele}
@@ -225,3 +238,8 @@ function AccountInfo() {
 }
 
 export default AccountInfo;
+
+
+
+
+

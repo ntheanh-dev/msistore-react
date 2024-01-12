@@ -35,7 +35,7 @@ function Register() {
             placeholder: "First name",
             errormessage: "First name should be 3-30 characters",
             label: "First name",
-            pattern: "/^[\p{L}\s']+$/u",
+            pattern: "^[a-zA-Z!@#\$%\^\&*\)\(+=._-]{2,}$",
             required: true,
         },
         {
@@ -45,7 +45,7 @@ function Register() {
             placeholder: "Last name",
             errormessage: "Last name should be 3-30 characters",
             label: "Last name",
-            pattern: "/^[\p{L}\s']+$/u",
+            pattern: "^[a-zA-Z!@#\$%\^\&*\)\(+=._-]{2,}$",
             required: true,
         },
         {
@@ -55,7 +55,7 @@ function Register() {
             placeholder: "Username",
             errormessage: "Username should be 3-16 characters and shouldn't include any special character!",
             label: "Username",
-            pattern: "^[A-Za-z0-9]{3,20}$",
+            pattern: "^[A-Za-z0-9]{3,16}$",
             required: true,
         },
         {
@@ -102,52 +102,74 @@ function Register() {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
+    const fileValidate = () => {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (allowedExtensions.exec(values.avatar)) {
+            return true;
+        } else {
+            return false
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const data = new FormData(e.target)
-        const { confirmPassword, ...user } = Object.fromEntries(data.entries())
-        dispatch(register(user))
-            .then(unwrapResult)
-            .then(resp => {
-                toast.success(`Register successfully, redirecting to homepage`, {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                setTimeout(() => {
-                    navigate('/')
-                }, 2700)
-            }).catch(err => {
-                for (const key in err) {
-                    if (key === 'username') {
-                        toast.warn(`Account already exists`, {
-                            position: "top-right",
-                            autoClose: 2000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                        break
-                    } else {
-                        toast.warn(`Check the encoding type on the form`, {
-                            position: "top-right",
-                            autoClose: 2000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                        break
+        if (fileValidate()) {
+            const data = new FormData(e.target)
+            const { confirmPassword, ...user } = Object.fromEntries(data.entries())
+            dispatch(register(user))
+                .then(unwrapResult)
+                .then(resp => {
+                    toast.success(`Register successfully, redirecting to homepage`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 2700)
+                }).catch(err => {
+                    for (const key in err) {
+                        if (key === 'username') {
+                            toast.warn(`Account already exists`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
+                            break
+                        } else {
+                            toast.warn(`Check the encoding type on the form`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                            });
+                            break
+                        }
                     }
-                }
-            })
+                })
+        } else {
+            toast.warn(`Invalid file type`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+
     }
     return (
         <Container className={cx("wrapper")}>

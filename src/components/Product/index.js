@@ -8,8 +8,7 @@ import { memo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify"
+import { useDispatch } from "react-redux";
 
 import { Formatter } from "../FormatCurrency";
 import style from './Product.module.scss'
@@ -28,26 +27,13 @@ function Product({
 }) {
     const navigate = useNavigate()
     const dispath = useDispatch()
-    const { user } = useSelector(state => state.auth)
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
 
     const handleAddToCart = (data, e) => {
         e.stopPropagation()
-        if (user.id) {
-            dispath(addToCart({
-                ...data
-            }))
-        } else {
-            toast.warn(`Please login to add product`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
-            })
-        }
+        dispath(addToCart({
+            ...data
+        }))
     }
     const handleRemove = (data, e) => {
         e.stopPropagation()
