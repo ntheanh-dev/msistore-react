@@ -12,25 +12,15 @@ Note: It is essential to respect intellectual property rights, and this project 
 **Version 1**
 * The data is stored locally and must be re-new periodically 
 * Backend has not been added. 
-* APIs are faked by [JSon Server](https://github.com/typicode/json-server) (a libary typicall create simple CRUD api using mostly json data)
+* APIs are faked by [JSon Server](https://github.com/typicode/json-server) (a libary typically create simple CRUD api using mostly json data)
 * Version 1 is hosted [HERE!](https://msi-store.vercel.app/)
 * Fake Apis is hosted [HERE!](https://json-server-sand.vercel.app/api/data)
+
 **Version 2 (recommend)**
 * Fixed bugs from predecessor, add some pages, updated ui... 
 * Backend django has been added [learn more](https://github.com/Theanhmgt/msistore-django)
 * Data is stored in Mysql database
 * Version 2 is hosted [HERE!](https://msistore.vercel.app/) and still updated daily
-## Tech Stack
-
-**Client:** ReactJs, Redux,Redux-Thunk, Bootstrap,Css, Scss
-
-**Server:** Apache, Django
-
-**Database:** Mysql
-
-
-## Database Schema
-![Databse schema](src/assets/screenshots/database-schema.png)
 ## Features
 
 - DeskTop/Tablet/Mobile Responsiveness
@@ -39,16 +29,52 @@ Note: It is essential to respect intellectual property rights, and this project 
 - Shopping Cart
 - User Accounts
 - Loading Speed Optimization
+## Tech Stack
+
+**Client:** ReactJs, Redux,Redux-Thunk, Bootstrap,Css, Scss
+
+**Server:** Apache, Django
+
+**Database:** Mysql
+## Orther Resource
+
+- Ui design: [Figma](https://www.figma.com/file/t7fsZHL3x8bu4KxpKW84J4/Tech-Online-Store-Design?type=design&node-id=133-3117&mode=design)
+- Product Info(image,name,prices, ,etc): [MSI official website](https://vn.msi.com/)
+
+
+
+## Database Schema
+
+![Databse schema](src/assets/screenshots/database-schema.png)
+
+
 
 
 ## Screenshots
 
+Home page Screenshot:
+
 ![Home page Screenshot](src/assets/screenshots/main-screen.png)
-![Product Preview:](src/assets/screenshots/products.png)
-![Product Detail:](src/assets/screenshots/product-detail.png)
-![User cart:](src/assets/screenshots/cart.png)
-![Sign-in Page:](src/assets/screenshots/sign-in.png)
-![User-dashboard Page:](src/assets/screenshots/orders.png)
+---
+Product Preview:
+
+![Product Preview](src/assets/screenshots/products.png)
+---
+Product Detail:
+
+![Product Detail](src/assets/screenshots/product-detail.png)
+---
+User cart:
+
+![User cart](src/assets/screenshots/cart.png)
+---
+Sign-in Page:
+
+![Sign-in Page](src/assets/screenshots/sign-in.png)
+---
+User-dashboard Page:
+
+![User-dashboard Page](src/assets/screenshots/orders.png)
 
 
 
@@ -64,6 +90,7 @@ The following software is required to be installed on your system:
 
 * node: 21.x
 * npm: 10.x
+
 Type the following commands in the terminal to verify your node and npm versions
 ```bash
   node -v
@@ -116,5 +143,5 @@ This project is licensed under the [MIT](https://choosealicense.com/licenses/mit
 
 ## Support
 
-For support, email theanhnguye.work@gmail.com
+For support, email theanhnguyen.work@gmail.com
 
