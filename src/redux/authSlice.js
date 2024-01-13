@@ -119,8 +119,8 @@ export const login = createAsyncThunk('user,loginUser',
             const res = await API.post(endpoints['login'], {
                 "username": data.username,
                 "password": data.password,
-                "client_id": "jR0H8JNABDdmB4VpXmxGxl9MJrhy8yXOvi44jjir",
-                "client_secret": "c6AIO0OZdC67VqWFq10JlXyS2hmt8XOovQI1BTxGmt8bN2IuULkRyBfA5A9SNHJr7NBleqdHEcOn0S5TEmNNWDjLppgK9fx2nVEmuRUuVIWVit9yJzyhBZsDGnIXUxrP",
+                "client_id": "noHF2gWxRmKaCiQmSAXOkB3YmFTk3AxMhZzxOxZD",
+                "client_secret": "k6iQGcjaaSZIExwYQ5VJTKVb7wOvYULOvjhpBXKGYTP5mrxPZ0fI1eHRuclCCT2gE4SMfVjC1bwrCEe9emuNlOFWS9KF17PU3VDF1oFwViWB1403co2ibsU1vs20Ir8R",
                 "grant_type": "password"
             }, {
                 headers: {
@@ -176,8 +176,8 @@ export const refreshToken = createAsyncThunk('tokent, refreshToken',
     async ({ rejectWithValue }) => {
         try {
             const res = await API.post(endpoints['refresh-tokent'], {
-                "client_id": "jR0H8JNABDdmB4VpXmxGxl9MJrhy8yXOvi44jjir",
-                "client_secret": "c6AIO0OZdC67VqWFq10JlXyS2hmt8XOovQI1BTxGmt8bN2IuULkRyBfA5A9SNHJr7NBleqdHEcOn0S5TEmNNWDjLppgK9fx2nVEmuRUuVIWVit9yJzyhBZsDGnIXUxrP",
+                "client_id": "noHF2gWxRmKaCiQmSAXOkB3YmFTk3AxMhZzxOxZD",
+                "client_secret": "k6iQGcjaaSZIExwYQ5VJTKVb7wOvYULOvjhpBXKGYTP5mrxPZ0fI1eHRuclCCT2gE4SMfVjC1bwrCEe9emuNlOFWS9KF17PU3VDF1oFwViWB1403co2ibsU1vs20Ir8R",
                 "grant_type": "refresh_token",
                 "refresh_token": cookie.load('refresh-token')
             }, {
