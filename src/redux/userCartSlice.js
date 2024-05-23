@@ -69,8 +69,8 @@ export const userCartSlice = createSlice({
         getTotal: (state) => {
             const { total, quanti } = state.cartItems.reduce(
                 (acc, curr) => {
-                    const { new_price, cartQuantity } = curr
-                    const toltalPrice = Number(new_price) * cartQuantity
+                    const { newPrice, cartQuantity } = curr
+                    const toltalPrice = Number(newPrice) * cartQuantity
                     acc.total += toltalPrice
                     acc.quanti += cartQuantity
                     return acc
@@ -86,8 +86,8 @@ export const userCartSlice = createSlice({
 const getTotalProducts = (cart) => {
     const { total, quanti } = cart.cartItems.reduce(
         (acc, curr) => {
-            const { new_price, cartQuantity } = curr
-            const toltalPrice = Number(new_price) * cartQuantity
+            const { newPrice, cartQuantity } = curr
+            const toltalPrice = Number(newPrice) * cartQuantity
             acc.total += toltalPrice
             acc.quanti += cartQuantity
             return acc

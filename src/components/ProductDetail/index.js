@@ -8,7 +8,6 @@ import { BsFillBarChartFill } from "react-icons/bs";
 import { memo, useState, Fragment } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify"
 
 import { Formatter } from "../FormatCurrency";
 import { addToCart } from "~/redux/userCartSlice";
@@ -19,11 +18,10 @@ const cx = classNames.bind(style)
 function ProductDetail({ data }) {
     const dispath = useDispatch()
     const { user } = useSelector(state => state.auth)
-
     const [qty, setQty] = useState(1)
     const [detail, setDetail] = useState(false)
-    const [img, setImg] = useState(data.images[0]);
-    const total = data.new_price * qty;
+    const [img, setImg] = useState(data.images[0].file);
+    const total = data.newPrice * qty;
     const handleUpdateQty = (type) => {
         if (type === 'plus') {
             setQty(qty + 1)
@@ -87,9 +85,9 @@ function ProductDetail({ data }) {
                                 <div className={cx('desc')}>{data.description}</div>
                             }
                             <div className={cx('types')}>
-                                <div className={(img === data.images[0]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[0]))}></div>
-                                <div className={(img === data.images[1]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[1]))}></div>
-                                <div className={(img === data.images[2]) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[2]))}></div>
+                                <div className={(img === data.images[0].file) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[0].file))}></div>
+                                <div className={(img === data.images[1].file) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[1].file))}></div>
+                                <div className={(img === data.images[2].file) ? cx('type-active') : ' '} onClick={() => (setImg(data.images[2].file))}></div>
                             </div>
                             <div className={cx('quote')}>
                                 Have a Question
@@ -106,9 +104,9 @@ function ProductDetail({ data }) {
                                 </div>
                             </div>
                             <div className={cx('change-img')}>
-                                <div className={(img === data.images[0]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[0]))}></div>
-                                <div className={(img === data.images[1]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[1]))}></div>
-                                <div className={(img === data.images[2]) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[2]))}></div>
+                                <div className={(img === data.images[0].file) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[0].file))}></div>
+                                <div className={(img === data.images[1].file) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[1].file))}></div>
+                                <div className={(img === data.images[2].file) ? cx('change-img-active') : ' '} onClick={() => (setImg(data.images[2].file))}></div>
                             </div>
                         </Col>
                     </Row>

@@ -28,7 +28,6 @@ function Product({
     const navigate = useNavigate()
     const dispath = useDispatch()
     let isMobile = useMediaQuery({ query: '(max-width: 426px)' })
-
     const handleAddToCart = (data, e) => {
         e.stopPropagation()
         dispath(addToCart({
@@ -82,7 +81,7 @@ function Product({
                         )
                         }
                         <div className={cx("img")}>
-                            <img src={data.images[0]} alt="" />
+                            <img src={data.images[0].file} alt="" />
                         </div>
                         <div className={cx("reviews")}>
                             <div className={cx("stars")}>
@@ -100,8 +99,8 @@ function Product({
                             {data.description}
                         </div>
                         <div className={cx("prices")}>
-                            <div className={cx("old")}>{Formatter.format(data.old_price)}</div>
-                            <div className={cx("new")}>{Formatter.format(data.new_price)}</div>
+                            <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
+                            <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
                         </div>
                     </>
                     <div className={cx('layout-hover')}>
@@ -123,7 +122,7 @@ function Product({
                 (<div className={cx('wrapper-isHover')} onClick={() => handleClickItem(data.id)}>
                     <div className={cx('quanti-isHover')}>{data.cartQuantity}<span>x</span></div>
                     <div className={cx('img-isHover')}>
-                        <img src={data.images[0]} alt="img" />
+                        <img src={data.images[0].file} alt="img" />
                     </div>
                     <div className={cx('name-isHover')}>{data.description}</div>
                     <div className={cx('actions')}>
@@ -135,7 +134,7 @@ function Product({
             {isInCart &&
                 (<Row className={cx('wrapper-isInCart')} onClick={() => handleClickItem(data.id)}>
                     <Col md={2} className={cx('img-isInCart')}>
-                        <img src={data.images[0]} alt="alt" />
+                        <img src={data.images[0].file} alt="alt" />
                     </Col>
 
                     <Col md={4} className={cx('name-isInCart')}>
@@ -144,7 +143,7 @@ function Product({
 
                     <Col md={2} className={cx('price-isInCart')}>
                         {isMobile && <div className={cx('priceInMobile')}>Price</div>}
-                        {Formatter.format(data.new_price)}
+                        {Formatter.format(data.newPrice)}
                     </Col>
 
                     <Col md={1} className={cx('quanti-isInCart')}>
@@ -157,7 +156,7 @@ function Product({
 
                     <Col md={2} className={cx('total-isInCart')}>
                         {isMobile && <div className={cx('totalInMobile')}>Subtotal</div>}
-                        <div>{Formatter.format(data.new_price * data.cartQuantity)}</div>
+                        <div>{Formatter.format(data.newPrice * data.cartQuantity)}</div>
                     </Col>
 
                     <Col md={1} className={cx('control-isInCart')}>
@@ -183,7 +182,7 @@ function Product({
                     </div>
                     <div className={cx('content')}>
                         <div className={cx('left-isSearch')}>
-                            <div className={cx('img-isSearch')} ><img src={data.images[0]} alt="img" /></div>
+                            <div className={cx('img-isSearch')} ><img src={data.images[0].file} alt="img" /></div>
                             <div className={cx("reviews")}>
                                 <div className={cx("stars")}>
                                     {
@@ -206,8 +205,8 @@ function Product({
                                 {data.description}
                             </div>
                             <div className={cx("prices-isSearch")}>
-                                <div className={cx("old")}>{Formatter.format(data.old_price)}</div>
-                                <div className={cx("new")}>{Formatter.format(data.new_price)}</div>
+                                <div className={cx("old")}>{Formatter.format(data.oldPrice)}</div>
+                                <div className={cx("new")}>{Formatter.format(data.newPrice)}</div>
                             </div>
                             <Button onClick={(e) => handleAddToCart(data, e)} primary>Add to cart</Button>
                         </div>
@@ -217,11 +216,11 @@ function Product({
             {isCheckout && (
                 <div className={cx('product-wrapper')} onClick={() => handleClickItem(data.id)}>
                     <div className={cx('img-incheckout')}>
-                        <img src={data.images[0]} />
+                        <img src={data.images[0].file} />
                     </div>
                     <div className={cx('detail')}>
                         <span className={cx('product-description')}>{data.description}</span>
-                        <span>{`Qty:${quanti} $${quanti * data.new_price}.00`}</span>
+                        <span>{`Qty:${quanti} $${quanti * data.newPrice}.00`}</span>
                     </div>
                 </div>
             )}

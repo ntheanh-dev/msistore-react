@@ -17,7 +17,8 @@ function ProductView() {
     useEffect(() => {
         const fetchApi = async () => {
             const res = await API.get(endpoints['product'](productid))
-            setProduct(res.data)
+            console.log(res.data.resutls)
+            setProduct(res.data.resutls)
         }
         fetchApi()
         // document.title = `${product[0].name}`

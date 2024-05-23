@@ -26,7 +26,7 @@ const OrderSuccess = () => {
     const getToltalPrice = () => {
         let total = 0
         if (receipt?.order_items) {
-            receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.new_price)
+            receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.newPrice)
         }
         return total
     }

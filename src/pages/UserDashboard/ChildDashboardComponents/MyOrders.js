@@ -34,7 +34,7 @@ function MyOrders() {
     }, [])
     const getTotal = (receipt) => {
         let total = 0;
-        receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.new_price)
+        receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.newPrice)
         return total
     }
 
