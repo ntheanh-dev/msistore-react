@@ -27,6 +27,8 @@ export const endpointsV2 = {
     'register-user': 'create-user',
     'login-user': 'Login',
     'current-user': 'current-user',
+    'get-products': 'api/products',
+    category: 'api/categories',
 };
 export const authAPI = () =>
     axios.create({

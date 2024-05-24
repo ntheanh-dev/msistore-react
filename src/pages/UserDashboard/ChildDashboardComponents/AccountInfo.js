@@ -164,7 +164,7 @@ function AccountInfo() {
                                 </form>
                             ) : (
                                 <>
-                                    <div className={cx('content')}>{`${values.first_name} ${values.last_name}`}</div>
+                                    <div className={cx('content')}>{`${values.fristname} ${values.lastname}`}</div>
                                     <div className={cx('content')}>{user.email}</div>
                                 </>
                             )
@@ -222,7 +222,7 @@ function AccountInfo() {
                                 /> */}
                             </form>
                         ) : (
-                            <div className={cx('current-avata')}><img src={values.image} alt="alt" /></div>
+                            <div className={cx('current-avata')}><img src={values.avatar} alt="alt" /></div>
                         )}
                     </div>
                     <div className={cx('change-info')}>

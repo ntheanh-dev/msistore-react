@@ -89,7 +89,7 @@ function Account({ user }) {
                     className={cx('avata')}
                     onClick={() => { visible ? hide() : show() }}
                 >
-                    <img src={user.image} alt='alt' />
+                    <img src={user.avatar} alt='alt' />
                 </div>
             ) : (
                 <div onClick={() => navigate('/login')} className={cx('icon')}>
