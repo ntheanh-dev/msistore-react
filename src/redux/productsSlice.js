@@ -22,7 +22,7 @@ export const productsSlice = createSlice({
 
 export const productsFetch = createAsyncThunk("products/productsFetch",
     async () => {
-        const res = await fetch('https://json-server-sand.vercel.app/api/data')
+        const res = await fetch('')
         const data = await res.json()
         return data
     }
