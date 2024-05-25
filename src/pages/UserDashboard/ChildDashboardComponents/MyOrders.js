@@ -8,24 +8,29 @@ import { useMediaQuery } from "react-responsive";
 import Button from "~/components/Button";
 import { useState } from "react";
 import { useEffect } from "react";
-import { authAPI, endpoints } from "~/configs/API";
+import { authAPI, endpoints, endpointsV2 } from "~/configs/API";
+import cookie from 'react-cookies';
 
 const cx = classNames.bind(style)
 function MyOrders() {
     let isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     const [receipts, setReceipts] = useState([])
     const { user } = useSelector(state => state.auth)
+    console.log(user)
     const { address } = useSelector(state => state.userAddress)
     const [showDetail, setShowDetail] = useState([])
     useEffect(() => {
+        const token = cookie.load("access-token")
         const getReceipt = async () => {
             try {
-                const res = await authAPI().get(endpoints['receipt'], {
+                const res = await authAPI().get(endpointsV2['order-product'], {
                     headers: {
                         'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${token}`,
                     },
                 })
-                setReceipts(res.data)
+                console.log(res.data.resutls)
+                setReceipts(res.data.resutls)
             } catch (e) {
                 console.log(e)
             }
@@ -34,7 +39,7 @@ function MyOrders() {
     }, [])
     const getTotal = (receipt) => {
         let total = 0;
-        receipt?.order_items.map(ele => total += Number(ele.quantity) * ele.product.newPrice)
+        receipt?.orderitems.map(ele => total += Number(ele.quantity) * ele.unitPrice)
         return total
     }
 
@@ -58,7 +63,7 @@ function MyOrders() {
                             <Row>
                                 <Col lg={12} xs={6}>
                                     <Row className={cx('order-row-header') && (isTabletOrMobile && 'flex-column')} >
-                                        <Col lg={3}>Order: {ele?.order.uuid}</Col>
+                                        <Col lg={3}>Order: {ele?.uuid}</Col>
                                         <Col lg={2}>Order status</Col>
                                         <Col lg={3}>Delivery Option</Col>
                                         <Col lg={2}>Payment</Col>
@@ -67,40 +72,40 @@ function MyOrders() {
                                 </Col>
                                 <Col lg={12} xs={6}>
                                     <Row className={cx('order-row-body') && (isTabletOrMobile && 'flex-column')} >
-                                        <Col lg={3}>Placed on {ele?.order.created_at}</Col>
+                                        <Col lg={3}>Placed on {ele?.createdAt}</Col>
                                         <Col lg={2} className={cx('order-row-body-status', 'shipping-status')}>
                                             <IoMdTime />
-                                            <p>{ele?.status.delivery_stage}</p>
+                                            <p>{ele?.statusorders[0].deliveryStage}</p>
                                         </Col>
                                         <Col lg={3}>{'Stardard Delivery'}</Col>
                                         <Col lg={2}>{'Pay on delivery'}</Col>
                                         <Col className={cx('order-row-body-view')} lg={2}
-                                            onClick={() => handleShowDetail(ele.order.id)}
+                                            onClick={() => handleShowDetail(ele.id)}
                                         >
-                                            {showDetail.find(item => item === ele.order.id) ? 'Close' : 'View Detail'}
+                                            {showDetail.find(item => item === ele.id) ? 'Close' : 'View Detail'}
                                         </Col>
                                     </Row>
                                 </Col>
                             </Row>
                         </div>
-                        {showDetail.find(item => item === ele.order.id) && (
+                        {showDetail.find(item => item === ele.id) && (
                             <Row className={cx('view')}>
-                                <Col className={cx('view-col')} xs={12} lg={6}>
+                                <Col className={cx('view-col')} xs={12} lg={8}>
                                     <div className={cx('view-col-title')}>
                                         <h1>ORDER INFORMATION</h1>
                                     </div>
                                     <p className={cx('view-col-subtitle')}>Shipping Details</p>
-                                    <p className={cx('view-col-content')}>{ele?.status.delivery_method}</p>
+                                    <p className={cx('view-col-content')}>{ele?.statusorders[0].deliveryMethod}</p>
                                     <p className={cx('view-col-subtitle')}>Customer info</p>
-                                    <p className={cx('view-col-content')}>{`${user.first_name} ${user.last_name} `}</p>
-                                    <p className={cx('view-col-content')}>
+                                    <p className={cx('view-col-content')}>{`${user.username} `}</p>
+                                    {/* <p className={cx('view-col-content')}>
                                         {`${address.home_number} ${address.street} ${address.city} ${address.country}`}
                                     </p>
                                     <p className={cx('view-col-content')}>
                                         {`Call: ${address.phone_number}`}
-                                    </p>
+                                    </p> */}
                                 </Col>
-                                <Col className={cx('view-col')} xs={12} lg={6}>
+                                <Col className={cx('view-col')} xs={12} lg={4}>
                                     <div className={cx('view-col-title')}>
                                         <h1>PAYMENT SUMMARY</h1>
                                     </div>
