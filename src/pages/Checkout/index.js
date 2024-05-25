@@ -16,11 +16,11 @@ import { FaRegCircle } from 'react-icons/fa';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import Product from '~/components/Product';
 import { PAYMENT, SHIPPING } from '~/configs/Enums';
-import { authAPI, endpoints } from '~/configs/API';
+import { authAPI, endpoints, endpointsV2 } from '~/configs/API';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '~/components/LoadingSpinner';
 import { create } from '~/redux/userAddressSlice';
-import { orderItemDjango } from '~/redux/userCartSlice';
+import { clearCart, orderItemDjango } from '~/redux/userCartSlice';
 // import Product from "~/components/Product";
 const cx = classNames.bind(style);
 const Checkout = () => {
@@ -224,34 +224,30 @@ const Checkout = () => {
             console.log(e);
         }
     };
-    const handlePay = () => {
-        const form = new FormData();
+    const handlePay = async () => {
         const orderItem = orderItemDjango(cartItems);
-        form.append('order_items', JSON.stringify(orderItem));
-        form.append(
-            'order_status',
-            JSON.stringify({
-                is_paid: paymentMethod === PAYMENT.CARD,
-                delivery_method: shippingMethod,
-                payment_method: paymentMethod,
-                delivery_stage: 'Processing',
-            }),
-        );
 
-        const createOrder = async () => {
-            try {
-                const res = await authAPI().post(endpoints['order'], form, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                navigate(`/checkout/receipt/${res.data}`);
-            } catch (e) {
-                console.log(e);
-                // dispatch(refreshToken())
-            }
+        const orderData = {
+            OrderItems: orderItem,
+            DeliveryMethod: shippingMethod,
+            PaymentMethod: paymentMethod,
+            DeliveryStage: 'Processing',
         };
-        createOrder();
+        console.log(orderData);
+        try {
+            // Gửi yêu cầu POST bằng axios
+            const res = await authAPI().post(endpointsV2['order-product'], orderData, {
+                headers: {
+                    'Content-Type': 'application/json', // Đặt Content-Type là 'application/json'
+                },
+            });
+            alert('Thanh cong');
+            dispatch(clearCart());
+            navigate('/');
+            // navigate(`/checkout/receipt/${res.data}`);
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     useEffect(() => {

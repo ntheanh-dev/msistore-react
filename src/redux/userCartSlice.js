@@ -100,7 +100,7 @@ const getTotalProducts = (cart) => {
 export const orderItemDjango = (items) => {
     const result = items.map(ele => {
         return {
-            id: ele.id,
+            ProductId: ele.id,
             quantity: ele.cartQuantity
         }
     })
