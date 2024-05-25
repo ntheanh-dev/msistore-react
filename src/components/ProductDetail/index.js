@@ -38,7 +38,6 @@ function ProductDetail({ data }) {
             }),
         );
     };
-
     return (
         <Fragment>
             <Container>
@@ -132,7 +131,7 @@ function ProductDetail({ data }) {
                         </Col>
                     </Row>
                 </Container>
-                <ProductComments />
+                {data?.feedbacks?.length > 0 && <ProductComments feedback= {data.feedbacks} />}
             </div>
         </Fragment>
     );

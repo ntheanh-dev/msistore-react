@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Rating from 'react-rating-stars-component';
 
-function ProductComments() {
+function ProductComments({feedback}) {
+    console.log(feedback)
     const fakeComments = [
         { user: 'Người dùng 1', rating: 4, content: 'Sản phẩm rất tốt, tôi rất hài lòng' },
         { user: 'Người dùng 2', rating: 5, content: 'Đáng giá mỗi xu, sản phẩm chất lượng cao' },
@@ -29,10 +30,10 @@ function ProductComments() {
     };
 
     return (
-        <div className="p-4 mt-8">
-            <h2 className="text-xl font-semibold mb-4">Bình luận và đánh giá</h2>
+        <div className="mt-8">
             <div className="bg-white rounded-lg shadow-md p-4">
-                <div className="mb-4">
+                <h2 className="text-2xl font-semibold mb-4">Feedback and Rating</h2>
+                {/* <div className="mb-4">
                     <label htmlFor="rating" className="block text-lg font-medium text-gray-700 mb-1">
                         Đánh giá của bạn
                     </label>
@@ -62,17 +63,17 @@ function ProductComments() {
                     <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                         Gửi
                     </button>
-                </form>
+                </form> */}
                 <div className="mt-4">
-                    {comments.map((comment, index) => (
+                    {feedback.map((f, index) => (
                         <div key={index} className="flex items-start mb-4">
                             <div className="flex-shrink-0">
-                                <img src="user-avatar.jpg" alt="User Avatar" className="w-8 h-8 rounded-full" />
+                                <img src={f.user.avatar} alt="User Avatar" className="w-8 h-8 rounded-full" />
                             </div>
                             <div className="ml-3">
-                                <h4 className="font-semibold">{comment.user}</h4>
-                                <Rating value={comment.rating} size={24} edit={false} activeColor="yellow" />
-                                <p className="text-gray-600">{comment.content}</p>
+                                <h4 className="font-semibold">{f.user.username}</h4>
+                                <Rating value={f.rating} size={24} edit={false} activeColor="yellow" />
+                                <p className="text-gray-600">{f.comment}</p>
                             </div>
                         </div>
                     ))}
