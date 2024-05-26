@@ -30,6 +30,7 @@ export const endpointsV2 = {
     'get-products': 'api/products',
     category: 'api/categories',
     'order-product': '/order',
+    'feedback': '/api/feedbacks'
 };
 export const authAPI = () =>
     axios.create({
