@@ -38,6 +38,9 @@ function ProductDetail({ data }) {
             }),
         );
     };
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
     return (
         <Fragment>
             <Container>
@@ -131,7 +134,7 @@ function ProductDetail({ data }) {
                         </Col>
                     </Row>
                 </Container>
-                {data?.feedbacks?.length > 0 && <ProductComments feedback= {data.feedbacks} />}
+                {data?.feedbacks?.length > 0 && <ProductComments feedback={data.feedbacks} />}
             </div>
         </Fragment>
     );
