@@ -162,23 +162,20 @@ function MyOrders() {
                                                 <div>{prod.prodcut.name}</div>
                                                 <div>{prod.quantity}</div>
                                                 <div>{prod.quantity * prod.unitPrice} $</div>
-                                                {ele?.statusorders[0].deliveryStage === 'Delivered' ? (
-                                                    <>
-                                                        <span
-                                                            onClick={() => viewFeedback(isFeedbackBefore)}
-                                                            className={cx('order-row-body-view')}
-                                                        >
-                                                            View Feedback
-                                                        </span>
-                                                        <span
-                                                            onClick={() => feedback(prod.orderId, prod.prodcutId)}
-                                                            className={cx('order-row-body-view')}
-                                                        >
-                                                            Feedback
-                                                        </span>
-                                                    </>
+                                                {isFeedbackBefore ? (
+                                                    <span
+                                                        onClick={() => viewFeedback(isFeedbackBefore)}
+                                                        className={cx('order-row-body-view')}
+                                                    >
+                                                        View Feedback
+                                                    </span>
                                                 ) : (
-                                                    <></>
+                                                    <span
+                                                        onClick={() => feedback(prod.orderId, prod.prodcutId)}
+                                                        className={cx('order-row-body-view')}
+                                                    >
+                                                        Feedback
+                                                    </span>
                                                 )}
                                             </div>
                                         );
@@ -245,7 +242,7 @@ function MyVerticallyCenteredModal(props) {
                 <Modal.Title id="contained-modal-title-vcenter">Your feedback</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Rating value={props.data.rating} size={16} edit={false} activeColor="yellow" />
+                <Rating value={props?.data?.rating} size={16} edit={false} activeColor="yellow" />
                 <h5>{props.data.createdAt}</h5>
                 <p>{props.data.comment}</p>
             </Modal.Body>

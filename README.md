@@ -1,147 +1,183 @@
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=dotnet,react,css,js,redux,tailwind" alt="Tech stack icons"/>
+  </a>
+</p>
 
-# Msistore Ecommerce website
-## Description: 
-This project is a clone of the [MSI official website](https://vn.msi.com/) based on the design provided in Figma. It is created solely for educational purposes and should not be used for any commercial activities, including but not limited to selling products, engaging in business transactions, or misleading users. The intention behind this project is to enhance learning and practice web development skills.
+# Introduce
 
-Note: It is essential to respect intellectual property rights, and this project should be used responsibly and ethically.
+Our e-commerce platform offers a comprehensive shopping experience, allowing customers to purchase computers and accessories from various brands. The key functionalities include user registration and login, adding items to the cart, checking out, and viewing order history.
 
+## Table of Contents
 
+- [Model Database](#model-database)
+- [Features](#features)
+  - [User Registration and Login](#user-registration-and-login)
+  - [Product Browsing and Search](#product-browsing-and-search)
+  - [Product Details](#product-details)
+  - [Shopping Cart](#shopping-cart)
+  - [Checkout Process](#checkout-process)
+  - [Order History](#order-history)
+- [Admin Site](#admin-site)
+  - [Overview](#overview)
+  - [User Management](#user-management)
+  - [Product Management](#product-management)
+  - [Order Management](#order-management)
+  - [Analytics and Reports](#analytics-and-reports)
+- [How Install](#how-install)
+- [Contact](#contact)
 
-## Work Under Progress
+## Model Database
 
-**Version 1**
-* The data is stored locally and must be re-new periodically 
-* Backend has not been added. 
-* APIs are faked by [JSon Server](https://github.com/typicode/json-server) (a libary typically create simple CRUD api using mostly json data)
-* Version 1 is hosted [HERE!](https://msi-store.vercel.app/)
-* Fake Apis is hosted [HERE!](https://json-server-sand.vercel.app/api/data)
+![Database Schema](readme/image.png)
+[Back to Top](#table-of-contents)
 
-**Version 2 (recommend)**
-* Fixed bugs from predecessor, add some pages, updated ui... 
-* Backend django has been added [learn more](https://github.com/Theanhmgt/msistore-django)
-* Data is stored in Mysql database
-* Version 2 is hosted [HERE!](https://msistore.vercel.app/) and still updated daily
 ## Features
 
-- DeskTop/Tablet/Mobile Responsiveness
-- Search Functionality
-- Product Pages
-- Shopping Cart
-- User Accounts
-- Loading Speed Optimization
-## Tech Stack
+### User Registration and Login:
 
-**Client:** ReactJs, Redux,Redux-Thunk, Bootstrap,Css, Scss
+- **Registration:** New users can create an account by providing their personal details such as name, email, and password.
+- **Login:** Existing users can log in using their email and password.
+  [Back to Top](#table-of-contents)
 
-**Server:** Apache, Django
+### Product Browsing and Search:
 
-**Database:** Mysql
-## Orther Resource
+- **Product Categories:** Users can browse through different categories of computers and accessories.
+- **Search Functionality:** Users can search for specific products by entering keywords.
+  [Back to Top](#table-of-contents)
 
-- Ui design: [Figma](https://www.figma.com/file/t7fsZHL3x8bu4KxpKW84J4/Tech-Online-Store-Design?type=design&node-id=133-3117&mode=design)
-- Product Info(image,name,prices, ,etc): [MSI official website](https://vn.msi.com/)
+### Product Details:
 
+- **Detailed Descriptions:** Each product page includes detailed descriptions, specifications, and images.
+- **Reviews and Ratings:** Users can read reviews and ratings left by other customers.
+  [Back to Top](#table-of-contents)
 
+### Shopping Cart:
 
-## Database Schema
+- **Add to Cart:** Users can add products to their shopping cart.
+- **Cart Management:** Users can view and manage the items in their cart, update quantities, or remove items.
+  [Back to Top](#table-of-contents)
 
-![Databse schema](src/assets/screenshots/database-schema.png)
+### Checkout Process:
 
+- **Billing Information:** Users enter their billing information.
+- **Shipping Information:** Users provide their shipping address.
+- **Payment Methods:** Multiple payment options are available (e.g., credit card, PayPal).
+- **Order Confirmation:** Users receive an order confirmation after successful payment.
+  [Back to Top](#table-of-contents)
 
+### Order History:
 
+- **View Orders:** Users can view their past orders and check the status of current orders.
+  [Back to Top](#table-of-contents)
 
-## Screenshots
+## Admin Site
 
-Home page Screenshot:
+### Overview
 
-![Home page Screenshot](src/assets/screenshots/main-screen.png)
----
-Product Preview:
+A comprehensive overview of the store's performance, including sales data, recent orders, and user activity.
+[Back to Top](#table-of-contents)
 
-![Product Preview](src/assets/screenshots/products.png)
----
-Product Detail:
+### User Management:
 
-![Product Detail](src/assets/screenshots/product-detail.png)
----
-User cart:
+- **View Users:** Administrators can view a list of all registered users.
+- **Manage Users:** Administrators can add, edit, or delete user accounts, and reset passwords if necessary.
+  [Back to Top](#table-of-contents)
 
-![User cart](src/assets/screenshots/cart.png)
----
-Sign-in Page:
+### Product Management:
 
-![Sign-in Page](src/assets/screenshots/sign-in.png)
----
-User-dashboard Page:
+- **Add Products:** Administrators can add new products, including details such as name, description, price, and images.
+- **Edit Products:** Administrators can update product information.
+- **Delete Products:** Administrators can remove products from the catalog.
+  [Back to Top](#table-of-contents)
 
-![User-dashboard Page](src/assets/screenshots/orders.png)
+### Order Management:
 
+![Order Management](readme/image-1.png)
 
+- **View Orders:** Administrators can view all orders placed by customers.
+- **Update Order Status:** Administrators can update the status of orders (e.g., processing, shipped, delivered).
+- **Manage Returns:** Administrators can handle return requests and process refunds.
+  [Back to Top](#table-of-contents)
 
-## Demo
+### Analytics and Reports:
 
-Version 1: [Click here!](https://msistore.vercel.app/)
+![Analytics and Reports](readme/image-3.png)
 
-Version 2: [Click here!](https://msi-store.vercel.app/)
+- **Sales Reports:** Generate reports on sales performance over different periods.
+- **User Activity:** Monitor user activity and engagement on the platform.
+- **Inventory Reports:** Keep track of inventory levels and receive alerts for low stock items.
+  ![Inventory Reports](readme/image-2.png)
+  [Back to Top](#table-of-contents)
 
+## How Install
 
-## Prerequisites
-The following software is required to be installed on your system:
-
-* node: 21.x
-* npm: 10.x
-
-Type the following commands in the terminal to verify your node and npm versions
-```bash
-  node -v
-  npm -v
-```
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Theanhmgt/msistore-react.git
-```
-
-Go to the project directory
+Front-end app
 
 ```bash
-  cd misstore-react
+git clone https://github.com/MinhTamNT/msistore-react
 ```
 
-Install dependencies
+```
+npm install
+```
+
+Back-end App
 
 ```bash
-  npm -i install
+  git clone https://github.com/MinhTamNT/msistore-aspmvc.git
 ```
 
-Start the server
+```
+Build Project
+```
+
+- In file appsettings.Development.json configuration all key here
 
 ```bash
-  npm run start
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "Jwt": {
+    "Key": "",
+    "Issuer": "",
+    "Audience": ""
+  },
+  "Cloudinary": {
+    "CloudName": "",
+    "ApiKey": "",
+    "ApiSecret": ""
+  }
+
+
+}
+
 ```
 
+- Cloudinary : https://cloudinary.com/documentation
+- JWT : You can generate key on the webiste such as : https://www.uuidgenerator.net/
 
-## Developed With
+- File MapController you must enter the key like that :
 
-* [Visual Studio Code](https://code.visualstudio.com/) - A source code editor developed by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring
-* [React](https://reactjs.org/) - A javascript library for building user interfaces
-* [Create react app](https://create-react-app.dev/) - A quick method to start developing a react application.
-* [Babel](https://babeljs.io/) - A transpiler for javascript
-* [Webpack](https://webpack.js.org/) - A module bundler
-* [SCSS](http://sass-lang.com/) - A css metalanguage
-## Authors
+```c#
+ private readonly string _bingMapsApiKey = "";
+```
 
- [@Nguyễn Thế Anh](https://github.com/Theanhmgt)
+- Getting key bing map : https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key
 
+```bash
+Run Project : Press F5
+```
 
-## License
+## Contact
 
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
+- **GitHub:** [Minh Tam](https://github.com/MinhTamNT)
+- **GitHub:** [The Anh](https://github.com/Theanhmgt)
+- **GitHub:** [Sinh Hung](https://github.com/ngsinhhung)
+- **Address:** OPEN UNIVERSITY , VIETNAM
 
-
-## Support
-
-For support, email theanhnguyen.work@gmail.com
-
+[Back to Top](#table-of-contents)
